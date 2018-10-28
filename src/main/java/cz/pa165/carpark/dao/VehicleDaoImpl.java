@@ -12,4 +12,8 @@ public class VehicleDaoImpl extends DaoImpl<Vehicle> implements VehicleDao {
         super(Vehicle.class);
     }
 
+    @Override
+    public Vehicle findByRegistrationNumber(String registrationNumber) {
+        return null;
+    }
 }
