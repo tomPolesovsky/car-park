@@ -4,9 +4,10 @@ import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -17,15 +18,15 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
 
     @Inject
     private ReservationSettingsDao reservationSettingsDao;
-    
+
     @Test
     public void find() {
         ReservationSettings reservationSettings = new ReservationSettings();
-        reservationSettings.setId(12345);
+        reservationSettings.setId(new Long(12345));
         em.persist(reservationSettings);
 
         ReservationSettings reservationSettingsResult = reservationSettingsDao.find(reservationSettings.getId());
-        assertThat(12345, is(reservationSettingsResult.getId()));
+        assertEquals(new Long(12345), reservationSettingsResult.getId());
 
         ReservationSettings reservationSettingsNull = reservationSettingsDao.find(10L);
         assertNull(reservationSettingsNull);
@@ -43,32 +44,33 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         em.persist(reservationSettings);
 
         ReservationSettings reservationSettingsResult = reservationSettingsDao.findByEmployee(
-                reservationSettings.getEmployee(employee));
+                reservationSettings.getEmployee()
+        );
 
-        assertThat(employee, equals(reservationSettingsResult.getEmployee()));
+        assertEquals(employee, reservationSettingsResult.getEmployee());
 
-        ReservationSettings reservationSettingsNull = reservationSettingsDao.findByEmployee(
-                reservationSettings.getEmployee(employee2);
+        ReservationSettings reservationSettingsNull = reservationSettingsDao.findByEmployee(employee2);
+
         assertNull(reservationSettingsNull);
     }
 
     @Test
     public void findAll() {
         ReservationSettings firstReservationSettings = new ReservationSettings();
-        firstReservationSettings.setId(12345);
+        firstReservationSettings.setId(new Long(12345));
         em.persist(firstReservationSettings);
 
         ReservationSettings secondReservationSettings = new ReservationSettings();
-        secondReservationSettings.setId(54321);
+        secondReservationSettings.setId(new Long(54321));
         em.persist(secondReservationSettings);
 
         List<ReservationSettings> reservationSettingsResult = reservationSettingsDao.findAll();
         assertThat(reservationSettingsResult, hasSize(2));
         assertThat(reservationSettingsResult, contains(
                 hasProperty("id",
-                        is(12345)),
+                        equalTo(new Long(12345))),
                 hasProperty("id",
-                        is(54321))
+                        equalTo(new Long(54321)))
         ));
     }
 
@@ -78,7 +80,9 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         reservationSettings.setAllowed(true);
         reservationSettingsDao.save(reservationSettings);
 
-        ReservationSettings reservationSettingsResult = em.find(ReservationSettings.class, reservationSettings.getId());
+        ReservationSettings reservationSettingsResult = em.find(
+                ReservationSettings.class, reservationSettings.getId()
+        );
         assertEquals(true, reservationSettingsResult.getAllowed());
     }
 
@@ -88,23 +92,29 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         reservationSettings.setAllowed(false);
         em.persist(reservationSettings);
 
-        ReservationSettings foundReservationSettings = em.find(ReservationSettings.class, reservationSettings.getId());
+        ReservationSettings foundReservationSettings = em.find(
+                ReservationSettings.class, reservationSettings.getId()
+        );
         foundReservationSettings.setAllowed(true);
         reservationSettingsDao.update(foundReservationSettings);
 
-        ReservationSettings reservationSettingsResult = em.find(ReservationSettings.class, reservationSettings.getId());
+        ReservationSettings reservationSettingsResult = em.find(
+                ReservationSettings.class, reservationSettings.getId()
+        );
         assertEquals(true, reservationSettingsResult.getAllowed());
     }
 
     @Test
     public void delete() {
         ReservationSettings reservationSettings = new ReservationSettings();
-        reservationSettings.setId(12345);
+        reservationSettings.setId(new Long(12345));
         em.persist(reservationSettings);
 
         reservationSettingsDao.delete(reservationSettings.getId());
 
-        ReservationSettings reservationSettingsResult = em.find(ReservationSettings.class, reservationSettings.getId());
+        ReservationSettings reservationSettingsResult = em.find(
+                ReservationSettings.class, reservationSettings.getId()
+        );
         assertNull(reservationSettingsResult);
     }
 }
