@@ -26,33 +26,6 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     private ReservationDao reservationDao;
 
     @Test
-    public void find() {
-        Reservation reservation = new Reservation();
-        reservation.setId(new Long(12345));
-
-        Employee employee = new Employee();
-        employee.setUsername("Username");
-        em.persist(employee);
-
-        Vehicle vehicle = new Vehicle();
-        vehicle.setRegistrationNumber("ABC123");
-        em.persist(vehicle);
-
-        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
-        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
-
-        reservation.setEmployee(employee);
-        reservation.setVehicle(vehicle);
-        em.persist(reservation);
-
-        Reservation reservationResult = reservationDao.find(reservation.getId());
-        assertEquals(new Long(12345), reservationResult.getId());
-
-        Reservation reservationNull = reservationDao.find(10L);
-        assertNull(reservationNull);
-    }
-
-    @Test
     public void findByEmployee() {
         Reservation reservation = new Reservation();
 
@@ -86,7 +59,7 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
 
         List<Reservation> reservationNull = reservationDao.findByEmployee(employee2);
 
-        assertNull(reservationNull);
+        assertThat(reservationNull, is(empty()));
     }
 
     @Test
@@ -122,13 +95,12 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
 
         List<Reservation> reservationNull = reservationDao.findByVehicle(vehicle2);
 
-        assertNull(reservationNull);
+        assertThat(reservationNull, is(empty()));
     }
 
     @Test
     public void findAll() {
         Reservation firstReservation = new Reservation();
-        firstReservation.setId(new Long(12345));
 
         Employee firstEmployee = new Employee();
         firstEmployee.setUsername("Username1");
@@ -146,7 +118,6 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
         em.persist(firstReservation);
 
         Reservation secondReservation = new Reservation();
-        secondReservation.setId(new Long(54321));
 
         Employee secondEmployee = new Employee();
         secondEmployee.setUsername("Username2");
@@ -156,20 +127,20 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
         secondVehicle.setRegistrationNumber("123ABC");
         em.persist(secondVehicle);
 
-        firstReservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
-        firstReservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+        secondReservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        secondReservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
 
-        firstReservation.setEmployee(secondEmployee);
-        firstReservation.setVehicle(secondVehicle);
+        secondReservation.setEmployee(secondEmployee);
+        secondReservation.setVehicle(secondVehicle);
         em.persist(secondReservation);
 
         List<Reservation> reservationResult = reservationDao.findAll();
         assertThat(reservationResult, hasSize(2));
         assertThat(reservationResult, contains(
-                hasProperty("id",
-                        equalTo(new Long(12345))),
-                hasProperty("id",
-                        equalTo(new Long(54321)))
+                hasProperty("vehicle",
+                        equalTo(firstVehicle)),
+                hasProperty("vehicle",
+                        equalTo(secondVehicle))
         ));
     }
 
@@ -228,7 +199,6 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     @Test
     public void delete() {
         Reservation reservation = new Reservation();
-        reservation.setId(new Long(12345));
 
         Employee employee = new Employee();
         employee.setUsername("Username");

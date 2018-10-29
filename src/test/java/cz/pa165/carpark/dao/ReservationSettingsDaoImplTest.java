@@ -22,23 +22,6 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     private ReservationSettingsDao reservationSettingsDao;
 
     @Test
-    public void find() {
-        ReservationSettings reservationSettings = new ReservationSettings();
-        reservationSettings.setId(new Long(12345));
-
-        Employee employee = new Employee();
-        employee.setUsername("Username");
-        reservationSettings.setEmployee(employee);
-        em.persist(reservationSettings);
-
-        ReservationSettings reservationSettingsResult = reservationSettingsDao.find(reservationSettings.getId());
-        assertEquals(new Long(12345), reservationSettingsResult.getId());
-
-        ReservationSettings reservationSettingsNull = reservationSettingsDao.find(10L);
-        assertNull(reservationSettingsNull);
-    }
-
-    @Test
     public void findByEmployee() {
         ReservationSettings reservationSettings = new ReservationSettings();
         Employee employee = new Employee();
@@ -69,7 +52,6 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         Employee firstEmployee = new Employee();
         firstEmployee.setUsername("Username1");
         em.persist(firstEmployee);
-        firstReservationSettings.setId(new Long(12345));
         firstReservationSettings.setEmployee(firstEmployee);
         em.persist(firstReservationSettings);
 
@@ -77,17 +59,16 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         Employee secondEmployee = new Employee();
         secondEmployee.setUsername("Username2");
         em.persist(secondEmployee);
-        secondReservationSettings.setId(new Long(54321));
         secondReservationSettings.setEmployee(secondEmployee);
         em.persist(secondReservationSettings);
 
         List<ReservationSettings> reservationSettingsResult = reservationSettingsDao.findAll();
         assertThat(reservationSettingsResult, hasSize(2));
         assertThat(reservationSettingsResult, contains(
-                hasProperty("id",
-                        equalTo(new Long(12345))),
-                hasProperty("id",
-                        equalTo(new Long(54321)))
+                hasProperty("employee",
+                        equalTo(firstEmployee)),
+                hasProperty("employee",
+                        equalTo(secondEmployee))
         ));
     }
 
@@ -139,7 +120,6 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         em.persist(employee);
 
         reservationSettings.setEmployee(employee);
-        reservationSettings.setId(new Long(12345));
         em.persist(reservationSettings);
 
         reservationSettingsDao.delete(reservationSettings.getId());
