@@ -4,9 +4,16 @@ import cz.pa165.carpark.entity.Employee;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Entity;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
+/**
+ * Specific implementation of {@link EmployeeDao} interface
+ *
+ * @param <T> generic type annotated by {@link Entity}
+ * @author Tomáš Polešovský, 487574@mail.muni.cz
+ */
 @Transactional
 @Repository
 public class EmployeeDaoImpl extends DaoImpl<Employee> implements EmployeeDao {

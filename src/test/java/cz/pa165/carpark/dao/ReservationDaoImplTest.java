@@ -19,6 +19,11 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
+/**
+ * Tests for Reservation' DAO implementation.
+ *
+ * @author Ondrej Svoreň
+ */
 @Transactional
 public class ReservationDaoImplTest extends AbstractJUnitTest {
 
@@ -220,4 +225,5 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
         Reservation reservationResult = em.find(Reservation.class, reservation.getId());
         assertNull(reservationResult);
     }
+
 }

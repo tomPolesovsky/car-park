@@ -7,16 +7,20 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+/**
+ * Company vehicle
+ *
+ * @author Ondrej Svoreň
+ */
 @BatchSize(size = 100)
 @Getter
 @Setter
 @Entity
 @Table(name = "cp_vehicle")
-
 public class Vehicle {
 
     /**
-     * The identifier
+     * The Identifier
      */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -50,9 +54,7 @@ public class Vehicle {
     private Long mileage;
 
     /**
-     * The overriden equals method.
-     * @param o of Vehicle type
-     * @return true if the vehicles are the same else false
+     * @see Object#equals(Object)
      */
     @Override
     public boolean equals(Object o) {
@@ -63,11 +65,11 @@ public class Vehicle {
     }
 
     /**
-     * The overriden hashCode method.
-     * @return hash code
+     * @see Object#hashCode()
      */
     @Override
     public int hashCode() {
         return Objects.hash(getRegistrationNumber());
     }
+
 }

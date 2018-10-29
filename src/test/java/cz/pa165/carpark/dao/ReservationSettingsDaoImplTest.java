@@ -15,6 +15,11 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 
+/**
+ * Tests for ReservationSettings' DAO implementation.
+ *
+ * @author Ondrej Svoreň
+ */
 @Transactional
 public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
 
@@ -129,4 +134,5 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         );
         assertNull(reservationSettingsResult);
     }
+
 }

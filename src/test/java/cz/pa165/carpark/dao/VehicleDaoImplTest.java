@@ -14,6 +14,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Tests for Vehicle' DAO implementation.
+ *
+ * @author Tomáš Polešovský, 487574@mail.muni.cz
+ */
 @Transactional
 public class VehicleDaoImplTest extends AbstractJUnitTest {
 

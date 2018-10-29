@@ -4,9 +4,16 @@ import cz.pa165.carpark.entity.Vehicle;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Entity;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
+/**
+ * Specific implementation of {@link VehicleDao} interface
+ *
+ * @param <T> generic type annotated by {@link Entity}
+ * @author Ondrej Svoreň
+ */
 @Transactional
 @Repository
 public class VehicleDaoImpl extends DaoImpl<Vehicle> implements VehicleDao {
@@ -26,4 +33,5 @@ public class VehicleDaoImpl extends DaoImpl<Vehicle> implements VehicleDao {
             return null;
         }
     }
+
 }

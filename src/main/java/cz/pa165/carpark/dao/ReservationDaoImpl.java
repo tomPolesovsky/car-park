@@ -6,8 +6,6 @@ import cz.pa165.carpark.entity.Vehicle;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import java.util.List;
 
 /**
@@ -49,4 +47,5 @@ public class ReservationDaoImpl extends DaoImpl<Reservation> implements Reservat
                  .setParameter("vehicle", vehicle)
                  .getResultList();
     }
+
 }

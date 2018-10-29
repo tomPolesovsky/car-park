@@ -6,6 +6,7 @@ package cz.pa165.carpark.entity;
  * @author Jana Applova, 422352@mail.muni.cz
  */
 public enum ReservationStatus {
+
     /**
      * Reservation is new
      */
@@ -22,4 +23,5 @@ public enum ReservationStatus {
      * Reservation was canceled
      */
     CANCELED
+
 }
