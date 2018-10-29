@@ -6,6 +6,8 @@ import cz.pa165.carpark.entity.Vehicle;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import java.util.List;
 
 /**
@@ -24,13 +26,27 @@ public class ReservationDaoImpl extends DaoImpl<Reservation> implements Reservat
         super(Reservation.class);
     }
 
+    /**
+     * Find all the reservations for the specified employee
+     * @param employee
+     * @return list of reservations
+     */
     @Override
     public List<Reservation> findByEmployee(Employee employee) {
-        return null;
+        return em.createQuery("select r from Reservation r where r.employee = :employee", Reservation.class)
+                 .setParameter("employee", employee)
+                 .getResultList();
     }
 
+    /**
+     * Find all the reservations for the specified vehicle
+     * @param vehicle
+     * @return list of reservations
+     */
     @Override
     public List<Reservation> findByVehicle(Vehicle vehicle) {
-        return null;
+        return em.createQuery("select r from Reservation r where r.vehicle = :vehicle", Reservation.class)
+                 .setParameter("vehicle", vehicle)
+                 .getResultList();
     }
 }

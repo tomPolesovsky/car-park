@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -32,30 +33,38 @@ public class Reservation {
     /**
      * The date and time from which will the reservation start
      */
+    @NotNull
+    @Column(nullable = false)
     private LocalDateTime from;
 
     /**
      * The date and time from which will the reservation end
      */
+    @NotNull
+    @Column(nullable = false)
     private LocalDateTime to;
 
     /**
-     * The employee which wants is making the reservation
+     * The employee which is making the reservation
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
 
     /**
      * The vehicle (car) which will be reserved
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Vehicle vehicle;
 
     /**
      * The status of the reservation - new, approved, returned or canceled
      */
     @Enumerated(EnumType.STRING)
-    private ReservationStatus status;
+    private ReservationStatus status = ReservationStatus.NEW;
 
     /**
      * The overriden equals method.
