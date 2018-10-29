@@ -3,6 +3,7 @@ import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 
+@Transactional
 public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
 
     @Inject

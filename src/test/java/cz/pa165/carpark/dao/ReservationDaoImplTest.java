@@ -6,6 +6,7 @@ import cz.pa165.carpark.entity.ReservationStatus;
 import cz.pa165.carpark.entity.Vehicle;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import java.util.List;
 
-public class RegistrationDaoImplTest extends AbstractJUnitTest {
+@Transactional
+public class ReservationDaoImplTest extends AbstractJUnitTest {
 
     @Inject
     private ReservationDao reservationDao;
@@ -23,7 +25,7 @@ public class RegistrationDaoImplTest extends AbstractJUnitTest {
     @Test
     public void find() {
         Reservation reservation = new Reservation();
-        reservation.setId((long) 12345);
+        reservation.setId(new Long(12345));
         em.persist(reservation);
 
         Reservation reservationResult = reservationDao.find(reservation.getId());
@@ -97,9 +99,9 @@ public class RegistrationDaoImplTest extends AbstractJUnitTest {
         assertThat(reservationResult, hasSize(2));
         assertThat(reservationResult, contains(
                 hasProperty("id",
-                        equalTo((long) 12345)),
+                        equalTo(new Long(12345))),
                 hasProperty("id",
-                        equalTo((long) 54321))
+                        equalTo(new Long(54321)))
         ));
     }
 
