@@ -25,6 +25,10 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     public void find() {
         ReservationSettings reservationSettings = new ReservationSettings();
         reservationSettings.setId(new Long(12345));
+
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        reservationSettings.setEmployee(employee);
         em.persist(reservationSettings);
 
         ReservationSettings reservationSettingsResult = reservationSettingsDao.find(reservationSettings.getId());
@@ -38,8 +42,11 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     public void findByEmployee() {
         ReservationSettings reservationSettings = new ReservationSettings();
         Employee employee = new Employee();
-        Employee employee2 = new Employee();
+        employee.setUsername("Username1");
         em.persist(employee);
+
+        Employee employee2 = new Employee();
+        employee2.setUsername("Username2");
         em.persist(employee2);
 
         reservationSettings.setEmployee(employee);
@@ -59,11 +66,19 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     @Test
     public void findAll() {
         ReservationSettings firstReservationSettings = new ReservationSettings();
+        Employee firstEmployee = new Employee();
+        firstEmployee.setUsername("Username1");
+        em.persist(firstEmployee);
         firstReservationSettings.setId(new Long(12345));
+        firstReservationSettings.setEmployee(firstEmployee);
         em.persist(firstReservationSettings);
 
         ReservationSettings secondReservationSettings = new ReservationSettings();
+        Employee secondEmployee = new Employee();
+        secondEmployee.setUsername("Username2");
+        em.persist(secondEmployee);
         secondReservationSettings.setId(new Long(54321));
+        secondReservationSettings.setEmployee(secondEmployee);
         em.persist(secondReservationSettings);
 
         List<ReservationSettings> reservationSettingsResult = reservationSettingsDao.findAll();
@@ -79,6 +94,11 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     @Test
     public void save() {
         ReservationSettings reservationSettings = new ReservationSettings();
+        Employee employee = new Employee();
+        employee.setUsername("Username1");
+        em.persist(employee);
+
+        reservationSettings.setEmployee(employee);
         reservationSettings.setAllowed(true);
         reservationSettingsDao.save(reservationSettings);
 
@@ -91,6 +111,11 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     @Test
     public void update() {
         ReservationSettings reservationSettings = new ReservationSettings();
+        Employee employee = new Employee();
+        employee.setUsername("Username1");
+        em.persist(employee);
+
+        reservationSettings.setEmployee(employee);
         reservationSettings.setAllowed(false);
         em.persist(reservationSettings);
 
@@ -109,6 +134,11 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
     @Test
     public void delete() {
         ReservationSettings reservationSettings = new ReservationSettings();
+        Employee employee = new Employee();
+        employee.setUsername("Username1");
+        em.persist(employee);
+
+        reservationSettings.setEmployee(employee);
         reservationSettings.setId(new Long(12345));
         em.persist(reservationSettings);
 

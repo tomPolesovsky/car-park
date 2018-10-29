@@ -14,6 +14,9 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.List;
 
 @Transactional
@@ -26,6 +29,20 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     public void find() {
         Reservation reservation = new Reservation();
         reservation.setId(new Long(12345));
+
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        em.persist(employee);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
+        em.persist(vehicle);
+
+        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        reservation.setEmployee(employee);
+        reservation.setVehicle(vehicle);
         em.persist(reservation);
 
         Reservation reservationResult = reservationDao.find(reservation.getId());
@@ -38,12 +55,24 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     @Test
     public void findByEmployee() {
         Reservation reservation = new Reservation();
-        Employee employee = new Employee();
-        reservation.setEmployee(employee);
-        Employee employee2 = new Employee();
 
+        Employee employee = new Employee();
+        employee.setUsername("Username");
         em.persist(employee);
+
+        Employee employee2 = new Employee();
+        employee2.setUsername("Username2");
         em.persist(employee2);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
+        em.persist(vehicle);
+
+        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        reservation.setEmployee(employee);
+        reservation.setVehicle(vehicle);
         em.persist(reservation);
 
         List<Reservation> reservationResult = reservationDao.findByEmployee(
@@ -63,12 +92,23 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     @Test
     public void findByVehicle() {
         Reservation reservation = new Reservation();
-        Vehicle vehicle = new Vehicle();
-        reservation.setVehicle(vehicle);
-        Vehicle vehicle2 = new Vehicle();
 
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        em.persist(employee);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
         em.persist(vehicle);
+
+        Vehicle vehicle2 = new Vehicle();
+        vehicle2.setRegistrationNumber("123ABC");
         em.persist(vehicle2);
+
+        reservation.setVehicle(vehicle);
+        reservation.setEmployee(employee);
+        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
         em.persist(reservation);
 
         List<Reservation> reservationResult = reservationDao.findByVehicle(
@@ -89,10 +129,38 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     public void findAll() {
         Reservation firstReservation = new Reservation();
         firstReservation.setId(new Long(12345));
+
+        Employee firstEmployee = new Employee();
+        firstEmployee.setUsername("Username1");
+        em.persist(firstEmployee);
+
+        Vehicle firstVehicle = new Vehicle();
+        firstVehicle.setRegistrationNumber("ABC123");
+        em.persist(firstVehicle);
+
+        firstReservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        firstReservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        firstReservation.setEmployee(firstEmployee);
+        firstReservation.setVehicle(firstVehicle);
         em.persist(firstReservation);
 
         Reservation secondReservation = new Reservation();
         secondReservation.setId(new Long(54321));
+
+        Employee secondEmployee = new Employee();
+        secondEmployee.setUsername("Username2");
+        em.persist(secondEmployee);
+
+        Vehicle secondVehicle = new Vehicle();
+        secondVehicle.setRegistrationNumber("123ABC");
+        em.persist(secondVehicle);
+
+        firstReservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        firstReservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        firstReservation.setEmployee(secondEmployee);
+        firstReservation.setVehicle(secondVehicle);
         em.persist(secondReservation);
 
         List<Reservation> reservationResult = reservationDao.findAll();
@@ -108,7 +176,21 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     @Test
     public void save() {
         Reservation reservation = new Reservation();
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        em.persist(employee);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
+        em.persist(vehicle);
+
+        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        reservation.setEmployee(employee);
+        reservation.setVehicle(vehicle);
         reservation.setStatus(ReservationStatus.NEW);
+
         reservationDao.save(reservation);
 
         Reservation reservationResult = em.find(Reservation.class, reservation.getId());
@@ -118,6 +200,20 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     @Test
     public void update() {
         Reservation reservation = new Reservation();
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        em.persist(employee);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
+        em.persist(vehicle);
+
+        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        reservation.setEmployee(employee);
+        reservation.setVehicle(vehicle);
+
         reservation.setStatus(ReservationStatus.NEW);
         em.persist(reservation);
 
@@ -133,6 +229,20 @@ public class ReservationDaoImplTest extends AbstractJUnitTest {
     public void delete() {
         Reservation reservation = new Reservation();
         reservation.setId(new Long(12345));
+
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        em.persist(employee);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
+        em.persist(vehicle);
+
+        reservation.setFrom(LocalDateTime.of(2018, Month.JANUARY, 1, 10, 10, 30));
+        reservation.setTo(LocalDateTime.of(2018, Month.FEBRUARY, 1, 10, 10, 30));
+
+        reservation.setEmployee(employee);
+        reservation.setVehicle(vehicle);
         em.persist(reservation);
 
         reservationDao.delete(reservation.getId());
