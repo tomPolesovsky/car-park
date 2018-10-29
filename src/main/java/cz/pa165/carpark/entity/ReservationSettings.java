@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -29,6 +30,8 @@ public class ReservationSettings {
     /**
      * Reservation settings for this employee
      */
+    @NotNull
+    @Column(nullable = false, unique = true)
     @OneToOne
     private Employee employee;
 
