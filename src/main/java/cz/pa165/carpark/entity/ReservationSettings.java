@@ -48,9 +48,7 @@ public class ReservationSettings {
     private Boolean autoApproval = false;
 
     /**
-     * The overriden equals method.
-     * @param o of ReservationSettings type
-     * @return true if the reservationSettings are the same else false
+     * @see Object#equals(Object)
      */
     @Override
     public boolean equals(Object o) {
@@ -61,11 +59,11 @@ public class ReservationSettings {
     }
 
     /**
-     * The overriden hashCode method.
-     * @return hash code
+     * @see Object#hashCode()
      */
     @Override
     public int hashCode() {
         return Objects.hash(getEmployee());
     }
+
 }

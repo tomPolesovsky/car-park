@@ -1,12 +1,17 @@
 package cz.pa165.carpark.dao;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
+ * Specific implementation of {@link Dao} interface
+ * Operations with persistent storage are defined by JPA Api
+ * For more information {@link EntityManager}
  *
- * @param <T>
+ * @param <T> generic type annotated by {@link Entity}
+ * @author Tomáš Polešovský, 487574@mail.muni.cz
  */
 public abstract class DaoImpl<T> implements Dao<T> {
 
@@ -26,7 +31,7 @@ public abstract class DaoImpl<T> implements Dao<T> {
 
     @Override
     public List<T> findAll() {
-        return em.createQuery( "from " + entityClass.getName())
+        return em.createQuery("from " + entityClass.getName())
                 .getResultList();
     }
 

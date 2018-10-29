@@ -39,4 +39,5 @@ public class ReservationSettingsDaoImpl extends DaoImpl<ReservationSettings> imp
             return null;
         }
     }
+
 }

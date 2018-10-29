@@ -49,7 +49,7 @@ public class Reservation {
      */
     @NotNull
     @JoinColumn(nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Employee employee;
 
     /**
@@ -57,7 +57,7 @@ public class Reservation {
      */
     @NotNull
     @JoinColumn(nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Vehicle vehicle;
 
     /**
@@ -67,26 +67,25 @@ public class Reservation {
     private ReservationStatus status = ReservationStatus.NEW;
 
     /**
-     * The overriden equals method.
-     * @param o of Reservation type
-     * @return true if the reservations are the same else false
+     * @see Object#equals(Object)
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if ((o == null) || !(o instanceof Reservation)){
-            return false;
-        }
-        Reservation r = (Reservation) o;
-        return Objects.equals(getId(), r.getId());
+        if (!(o instanceof Reservation)) return false;
+        Reservation that = (Reservation) o;
+        return Objects.equals(getFrom(), that.getFrom()) &&
+                Objects.equals(getTo(), that.getTo()) &&
+                Objects.equals(getEmployee(), that.getEmployee()) &&
+                Objects.equals(getVehicle(), that.getVehicle());
     }
 
     /**
-     * The overriden hashCode method.
-     * @return hash code
+     * @see Object#hashCode()
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getFrom(), getTo(), getEmployee(), getVehicle());
     }
+
 }
