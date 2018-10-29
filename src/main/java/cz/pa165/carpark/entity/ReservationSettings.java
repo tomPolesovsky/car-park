@@ -31,7 +31,7 @@ public class ReservationSettings {
      * Reservation settings for this employee
      */
     @NotNull
-    @Column(nullable = false, unique = true)
+    @JoinColumn(nullable = false, unique = true)
     @OneToOne
     private Employee employee;
 

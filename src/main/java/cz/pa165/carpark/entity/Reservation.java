@@ -48,7 +48,7 @@ public class Reservation {
      * The employee which is making the reservation
      */
     @NotNull
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
 
@@ -56,7 +56,7 @@ public class Reservation {
      * The vehicle (car) which will be reserved
      */
     @NotNull
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Vehicle vehicle;
 
