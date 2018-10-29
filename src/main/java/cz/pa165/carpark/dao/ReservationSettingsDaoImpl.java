@@ -21,6 +21,11 @@ public class ReservationSettingsDaoImpl extends DaoImpl<ReservationSettings> imp
         super(ReservationSettings.class);
     }
 
+    /**
+     * Find settings for specified employee.
+     * @param employee
+     * @return settings
+     */
     @Override
     public ReservationSettings findByEmployee(Employee employee) {
         return null;

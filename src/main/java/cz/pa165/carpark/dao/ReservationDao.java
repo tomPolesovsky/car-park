@@ -14,7 +14,7 @@ import java.util.List;
 public interface ReservationDao extends Dao<Reservation>  {
 
     /**
-     * Find all the reservations of the specified employee
+     * Find all the reservations for the specified employee
      * @param employee
      * @return list of reservations
      */

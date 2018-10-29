@@ -40,7 +40,7 @@ public class Reservation {
     private LocalDateTime to;
 
     /**
-     * The employee which wants is making the reservation
+     * The employee which is making the reservation
      */
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
