@@ -14,22 +14,46 @@ import java.util.Objects;
 @Table(name = "cp_vehicle")
 
 public class Vehicle {
+
+    /**
+     * The identifier
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * The brand of the vehicle
+     */
     private String brand;
 
+    /**
+     * The registration number of the vehicle
+     */
     @NotNull
     @Column(nullable = false, unique = true)
     private String registrationNumber;
 
+    /**
+     * The type of the vehicle
+     */
     private String type;
 
+    /**
+     * The color of the vehicle
+     */
     private String color;
 
+    /**
+     * The mileage of the vehicle
+     */
     private Long mileage;
 
+    /**
+     * The overriden equals method.
+     * @param o of Vehicle type
+     * @return true if the vehicles are the same else false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,6 +62,10 @@ public class Vehicle {
         return Objects.equals(getRegistrationNumber(), vehicle.getRegistrationNumber());
     }
 
+    /**
+     * The overriden hashCode method.
+     * @return hash code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getRegistrationNumber());
