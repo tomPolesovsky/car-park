@@ -81,9 +81,9 @@ public class EmployeeDaoImplTest extends AbstractJUnitTest {
         List<Employee> employeeList = employeeDao.findAll();
         assertThat(employeeList, hasSize(2));
         assertThat(employeeList, contains(
-                hasProperty("userName",
+                hasProperty("username",
                         is("yokoono")),
-                hasProperty("userName",
+                hasProperty("username",
                         is("wakawaka"))
         ));
     }
