@@ -74,7 +74,9 @@ public class Reservation {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Reservation)) return false;
+        if ((o == null) || !(o instanceof Reservation)){
+            return false;
+        }
         Reservation r = (Reservation) o;
         return Objects.equals(getId(), r.getId());
     }

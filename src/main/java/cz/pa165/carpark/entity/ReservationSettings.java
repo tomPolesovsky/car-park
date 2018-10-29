@@ -39,13 +39,13 @@ public class ReservationSettings {
      * If true the employee is on the whitelist - the employee can reserve a vehicle (car)
      * otherwise is on the blacklist - his reservations will not be approved
      */
-    private Boolean allowed;
+    private Boolean allowed = true;
 
     /**
      * If true the automatic approval is allowed
      * otherwise the approver has to approve it manually
      */
-    private Boolean autoApproval;
+    private Boolean autoApproval = false;
 
     /**
      * The overriden equals method.
