@@ -34,14 +34,14 @@ public class Reservation {
      * The date and time from which will the reservation start
      */
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "reservation_from", nullable = false)
     private LocalDateTime from;
 
     /**
      * The date and time from which will the reservation end
      */
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "reservation_to", nullable = false)
     private LocalDateTime to;
 
     /**
