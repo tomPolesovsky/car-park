@@ -13,7 +13,7 @@ public interface EmployeeDao extends Dao<Employee> {
      * Find specific employee by its username
      *
      * @param username username of employee
-     * @return entity object or null, if entity was not found
+     * @return entity object
      */
     Employee findByUsername(String username);
 

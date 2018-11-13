@@ -4,7 +4,6 @@ import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,7 +12,6 @@ import java.util.List;
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
-@Transactional
 @Repository
 public class ReservationDaoImpl extends DaoImpl<Reservation> implements ReservationDao  {
 

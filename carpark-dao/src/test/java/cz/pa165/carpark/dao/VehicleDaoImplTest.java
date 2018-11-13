@@ -3,6 +3,7 @@ package cz.pa165.carpark.dao;
 import cz.pa165.carpark.entity.Vehicle;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
+import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -48,9 +49,11 @@ public class VehicleDaoImplTest extends AbstractJUnitTest {
                 vehicle.getRegistrationNumber()
         );
         assertThat("aabbcc", is(vehicleResult.getRegistrationNumber()));
+    }
 
-        Vehicle vehicleNull = vehicleDao.findByRegistrationNumber("aasff");
-        assertNull(vehicleNull);
+    @Test(expected = DataAccessException.class)
+    public void findByRegistrationNumberNotExists() {
+        vehicleDao.findByRegistrationNumber("aasff");
     }
 
     @Test

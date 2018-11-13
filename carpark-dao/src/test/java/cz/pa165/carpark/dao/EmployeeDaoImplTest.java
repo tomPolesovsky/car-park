@@ -3,6 +3,7 @@ package cz.pa165.carpark.dao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
+import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -59,9 +60,15 @@ public class EmployeeDaoImplTest extends AbstractJUnitTest {
                 employee.getUsername()
         );
         assertThat("yokoono", is(employeeResult.getUsername()));
+    }
 
-        Employee employeeNull = employeeDao.findByUsername("wakawaka");
-        assertNull(employeeNull);
+    /**
+     * Tests the findByUsername method in Dao.
+     * The username wakawaka doesn't exists
+     */
+    @Test(expected = DataAccessException.class)
+    public void findByUsernameNotExists() {
+        employeeDao.findByUsername("wakawaka");
     }
 
     /**

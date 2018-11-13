@@ -3,6 +3,7 @@ import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
+import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
@@ -33,10 +34,6 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         employee.setUsername("Username1");
         em.persist(employee);
 
-        Employee employee2 = new Employee();
-        employee2.setUsername("Username2");
-        em.persist(employee2);
-
         reservationSettings.setEmployee(employee);
         em.persist(reservationSettings);
 
@@ -45,10 +42,15 @@ public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
         );
 
         assertEquals(employee, reservationSettingsResult.getEmployee());
+    }
 
-        ReservationSettings reservationSettingsNull = reservationSettingsDao.findByEmployee(employee2);
+    @Test(expected = DataAccessException.class)
+    public void findByEmployeeNotExists() {
+        Employee employee2 = new Employee();
+        employee2.setUsername("Username2");
+        em.persist(employee2);
 
-        assertNull(reservationSettingsNull);
+        reservationSettingsDao.findByEmployee(employee2);
     }
 
     @Test
