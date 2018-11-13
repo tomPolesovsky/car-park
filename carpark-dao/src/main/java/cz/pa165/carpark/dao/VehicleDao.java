@@ -13,7 +13,7 @@ public interface VehicleDao extends Dao<Vehicle> {
      * Find specific vehicle by its registration number
      *
      * @param registrationNumber registration number of vehicle
-     * @return entity object or null, if entity was not found
+     * @return entity object
      */
     Vehicle findByRegistrationNumber(String registrationNumber);
 
