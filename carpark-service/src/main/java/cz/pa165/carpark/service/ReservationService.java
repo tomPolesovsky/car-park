@@ -1,3 +1,5 @@
+package cz.pa165.carpark.service;
+
 /**
  * The reservation service's interface.
  *

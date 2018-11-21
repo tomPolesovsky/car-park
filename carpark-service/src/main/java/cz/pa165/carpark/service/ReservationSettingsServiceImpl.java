@@ -1,3 +1,7 @@
+package cz.pa165.carpark.service;
+
+import cz.pa165.carpark.service.ReservationSettingsService;
+
 /**
  * The reservation settings service's implementation.
  *

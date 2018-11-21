@@ -1,3 +1,5 @@
+package cz.pa165.carpark.dto;
+
 /**
  * The reservation settings data transfer object.
  *

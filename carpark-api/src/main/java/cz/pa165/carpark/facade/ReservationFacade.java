@@ -1,3 +1,5 @@
+package cz.pa165.carpark.facade;
+
 /**
  * The reservation facade's interface.
  *
