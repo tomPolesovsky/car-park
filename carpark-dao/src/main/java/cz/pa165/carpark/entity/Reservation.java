@@ -20,14 +20,18 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "cp_reservation")
+@Table(name = "cp_reservation",
+       uniqueConstraints = @UniqueConstraint(columnNames = {
+               "reservation_from", "reservation_to", "employee_id"
+       })
+)
 public class Reservation {
 
     /**
      * The identifier
      */
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -76,8 +80,7 @@ public class Reservation {
         Reservation that = (Reservation) o;
         return Objects.equals(getFrom(), that.getFrom()) &&
                 Objects.equals(getTo(), that.getTo()) &&
-                Objects.equals(getEmployee(), that.getEmployee()) &&
-                Objects.equals(getVehicle(), that.getVehicle());
+                Objects.equals(getEmployee(), that.getEmployee());
     }
 
     /**
@@ -85,7 +88,7 @@ public class Reservation {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getFrom(), getTo(), getEmployee(), getVehicle());
+        return Objects.hash(getFrom(), getTo(), getEmployee());
     }
 
 }
