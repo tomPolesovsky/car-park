@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@ContextConfiguration(locations = "classpath:application-test.xml")
+@ContextConfiguration(locations = "classpath:application.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class AbstractJUnitTest {
 
