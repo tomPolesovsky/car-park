@@ -5,5 +5,6 @@ package cz.pa165.carpark.service;
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
+
 public interface ReservationService {
 }
