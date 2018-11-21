@@ -1,7 +1,5 @@
 package cz.pa165.carpark.service;
 
-import cz.pa165.carpark.service.ReservationService;
-
 /**
  * The reservation service's implementation.
  *
