@@ -2,6 +2,7 @@ package cz.pa165.carpark.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
 /**
  * The reservation data transfer object.
  *

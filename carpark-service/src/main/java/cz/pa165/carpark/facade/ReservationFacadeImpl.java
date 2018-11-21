@@ -5,5 +5,5 @@ package cz.pa165.carpark.facade;
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
-public class ReservationFacadeImpl implements  ReservationFacade {
+public class ReservationFacadeImpl implements ReservationFacade {
 }
