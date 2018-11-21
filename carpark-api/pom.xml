@@ -11,13 +11,16 @@
 
     <artifactId>carpark-api</artifactId>
     <name>Car park api</name>
+    <packaging>jar</packaging>
+
     <dependencies>
+
+
         <!-- utils -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
-    <packaging>jar</packaging>
 
 </project>
