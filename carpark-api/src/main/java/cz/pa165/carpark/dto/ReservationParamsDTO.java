@@ -10,25 +10,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReservationParamsDTO {
+    /**
+     * The page
+     */
+    private Long page;
 
-//    /**
-//     * The reservation
-//     */
-//    private Reservation reservation;
-//
-//    /**
-//     * The page
-//     */
-//    private Long page;
-//
-//    /**
-//     * The size of the page
-//     */
-//    private Long pageSize;
-//
-//
-//    /**
-//     *  The query string
-//     */
-//    private String query;
+    /**
+     * The size of the page
+     */
+    private Long pageSize;
+
+    /**
+     *  The query string
+     */
+    private String query;
 }
