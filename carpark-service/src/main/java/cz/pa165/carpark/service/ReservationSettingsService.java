@@ -1,17 +1,25 @@
 package cz.pa165.carpark.service;
-
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.ReservationSettings;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
  * The reservation settings service's interface.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
-@Service
 public interface ReservationSettingsService {
 
-    public ReservationSettings findByEmployee(Employee employee);
+    ReservationSettings findByEmployee(Employee employee);
+
+    ReservationSettings find(Long id);
+
+    List<ReservationSettings> findAll();
+
+    void save(ReservationSettings reservationSettings);
+
+    void update(ReservationSettings reservationSettings);
+
+    void delete(Long id);
 
 }
