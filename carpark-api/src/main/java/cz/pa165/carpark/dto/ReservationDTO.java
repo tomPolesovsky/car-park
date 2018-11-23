@@ -1,5 +1,6 @@
 package cz.pa165.carpark.dto;
 
+import cz.pa165.carpark.enums.ReservationStatus;
 import lombok.Getter;
 import lombok.Setter;
 
