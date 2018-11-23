@@ -102,7 +102,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
     @Override
     public ReservationDTO update(ReservationDTO reservation) {
         Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
-        reservationService.save(reservationEntity);
+        reservationService.update(reservationEntity);
         return objectMapper.mapTo(reservationEntity, ReservationDTO.class);
     }
 

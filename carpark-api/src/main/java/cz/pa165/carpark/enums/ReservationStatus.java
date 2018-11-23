@@ -1,4 +1,4 @@
-package cz.pa165.carpark.entity;
+package cz.pa165.carpark.enums;
 
 /**
  * The status of the reservation
@@ -25,3 +25,4 @@ public enum ReservationStatus {
     CANCELED
 
 }
+
