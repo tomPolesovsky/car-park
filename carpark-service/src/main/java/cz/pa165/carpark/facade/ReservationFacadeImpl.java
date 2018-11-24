@@ -2,10 +2,12 @@ package cz.pa165.carpark.facade;
 
 import cz.pa165.carpark.dto.EmployeeDTO;
 import cz.pa165.carpark.dto.ReservationDTO;
+import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.service.ReservationFilterParams;
 import cz.pa165.carpark.service.ReservationService;
 import cz.pa165.carpark.util.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -116,4 +118,15 @@ public class ReservationFacadeImpl implements ReservationFacade {
         reservationService.delete(id);
     }
 
+    /**
+     * Filter all the reservations according to the input params
+     *
+     * @param reservationParams
+     * @return list of reservations
+     */
+    @Override
+    public List<ReservationDTO> filter(ReservationParamsDTO reservationParams) {
+        ReservationFilterParams reservationFilterParams = objectMapper.mapTo(reservationParams, ReservationFilterParams.class);
+        return reservationService.filter(reservationFilterParams);
+    };
 }

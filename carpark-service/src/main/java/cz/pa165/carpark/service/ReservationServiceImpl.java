@@ -1,6 +1,7 @@
 package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.dao.ReservationDao;
+import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
@@ -94,4 +95,13 @@ public class ReservationServiceImpl implements ReservationService {
     public void delete(Long id) {
         reservationDao.delete(id);
     }
+
+    /**
+     * Filter all the reservations according to the input params
+     *
+     * @param page, pageSize, query
+     * @return list of reservations
+     */
+    @Override
+    public List<Reservation> filter(ReservationFilterParams reservationFilterParams) { };
 }
