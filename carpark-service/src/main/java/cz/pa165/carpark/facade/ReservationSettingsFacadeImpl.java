@@ -11,6 +11,11 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * The reservation facade's implementation.
+ *
+ * @author Ondrej Svoren, 487558@mail.muni.cz
+ */
 @Transactional
 @Service
 public class ReservationSettingsFacadeImpl implements ReservationSettingsFacade {

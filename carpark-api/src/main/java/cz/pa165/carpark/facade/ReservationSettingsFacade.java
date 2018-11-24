@@ -5,6 +5,11 @@ import cz.pa165.carpark.dto.ReservationSettingsDTO;
 
 import java.util.List;
 
+/**
+ * The reservation facade's implementation.
+ *
+ * @author Ondrej Svoren, 487558@mail.muni.cz
+ */
 public interface ReservationSettingsFacade {
     /**
      * Find the reservation settings with the specified id
