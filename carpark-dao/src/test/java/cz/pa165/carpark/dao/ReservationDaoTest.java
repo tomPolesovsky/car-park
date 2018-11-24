@@ -2,7 +2,7 @@ package cz.pa165.carpark.dao;
 
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
-import cz.pa165.carpark.entity.ReservationStatus;
+import cz.pa165.carpark.enums.ReservationStatus;
 import cz.pa165.carpark.entity.Vehicle;
 import cz.pa165.carpark.util.AbstractJUnitTest;
 import org.junit.Test;
