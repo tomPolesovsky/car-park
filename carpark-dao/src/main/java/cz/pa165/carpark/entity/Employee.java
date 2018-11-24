@@ -45,6 +45,11 @@ public class Employee {
     private String username;
 
     /**
+     * Person's email
+     */
+    private String emailAddress;
+
+    /**
      * Password for authentication
      */
     @Transient

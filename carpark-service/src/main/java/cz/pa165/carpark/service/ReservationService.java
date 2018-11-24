@@ -11,7 +11,6 @@ import java.util.List;
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
-
 public interface ReservationService {
 
     /**
