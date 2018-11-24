@@ -3,20 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <dependencies>
-        <dependency>
-            <groupId>cz.pa165</groupId>
-            <artifactId>carpark-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>cz.pa165</groupId>
-            <artifactId>carpark-dao</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
 
     <parent>
         <artifactId>carpark-parent</artifactId>
@@ -29,6 +15,12 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>cz.pa165</groupId>
+            <artifactId>carpark-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>cz.pa165</groupId>
             <artifactId>carpark-dao</artifactId>
@@ -50,6 +42,23 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- utils -->

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
  * @author Jana Applova, 422352@mail.muni.cz
  */
 @Transactional
-public class EmployeeDaoImplTest extends AbstractJUnitTest {
+public class EmployeeDaoTest extends AbstractJUnitTest {
 
     /**
      * Employee' DAO injected

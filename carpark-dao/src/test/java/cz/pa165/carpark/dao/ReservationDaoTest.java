@@ -25,7 +25,7 @@ import java.util.List;
  * @author Ondrej Svoreň
  */
 @Transactional
-public class ReservationDaoImplTest extends AbstractJUnitTest {
+public class ReservationDaoTest extends AbstractJUnitTest {
 
     @Inject
     private ReservationDao reservationDao;

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
  * @author Tomáš Polešovský, 487574@mail.muni.cz
  */
 @Transactional
-public class VehicleDaoImplTest extends AbstractJUnitTest {
+public class VehicleDaoTest extends AbstractJUnitTest {
 
     @Inject
     private VehicleDao vehicleDao;

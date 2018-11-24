@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.hasSize;
  * @author Ondrej Svoreň
  */
 @Transactional
-public class ReservationSettingsDaoImplTest extends AbstractJUnitTest {
+public class ReservationSettingsDaoTest extends AbstractJUnitTest {
 
     @Inject
     private ReservationSettingsDao reservationSettingsDao;

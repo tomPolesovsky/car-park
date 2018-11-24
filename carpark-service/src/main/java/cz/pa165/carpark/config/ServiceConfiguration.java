@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ImportResource({"classpath*:application.xml"})
-@ComponentScan("cz.muni.fi.pa165.carpark.service")
 public class ServiceConfiguration {
 
     @Bean
