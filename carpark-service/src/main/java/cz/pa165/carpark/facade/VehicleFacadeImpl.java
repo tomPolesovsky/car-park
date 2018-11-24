@@ -52,7 +52,7 @@ public class VehicleFacadeImpl implements VehicleFacade {
     @Override
     public VehicleDTO update(VehicleDTO vehicle) {
         Vehicle vehicleEntity = objectMapper.mapTo(vehicle, Vehicle.class);
-        vehicleService.save(vehicleEntity);
+        vehicleService.update(vehicleEntity);
         return objectMapper.mapTo(vehicleEntity, VehicleDTO.class);
     }
 

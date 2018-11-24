@@ -4,6 +4,7 @@ import cz.pa165.carpark.dao.ReservationDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
+@Service
 public class ReservationServiceImpl implements ReservationService {
 
     private ReservationDao reservationDao;
