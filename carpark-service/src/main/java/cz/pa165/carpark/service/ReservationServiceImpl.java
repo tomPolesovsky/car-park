@@ -8,7 +8,11 @@ import cz.pa165.carpark.entity.Vehicle;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * The reservation service's implementation.
@@ -99,9 +103,32 @@ public class ReservationServiceImpl implements ReservationService {
     /**
      * Filter all the reservations according to the input params
      *
-     * @param page, pageSize, query
+     * @param reservationFilterParams
      * @return list of reservations
      */
     @Override
-    public List<Reservation> filter(ReservationFilterParams reservationFilterParams) { };
+    public List<Reservation> filter(ReservationFilterParams reservationFilterParams) {
+        List<Reservation> reservations = findAll();
+        List<Reservation> reservationResultList = new ArrayList<Reservation>();
+        for (Reservation reservation : reservations) {
+            if (reservation.getEmployee().getFirstName().equals(reservationFilterParams.getQuery()) ||
+                reservation.getEmployee().getLastName().equals(reservationFilterParams.getQuery()) ||
+                reservation.getEmployee().getUsername().equals(reservationFilterParams.getQuery()) ||
+                reservation.getVehicle().getBrand().equals(reservationFilterParams.getQuery()) ||
+                reservation.getVehicle().getRegistrationNumber().equals(reservationFilterParams.getQuery()) ||
+                reservation.getVehicle().getType().equals(reservationFilterParams.getQuery()) &&
+                        (reservation.getFrom().isEqual(reservationFilterParams.getFrom()) &&
+                                reservation.getTo().isEqual(reservation.getTo()))) {
+                reservationResultList.add(reservation);
+            }
+        }
+
+        Long numberOfPages = reservationResultList.size() / reservationFilterParams.getPageSize();
+        if (reservationFilterParams.getPage() <= numberOfPages) {
+            Long firstIndex = (reservationFilterParams.getPage() - 1) * reservationFilterParams.getPageSize();
+            reservationResultList.subList(Math.toIntExact(firstIndex), reservationResultList.size()).clear();
+        }
+
+        return reservationResultList;
+    };
 }

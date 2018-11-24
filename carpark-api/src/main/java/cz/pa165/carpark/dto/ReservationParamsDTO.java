@@ -2,6 +2,9 @@ package cz.pa165.carpark.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+
 /**
  * The reservation parameters data transfer object.
  *
@@ -24,4 +27,14 @@ public class ReservationParamsDTO {
      *  The query string
      */
     private String query;
+
+    /**
+     * Filter reservations from this date
+     */
+    private LocalDateTime from;
+
+    /**
+     * Filter reservations to this date
+     */
+    private LocalDateTime to;
 }
