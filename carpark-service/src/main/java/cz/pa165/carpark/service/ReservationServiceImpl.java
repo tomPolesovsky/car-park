@@ -1,9 +1,12 @@
 package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.dao.ReservationDao;
+import cz.pa165.carpark.dao.VehicleDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.exception.UnavailableCarException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -19,9 +22,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     private ReservationDao reservationDao;
 
+    private VehicleDao vehicleDao;
+
     @Inject
-    public ReservationServiceImpl(ReservationDao reservationDao) {
+    public ReservationServiceImpl(ReservationDao reservationDao, VehicleDao vehicleDao) {
         this.reservationDao = reservationDao;
+        this.vehicleDao = vehicleDao;
     }
 
     /**
@@ -68,12 +74,39 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     /**
-     * Save the specified reservation
+     * Processes reservation request
      *
      * @param reservation
      */
     @Override
-    public void save(Reservation reservation) {
+    public boolean processRequest(Reservation reservation) {
+        List<Vehicle> allCars = vehicleDao.findAll();
+        if (allCars == null || !allCars.contains(reservation.getVehicle())){
+            throw new UnavailableCarException("Our company does not rent this car.");
+        }
+        Vehicle chosenCar = reservation.getVehicle();
+        List<Reservation> reservations = reservationDao.findByVehicle(chosenCar);
+
+        //to be continued
+
+        save(reservation);
+        return true;
+    }
+
+    /**
+     * Processes reservation request manually
+     *
+     * @param reservation
+     */
+    @Override
+    public boolean processRequestManually(Reservation reservation, ReservationSettings reservationSettings) {
+        //to be continued
+
+        save(reservation);
+        return true;
+    }
+
+    private void save(Reservation reservation) {
         reservationDao.save(reservation);
     }
 

@@ -2,6 +2,7 @@ package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
 
 import java.util.List;
@@ -45,11 +46,20 @@ public interface ReservationService {
     List<Reservation> findAll();
 
     /**
-     * Save the specified reservation
+     * Processes reservation request
      *
      * @param reservation
+     * @return true if reservation was successful else false
      */
-    void save(Reservation reservation);
+    boolean processRequest(Reservation reservation);
+
+    /**
+     * Processes reservation request manually
+     *
+     * @param reservation
+     * @return true if reservation was successful else false
+     */
+    boolean processRequestManually(Reservation reservation, ReservationSettings reservationSettings);
 
     /**
      * Update the specified reservation

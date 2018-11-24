@@ -45,11 +45,11 @@ public interface ReservationFacade {
     List<ReservationDTO> findAll();
 
     /**
-     * Create new reservation
+     * Processes the reservation request
      *
      * @param reservation dto
      */
-    ReservationDTO create(ReservationDTO reservation);
+    void processRequest(ReservationDTO reservation);
 
     /**
      * Update the specified reservation

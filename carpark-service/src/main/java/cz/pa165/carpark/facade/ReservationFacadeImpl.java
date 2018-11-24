@@ -5,8 +5,11 @@ import cz.pa165.carpark.dto.ReservationDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.service.MailingService;
 import cz.pa165.carpark.service.ReservationService;
+import cz.pa165.carpark.service.ReservationSettingsService;
 import cz.pa165.carpark.util.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,10 +30,17 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     private ReservationService reservationService;
 
+    private ReservationSettingsService reservationSettingsService;
+
+    private MailingService mailingService;
+
     @Inject
-    public ReservationFacadeImpl(ObjectMapper objectMapper, ReservationService reservationService) {
+    public ReservationFacadeImpl(ObjectMapper objectMapper,
+                                 ReservationService reservationService,
+                                 MailingService mailingService) {
         this.objectMapper = objectMapper;
         this.reservationService = reservationService;
+        this.mailingService = mailingService;
     }
 
     /**
@@ -83,15 +93,50 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     /**
-     * Create new reservation
+     * Processes the reservation request
      *
      * @param reservation dto
      */
     @Override
-    public ReservationDTO create(ReservationDTO reservation) {
+    public void processRequest(ReservationDTO reservation) {
         Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
-        reservationService.save(reservationEntity);
-        return objectMapper.mapTo(reservationEntity, ReservationDTO.class);
+        ReservationSettings reservationSettings =
+                reservationSettingsService.findByEmployee(reservationEntity.getEmployee());
+        if (reservationSettings.getAutoApproval()){
+            processRequestAutoApproval(reservationEntity, reservationSettings.getAllowed());
+        }
+        else {
+            processRequestManually(reservationEntity, reservationSettings);
+        }
+    }
+
+    private void processRequestAutoApproval(Reservation reservationEntity, boolean isAllowed){
+        if (!isAllowed) {
+            mailingService.SendDeclination(reservationEntity);
+        }
+        else {
+            processRequestAutoApprovalAllowed(reservationEntity);
+        }
+    }
+
+    private void processRequestAutoApprovalAllowed(Reservation reservationEntity){
+        if (reservationService.processRequest(reservationEntity)){
+            mailingService.SendConfirmation(reservationEntity);
+        }
+        else {
+            mailingService.SendDeclination(reservationEntity);
+        }
+    }
+
+    private void processRequestManually(Reservation reservationEntity, ReservationSettings reservationSettings){
+        mailingService.SendRequestForApproval(reservationEntity);
+        //this will happen after we get the response...
+        if (reservationService.processRequestManually(reservationEntity, reservationSettings)){
+            mailingService.SendConfirmation(reservationEntity);
+        }
+        else {
+            mailingService.SendDeclination(reservationEntity);
+        }
     }
 
     /**
