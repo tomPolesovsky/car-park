@@ -1,6 +1,7 @@
 package cz.pa165.carkpark.facade;
 
 import cz.pa165.carkpark.util.AbstractJUnitTest;
+import cz.pa165.carpark.facade.ReservationSettingsFacadeImpl;
 import cz.pa165.carpark.service.ReservationSettingsService;
 import cz.pa165.carpark.util.ObjectMapper;
 import org.mockito.InjectMocks;
@@ -19,6 +20,6 @@ public class ReservationSettingsFacadeTest extends AbstractJUnitTest {
     @Mock
     private ReservationSettingsService reservationSettingsService;
 
-    //@InjectMocks
-    //private ReservationSettingsFacadeImpl reservationSettingsFacade;
+    @InjectMocks
+    private ReservationSettingsFacadeImpl reservationSettingsFacade;
 }
