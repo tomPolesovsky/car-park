@@ -1,4 +1,5 @@
 package cz.pa165.carpark.service;
+
 import cz.pa165.carpark.dao.ReservationSettingsDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.ReservationSettings;
@@ -6,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 /**
  * The reservation settings service's implementation.

@@ -5,6 +5,11 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+/**
+ * The vehicle data transfer object.
+ *
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
+ */
 @Getter
 @Setter
 public class VehicleDTO {

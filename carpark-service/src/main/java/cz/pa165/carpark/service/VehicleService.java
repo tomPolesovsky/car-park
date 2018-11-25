@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The vehicle service's interface.
  *
- * @author Tomáš Polešovský, polesovsky@gmail.com
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
 public interface VehicleService {
 

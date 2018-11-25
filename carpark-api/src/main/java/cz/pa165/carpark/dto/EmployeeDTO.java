@@ -5,6 +5,11 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+/**
+ * The employee data transfer object.
+ *
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
+ */
 @Getter
 @Setter
 public class EmployeeDTO {
