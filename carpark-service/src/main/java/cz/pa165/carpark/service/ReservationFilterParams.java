@@ -1,4 +1,4 @@
-package cz.pa165.carpark.dto;
+package cz.pa165.carpark.service;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-public class ReservationParamsDTO {
+public class ReservationFilterParams {
     /**
      * The page
      */
