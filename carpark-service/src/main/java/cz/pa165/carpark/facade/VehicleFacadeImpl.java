@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * The reservation facade's implementation.
+ *
+ * @author Jana Applova, 422352@mail.muni.cz
+ */
 @Transactional
 @Service
 public class VehicleFacadeImpl implements VehicleFacade {

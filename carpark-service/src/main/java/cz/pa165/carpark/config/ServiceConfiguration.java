@@ -7,8 +7,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
+/**
+ * Configuration of service layer
+ *
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
+ */
 @Configuration
-@ImportResource({"classpath*:application.xml"})
+@ImportResource({"classpath*:applsication.xml"})
 public class ServiceConfiguration {
 
     @Bean

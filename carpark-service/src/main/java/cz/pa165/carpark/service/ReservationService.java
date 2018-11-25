@@ -1,5 +1,6 @@
 package cz.pa165.carpark.service;
 
+import cz.pa165.carpark.dto.ReservationDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.ReservationSettings;
@@ -82,4 +83,12 @@ public interface ReservationService {
      * @param id unambiguous identification of entity
      */
     void delete(Long id);
+
+    /**
+     * Filter all the reservations according to the input params
+     *
+     * @param reservationFilterParams
+     * @return list of reservations
+     */
+    List<Reservation> filter(ReservationFilterParams reservationFilterParams);
 }

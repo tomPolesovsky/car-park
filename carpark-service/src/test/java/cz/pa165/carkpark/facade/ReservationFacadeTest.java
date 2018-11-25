@@ -31,6 +31,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Tests for Reservation' facade implementation.
+ *
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
+ */
 public class ReservationFacadeTest extends AbstractJUnitTest {
 
     @Mock

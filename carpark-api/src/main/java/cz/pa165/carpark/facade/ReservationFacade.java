@@ -2,6 +2,7 @@ package cz.pa165.carpark.facade;
 
 import cz.pa165.carpark.dto.EmployeeDTO;
 import cz.pa165.carpark.dto.ReservationDTO;
+import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 
 import java.util.List;
@@ -79,5 +80,13 @@ public interface ReservationFacade {
      * @param id unambiguous identification of entity
      */
     void delete(Long id);
+
+    /**
+     * Filter all the reservations according to the input params
+     *
+     * @param reservationParams
+     * @return list of reservations
+     */
+    List<ReservationDTO> filter(ReservationParamsDTO reservationParams);
 
 }
