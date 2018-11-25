@@ -23,6 +23,11 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Tests for Reservation' service implementation.
+ *
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
+ */
 public class ReservationServiceTest extends AbstractJUnitTest {
 
     @Mock
