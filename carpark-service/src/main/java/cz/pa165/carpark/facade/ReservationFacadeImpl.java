@@ -102,25 +102,31 @@ public class ReservationFacadeImpl implements ReservationFacade {
         Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
         ReservationSettings reservationSettings =
                 reservationSettingsService.findByEmployee(reservationEntity.getEmployee());
-        if (reservationSettings.getAutoApproval()){
-            processRequestAutoApproval(reservationEntity, reservationSettings.getAllowed());
+        boolean resultOk = reservationService.processRequest(reservationEntity, reservationSettings);
+        if (reservationSettings.getAutoApproval()) {
+            if (resultOk){
+                mailingService.SendConfirmation(reservationEntity);
+            }
+            else {
+                mailingService.SendDeclination(reservationEntity);
+            }
         }
         else {
-            processRequestManually(reservationEntity, reservationSettings);
+            mailingService.SendRequestForApproval(reservationEntity);
         }
     }
 
-    private void processRequestAutoApproval(Reservation reservationEntity, boolean isAllowed){
-        if (!isAllowed) {
-            mailingService.SendDeclination(reservationEntity);
-        }
-        else {
-            processRequestAutoApprovalAllowed(reservationEntity);
-        }
-    }
-
-    private void processRequestAutoApprovalAllowed(Reservation reservationEntity){
-        if (reservationService.processRequest(reservationEntity)){
+    /**
+     * Accepts or declines the reservation request
+     *
+     * @param reservation dto
+     * @param toBeAccepted
+     */
+    @Override
+    public void acceptOrDecline(ReservationDTO reservation, boolean toBeAccepted) {
+        Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
+        reservationService.acceptOrDecline(reservationEntity, toBeAccepted);
+        if (toBeAccepted) {
             mailingService.SendConfirmation(reservationEntity);
         }
         else {
@@ -128,15 +134,15 @@ public class ReservationFacadeImpl implements ReservationFacade {
         }
     }
 
-    private void processRequestManually(Reservation reservationEntity, ReservationSettings reservationSettings){
-        mailingService.SendRequestForApproval(reservationEntity);
-        //this will happen after we get the response...
-        if (reservationService.processRequestManually(reservationEntity, reservationSettings)){
-            mailingService.SendConfirmation(reservationEntity);
-        }
-        else {
-            mailingService.SendDeclination(reservationEntity);
-        }
+    /**
+     * Occurs when car is returned
+     *
+     * @param reservation dto
+     */
+    @Override
+    public void returned(ReservationDTO reservation) {
+        Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
+        reservationService.returned(reservationEntity);
     }
 
     /**

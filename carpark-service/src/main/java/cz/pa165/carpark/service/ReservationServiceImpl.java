@@ -6,6 +6,7 @@ import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.enums.ReservationStatus;
 import cz.pa165.carpark.exception.UnavailableCarException;
 import org.springframework.stereotype.Service;
 
@@ -77,37 +78,62 @@ public class ReservationServiceImpl implements ReservationService {
      * Processes reservation request
      *
      * @param reservation
+     * @param reservationSettings
+     * @return true if the request was successfully processed else false
      */
     @Override
-    public boolean processRequest(Reservation reservation) {
+    public boolean processRequest(Reservation reservation, ReservationSettings reservationSettings) {
         List<Vehicle> allCars = vehicleDao.findAll();
-        if (allCars == null || !allCars.contains(reservation.getVehicle())){
+        Vehicle chosenCar = reservation.getVehicle();
+        if (allCars == null || !allCars.contains(chosenCar)){
             throw new UnavailableCarException("Our company does not rent this car.");
         }
-        Vehicle chosenCar = reservation.getVehicle();
         List<Reservation> reservations = reservationDao.findByVehicle(chosenCar);
-
-        //to be continued
-
-        save(reservation);
+        if (reservations.stream().anyMatch(r -> r.getTo().compareTo(reservation.getFrom()) > 0 &&
+                                                r.getFrom().compareTo(reservation.getTo()) < 0)) {
+            throw new UnavailableCarException("This car is not available in the selected time period.");
+        }
+        if (reservationSettings.getAutoApproval()){
+            if (reservationSettings.getAllowed()){
+                reservation.setStatus(ReservationStatus.APPROVED);
+            }
+            else {
+                reservation.setStatus(ReservationStatus.CANCELED);
+            }
+        }
+        else {
+            reservation.setStatus(ReservationStatus.NEW);
+        }
+        reservationDao.save(reservation);
         return true;
     }
 
     /**
-     * Processes reservation request manually
+     * Accepts or declines the reservation request
+     *
+     * @param reservation dto
+     * @param toBeAccepted
+     */
+    @Override
+    public void acceptOrDecline(Reservation reservation, boolean toBeAccepted) {
+        if (toBeAccepted){
+            reservation.setStatus(ReservationStatus.APPROVED);
+        }
+        else {
+            reservation.setStatus(ReservationStatus.CANCELED);
+        }
+        update(reservation);
+    }
+
+    /**
+     * Occurs when car is returned
      *
      * @param reservation
      */
     @Override
-    public boolean processRequestManually(Reservation reservation, ReservationSettings reservationSettings) {
-        //to be continued
-
-        save(reservation);
-        return true;
-    }
-
-    private void save(Reservation reservation) {
-        reservationDao.save(reservation);
+    public void returned(Reservation reservation) {
+        reservation.setStatus(ReservationStatus.RETURNED);
+        update(reservation);
     }
 
     /**

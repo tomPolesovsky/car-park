@@ -49,17 +49,25 @@ public interface ReservationService {
      * Processes reservation request
      *
      * @param reservation
-     * @return true if reservation was successful else false
+     * @param reservationSettings
+     * @return true if the request was successfully processed else false
      */
-    boolean processRequest(Reservation reservation);
+    boolean processRequest(Reservation reservation, ReservationSettings reservationSettings);
 
     /**
-     * Processes reservation request manually
+     * Accepts or declines the reservation request
      *
      * @param reservation
-     * @return true if reservation was successful else false
+     * @param toBeAccepted
      */
-    boolean processRequestManually(Reservation reservation, ReservationSettings reservationSettings);
+    void acceptOrDecline(Reservation reservation, boolean toBeAccepted);
+
+    /**
+     * Occurs when car is returned
+     *
+     * @param reservation
+     */
+    void returned(Reservation reservation);
 
     /**
      * Update the specified reservation

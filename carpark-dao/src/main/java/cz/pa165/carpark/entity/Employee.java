@@ -47,7 +47,7 @@ public class Employee {
     /**
      * Person's email
      */
-    private String emailAddress;
+    private String email;
 
     /**
      * Password for authentication

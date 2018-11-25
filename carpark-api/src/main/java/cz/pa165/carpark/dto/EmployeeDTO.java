@@ -32,7 +32,7 @@ public class EmployeeDTO {
     /**
      * Person's email
      */
-    private String emailAddress;
+    private String email;
 
     /**
      * Password for authentication
@@ -70,7 +70,7 @@ public class EmployeeDTO {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", position='" + position + '\'' +
                 '}';

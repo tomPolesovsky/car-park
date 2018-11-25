@@ -52,6 +52,21 @@ public interface ReservationFacade {
     void processRequest(ReservationDTO reservation);
 
     /**
+     * Accepts or declines the reservation request
+     *
+     * @param reservation dto
+     * @param toBeAccepted
+     */
+    void acceptOrDecline(ReservationDTO reservation, boolean toBeAccepted);
+
+    /**
+     * Occurs when car is returned
+     *
+     * @param reservation dto
+     */
+    void returned(ReservationDTO reservation);
+
+    /**
      * Update the specified reservation
      *
      * @param reservation dto
