@@ -131,6 +131,8 @@ public class EmployeeFacadeTest extends AbstractJUnitTest {
         assertThat(resultList, hasSize(1));
     }
 
+    // todo: new employee
+
     @Test
     public void update() {
         when(mapper.mapTo(any(Employee.class), eq(Employee.class)))
