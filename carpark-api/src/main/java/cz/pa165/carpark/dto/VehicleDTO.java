@@ -3,6 +3,7 @@ package cz.pa165.carpark.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -27,6 +28,7 @@ public class VehicleDTO {
     /**
      * The registration number of the vehicle
      */
+    @NotNull
     private String registrationNumber;
 
     /**

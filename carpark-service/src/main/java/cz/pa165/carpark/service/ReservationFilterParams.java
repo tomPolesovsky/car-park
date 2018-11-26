@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 /**
- * The reservation parameters data transfer object.
+ * The reservation filter parameters.
  *
  * @author Ondrej Svoren, 487558@mail.muni.cz
  */
