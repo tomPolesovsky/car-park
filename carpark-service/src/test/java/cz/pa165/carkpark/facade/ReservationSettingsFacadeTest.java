@@ -108,7 +108,6 @@ public class ReservationSettingsFacadeTest extends AbstractJUnitTest {
         ReservationSettingsDTO reservationSettingsDTOResult = reservationSettingsFacade.find(reservationSettings1.getId());
 
         assertNotNull(reservationSettingsDTOResult);
-        assertThat(reservationSettingsDTOResult.getEmployee(), is(reservationSettings1.getEmployee()));
         assertThat(reservationSettingsDTOResult.getId(), is(reservationSettings1.getId()));
 
         assertNotNull(reservationSettingsDTOResult.getEmployee());
@@ -161,7 +160,7 @@ public class ReservationSettingsFacadeTest extends AbstractJUnitTest {
         ReservationSettingsDTO reservationSettingsDTOResult = reservationSettingsFacade.update(reservationSettings1DTO);
 
         assertNotNull(reservationSettingsDTOResult);
-        assertThat(reservationSettingsDTOResult.getEmployee(), is(reservationSettings1.getEmployee()));
+        assertThat(reservationSettingsDTOResult.getEmployee().getUsername(), is(reservationSettings1.getEmployee().getUsername()));
         assertThat(reservationSettingsDTOResult.getId(), is(reservationSettings1.getId()));
 
         verify(reservationSettingsService, times(1)).update(reservationSettings1);

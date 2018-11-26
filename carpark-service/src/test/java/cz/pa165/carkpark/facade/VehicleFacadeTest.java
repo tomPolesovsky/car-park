@@ -3,9 +3,11 @@ package cz.pa165.carkpark.facade;
 import cz.pa165.carkpark.util.AbstractJUnitTest;
 import cz.pa165.carpark.dto.EmployeeDTO;
 import cz.pa165.carpark.dto.ReservationDTO;
+import cz.pa165.carpark.dto.ReservationSettingsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
 import cz.pa165.carpark.facade.VehicleFacadeImpl;
 import cz.pa165.carpark.service.VehicleService;
@@ -32,7 +34,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class VehicleFacadeTest extends AbstractJUnitTest {
-
 
     @Mock
     private ObjectMapper mapper;
@@ -145,7 +146,12 @@ public class VehicleFacadeTest extends AbstractJUnitTest {
         assertThat(resultList, hasSize(1));
     }
 
-    // todo: new vehicle
+    @Test
+    public void create() {
+        when(mapper.mapTo(any(VehicleDTO.class), eq(Vehicle.class))).thenReturn(vehicle);
+        vehicleFacade.create(vehicleDTO);
+        verify(vehicleService, times(1)).save(vehicle);
+    }
 
     @Test
     public void update() {

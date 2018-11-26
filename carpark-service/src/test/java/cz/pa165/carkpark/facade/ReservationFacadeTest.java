@@ -147,8 +147,6 @@ public class ReservationFacadeTest extends AbstractJUnitTest {
         assertThat(resultList, hasSize(1));
     }
 
-    // todo: new reservation
-
     @Test
     public void update() {
         when(mapper.mapTo(any(Reservation.class), eq(Reservation.class)))
