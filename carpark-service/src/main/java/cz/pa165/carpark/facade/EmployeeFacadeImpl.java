@@ -30,10 +30,10 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     /**
-     * Find the employees with the specified id
+     * Find the employee with the specified id
      *
      * @param id unambiguous identification of entity
-     * @return employees dto
+     * @return employee dto
      */
     @Override
     public EmployeeDTO find(Long id) {
