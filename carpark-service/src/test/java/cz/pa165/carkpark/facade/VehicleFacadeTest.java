@@ -33,6 +33,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * The tests for vehicle facade.
+ *
+ * @author Ondrej Svoren, 487558@mail.muni.cz
+ */
 public class VehicleFacadeTest extends AbstractJUnitTest {
 
     @Mock

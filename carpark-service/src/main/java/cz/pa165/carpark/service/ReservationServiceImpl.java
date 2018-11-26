@@ -30,12 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     private ReservationDao reservationDao;
 
-    private VehicleDao vehicleDao;
-
     @Inject
-    public ReservationServiceImpl(ReservationDao reservationDao, VehicleDao vehicleDao) {
+    public ReservationServiceImpl(ReservationDao reservationDao) {
         this.reservationDao = reservationDao;
-        this.vehicleDao = vehicleDao;
     }
 
     /**
@@ -176,6 +173,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     /**
+     * Filter and get sublist in date time interval
      *
      * @param reservations list of reservations
      * @param from date time from

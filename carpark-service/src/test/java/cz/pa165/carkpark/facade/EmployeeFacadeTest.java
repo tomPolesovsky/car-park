@@ -32,6 +32,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * The tests for employee facade.
+ *
+ * @author Ondrej Svoren, 487558@mail.muni.cz
+ */
 public class EmployeeFacadeTest extends AbstractJUnitTest {
 
     @Mock
