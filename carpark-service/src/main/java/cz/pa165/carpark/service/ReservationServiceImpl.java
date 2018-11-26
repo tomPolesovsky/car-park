@@ -1,10 +1,14 @@
 package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.dao.ReservationDao;
+import cz.pa165.carpark.dao.VehicleDao;
 import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.enums.ReservationStatus;
+import cz.pa165.carpark.exception.UnavailableCarException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -24,9 +28,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     private ReservationDao reservationDao;
 
+    private VehicleDao vehicleDao;
+
     @Inject
-    public ReservationServiceImpl(ReservationDao reservationDao) {
+    public ReservationServiceImpl(ReservationDao reservationDao, VehicleDao vehicleDao) {
         this.reservationDao = reservationDao;
+        this.vehicleDao = vehicleDao;
     }
 
     /**
@@ -73,13 +80,65 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     /**
-     * Save the specified reservation
+     * Processes reservation request
+     *
+     * @param reservation
+     * @param reservationSettings
+     * @return true if the request was successfully processed else false
+     */
+    @Override
+    public boolean processRequest(Reservation reservation, ReservationSettings reservationSettings) {
+        List<Vehicle> allCars = vehicleDao.findAll();
+        Vehicle chosenCar = reservation.getVehicle();
+        if (allCars == null || !allCars.contains(chosenCar)){
+            throw new UnavailableCarException("Our company does not rent this car.");
+        }
+        List<Reservation> reservations = reservationDao.findByVehicle(chosenCar);
+        if (reservations.stream().anyMatch(r -> r.getTo().compareTo(reservation.getFrom()) > 0 &&
+                r.getFrom().compareTo(reservation.getTo()) < 0)) {
+            throw new UnavailableCarException("This car is not available in the selected time period.");
+        }
+        if (reservationSettings.getAutoApproval()){
+            if (reservationSettings.getAllowed()){
+                reservation.setStatus(ReservationStatus.APPROVED);
+            }
+            else {
+                reservation.setStatus(ReservationStatus.CANCELED);
+            }
+        }
+        else {
+            reservation.setStatus(ReservationStatus.NEW);
+        }
+        reservationDao.save(reservation);
+        return true;
+    }
+
+    /**
+     * Accepts or declines the reservation request
+     *
+     * @param reservation dto
+     * @param toBeAccepted
+     */
+    @Override
+    public void acceptOrDecline(Reservation reservation, boolean toBeAccepted) {
+        if (toBeAccepted){
+            reservation.setStatus(ReservationStatus.APPROVED);
+        }
+        else {
+            reservation.setStatus(ReservationStatus.CANCELED);
+        }
+        update(reservation);
+    }
+
+    /**
+     * Occurs when car is returned
      *
      * @param reservation
      */
     @Override
-    public void save(Reservation reservation) {
-        reservationDao.save(reservation);
+    public void returned(Reservation reservation) {
+        reservation.setStatus(ReservationStatus.RETURNED);
+        update(reservation);
     }
 
     /**
