@@ -4,6 +4,7 @@ import cz.pa165.carpark.enums.ReservationStatus;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -23,21 +24,25 @@ public class ReservationDTO {
     /**
      * The date and time from which will the reservation start
      */
+    @NotNull
     private LocalDateTime from;
 
     /**
      * The date and time from which will the reservation end
      */
+    @NotNull
     private LocalDateTime to;
 
     /**
      * The employee which is making the reservation
      */
+    @NotNull
     private EmployeeDTO employee;
 
     /**
      * The vehicle (car) which will be reserved
      */
+    @NotNull
     private VehicleDTO vehicle;
 
     /**

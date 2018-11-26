@@ -3,6 +3,7 @@ package cz.pa165.carkpark.facade;
 import cz.pa165.carkpark.util.AbstractJUnitTest;
 import cz.pa165.carpark.dto.EmployeeDTO;
 import cz.pa165.carpark.dto.ReservationDTO;
+import cz.pa165.carpark.dto.ReservationSettingsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
@@ -129,6 +130,13 @@ public class EmployeeFacadeTest extends AbstractJUnitTest {
 
         assertNotNull(resultList);
         assertThat(resultList, hasSize(1));
+    }
+
+    @Test
+    public void create() {
+        when(mapper.mapTo(any(EmployeeDTO.class), eq(Employee.class))).thenReturn(employee);
+        employeeFacade.create(employeeDTO);
+        verify(employeeService, times(1)).save(employee);
     }
 
     @Test
