@@ -1,6 +1,5 @@
 package cz.pa165.carpark.service;
 
-import cz.pa165.carpark.dto.ReservationDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.ReservationSettings;

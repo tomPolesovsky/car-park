@@ -30,12 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     private ReservationDao reservationDao;
 
-    private VehicleDao vehicleDao;
-
     @Inject
-    public ReservationServiceImpl(ReservationDao reservationDao, VehicleDao vehicleDao) {
+    public ReservationServiceImpl(ReservationDao reservationDao) {
         this.reservationDao = reservationDao;
-        this.vehicleDao = vehicleDao;
     }
 
     /**
