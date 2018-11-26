@@ -1,11 +1,9 @@
 package cz.pa165.carkpark.service;
 
-import cz.pa165.carpark.dao.ReservationDao;
 import cz.pa165.carpark.dao.VehicleDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
-import cz.pa165.carpark.service.ReservationServiceImpl;
 import cz.pa165.carpark.service.VehicleServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,10 +20,13 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+/**
+ * The tests for vehicle service.
+ *
+ * @author Ondrej Svoren, 487558@mail.muni.cz
+ */
 public class VehicleServiceTest {
 
     @Mock
