@@ -3,6 +3,7 @@ package cz.pa165.carpark.service;
 import cz.pa165.carpark.dto.ReservationDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
 
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.List;
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
-
 public interface ReservationService {
 
     /**
@@ -47,11 +47,28 @@ public interface ReservationService {
     List<Reservation> findAll();
 
     /**
-     * Save the specified reservation
+     * Processes reservation request
+     *
+     * @param reservation
+     * @param reservationSettings
+     * @return true if the request was successfully processed else false
+     */
+    boolean processRequest(Reservation reservation, ReservationSettings reservationSettings);
+
+    /**
+     * Accepts or declines the reservation request
+     *
+     * @param reservation
+     * @param toBeAccepted
+     */
+    void acceptOrDecline(Reservation reservation, boolean toBeAccepted);
+
+    /**
+     * Occurs when car is returned
      *
      * @param reservation
      */
-    void save(Reservation reservation);
+    void returned(Reservation reservation);
 
     /**
      * Update the specified reservation

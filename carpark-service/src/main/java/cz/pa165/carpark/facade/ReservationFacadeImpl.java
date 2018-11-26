@@ -6,9 +6,12 @@ import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.service.MailingService;
 import cz.pa165.carpark.service.ReservationFilterParams;
 import cz.pa165.carpark.service.ReservationService;
+import cz.pa165.carpark.service.ReservationSettingsService;
 import cz.pa165.carpark.util.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,10 +32,19 @@ public class ReservationFacadeImpl implements ReservationFacade {
 
     private ReservationService reservationService;
 
+    private ReservationSettingsService reservationSettingsService;
+
+    private MailingService mailingService;
+
     @Inject
-    public ReservationFacadeImpl(ObjectMapper objectMapper, ReservationService reservationService) {
+    public ReservationFacadeImpl(ObjectMapper objectMapper,
+                                 ReservationService reservationService,
+                                 ReservationSettingsService reservationSettingsService,
+                                 MailingService mailingService) {
         this.objectMapper = objectMapper;
         this.reservationService = reservationService;
+        this.reservationSettingsService = reservationSettingsService;
+        this.mailingService = mailingService;
     }
 
     /**
@@ -85,15 +97,56 @@ public class ReservationFacadeImpl implements ReservationFacade {
     }
 
     /**
-     * Create new reservation
+     * Processes the reservation request
      *
      * @param reservation dto
      */
     @Override
-    public ReservationDTO create(ReservationDTO reservation) {
+    public void processRequest(ReservationDTO reservation) {
         Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
-        reservationService.save(reservationEntity);
-        return objectMapper.mapTo(reservationEntity, ReservationDTO.class);
+        ReservationSettings reservationSettings =
+                reservationSettingsService.findByEmployee(reservationEntity.getEmployee());
+        boolean resultOk = reservationService.processRequest(reservationEntity, reservationSettings);
+        if (reservationSettings.getAutoApproval()) {
+            if (resultOk){
+                mailingService.SendConfirmation(reservationEntity);
+            }
+            else {
+                mailingService.SendDeclination(reservationEntity);
+            }
+        }
+        else {
+            mailingService.SendRequestForApproval(reservationEntity);
+        }
+    }
+
+    /**
+     * Accepts or declines the reservation request
+     *
+     * @param reservation dto
+     * @param toBeAccepted
+     */
+    @Override
+    public void acceptOrDecline(ReservationDTO reservation, boolean toBeAccepted) {
+        Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
+        reservationService.acceptOrDecline(reservationEntity, toBeAccepted);
+        if (toBeAccepted) {
+            mailingService.SendConfirmation(reservationEntity);
+        }
+        else {
+            mailingService.SendDeclination(reservationEntity);
+        }
+    }
+
+    /**
+     * Occurs when car is returned
+     *
+     * @param reservation dto
+     */
+    @Override
+    public void returned(ReservationDTO reservation) {
+        Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
+        reservationService.returned(reservationEntity);
     }
 
     /**

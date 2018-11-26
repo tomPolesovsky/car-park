@@ -46,11 +46,26 @@ public interface ReservationFacade {
     List<ReservationDTO> findAll();
 
     /**
-     * Create new reservation
+     * Processes the reservation request
      *
      * @param reservation dto
      */
-    ReservationDTO create(ReservationDTO reservation);
+    void processRequest(ReservationDTO reservation);
+
+    /**
+     * Accepts or declines the reservation request
+     *
+     * @param reservation dto
+     * @param toBeAccepted
+     */
+    void acceptOrDecline(ReservationDTO reservation, boolean toBeAccepted);
+
+    /**
+     * Occurs when car is returned
+     *
+     * @param reservation dto
+     */
+    void returned(ReservationDTO reservation);
 
     /**
      * Update the specified reservation
