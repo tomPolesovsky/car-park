@@ -23,7 +23,7 @@ public interface ReservationSettingsFacade {
      * Find all the reservation settingss for the specified employee
      *
      * @param employee
-     * @return list of reservation settingss
+     * @return list of reservation settings
      */
     ReservationSettingsDTO findByEmployee(EmployeeDTO employee);
 
