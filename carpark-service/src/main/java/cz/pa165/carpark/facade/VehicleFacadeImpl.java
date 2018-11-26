@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * The reservation facade's implementation.
  *
- * @author Jana Applova, 422352@mail.muni.cz
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
 @Transactional
 @Service

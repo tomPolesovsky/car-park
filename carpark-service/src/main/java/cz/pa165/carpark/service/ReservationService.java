@@ -4,6 +4,7 @@ import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
+import cz.pa165.carpark.exception.UnavailableCarException;
 
 import java.util.List;
 
@@ -51,6 +52,7 @@ public interface ReservationService {
      * @param reservation
      * @param reservationSettings
      * @return true if the request was successfully processed else false
+     * @throws UnavailableCarException when car is not available
      */
     void processRequest(Reservation reservation, ReservationSettings reservationSettings);
 
@@ -79,8 +81,9 @@ public interface ReservationService {
     /**
      * Filter all the reservations according to the input params
      *
-     * @param reservationFilterParams
+     * @param params
      * @return list of reservations
      */
-    List<Reservation> filter(ReservationFilterParams reservationFilterParams);
+    List<Reservation> filter(ReservationFilterParams params);
+
 }

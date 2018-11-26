@@ -173,6 +173,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     /**
+     * Filter and get sublist in date time interval
      *
      * @param reservations list of reservations
      * @param from date time from
