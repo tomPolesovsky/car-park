@@ -3,12 +3,17 @@ package cz.pa165.carkpark.facade;
 import cz.pa165.carkpark.util.AbstractJUnitTest;
 import cz.pa165.carpark.dto.EmployeeDTO;
 import cz.pa165.carpark.dto.ReservationDTO;
+import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
+import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
 import cz.pa165.carpark.facade.ReservationFacadeImpl;
+import cz.pa165.carpark.service.MailingService;
+import cz.pa165.carpark.service.ReservationFilterParams;
 import cz.pa165.carpark.service.ReservationService;
+import cz.pa165.carpark.service.ReservationSettingsService;
 import cz.pa165.carpark.util.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +48,12 @@ public class ReservationFacadeTest extends AbstractJUnitTest {
 
     @Mock
     private ReservationService reservationService;
+
+    @Mock
+    private ReservationSettingsService reservationSettingsService;
+
+    @Mock
+    private MailingService mailingService;
 
     @InjectMocks
     private ReservationFacadeImpl reservationFacade;
@@ -147,11 +158,46 @@ public class ReservationFacadeTest extends AbstractJUnitTest {
         assertThat(resultList, hasSize(1));
     }
 
-    // todo: new reservation
+    @Test
+    public void processRequest() {
+        ReservationSettings settings = new ReservationSettings();
+        when(mapper.mapTo(any(ReservationDTO.class), eq(Reservation.class)))
+                .thenReturn(reservation);
+        when(reservationSettingsService.findByEmployee(any(Employee.class)))
+                .thenReturn(settings);
+        when(mapper.mapTo(any(ReservationDTO.class), eq(Reservation.class)))
+                .thenReturn(reservation);
+
+        settings.setAllowed(false);
+        reservationFacade.processRequest(reservationDTO);
+        verify(mailingService, times(1)).sendDeclination(reservation);
+
+        settings.setAutoApproval(true);
+        settings.setAllowed(true);
+        reservationFacade.processRequest(reservationDTO);
+        verify(mailingService, times(1)).sendConfirmation(reservation);
+
+        settings.setAutoApproval(false);
+        reservationFacade.processRequest(reservationDTO);
+        verify(mailingService, times(1)).sendRequestForApproval(reservation);
+    }
+
+    @Test
+    public void acceptOrDecline() {
+        when(mapper.mapTo(any(ReservationDTO.class), eq(Reservation.class)))
+                .thenReturn(reservation);
+
+        reservationFacade.acceptOrDecline(reservationDTO, true);
+        verify(mailingService, times(1)).sendConfirmation(reservation);
+
+
+        reservationFacade.acceptOrDecline(reservationDTO, false);
+        verify(mailingService, times(1)).sendDeclination(reservation);
+    }
 
     @Test
     public void update() {
-        when(mapper.mapTo(any(Reservation.class), eq(Reservation.class)))
+        when(mapper.mapTo(any(ReservationDTO.class), eq(Reservation.class)))
                 .thenReturn(reservation);
         when(mapper.mapTo(any(Reservation.class), eq(ReservationDTO.class)))
                 .thenReturn(reservationDTO);
@@ -169,6 +215,20 @@ public class ReservationFacadeTest extends AbstractJUnitTest {
     public void delete() {
         reservationFacade.delete(reservationDTO.getId());
         verify(reservationService, times(1)).delete(reservation.getId());
+    }
+
+    @Test
+    public void filter() {
+        ReservationFilterParams filterParams = new ReservationFilterParams();
+        when(mapper.mapTo(any(ReservationParamsDTO.class), eq(ReservationFilterParams.class)))
+                .thenReturn(filterParams);
+        when(mapper.mapTo(anyCollection(), eq(ReservationDTO.class)))
+                .thenReturn(asList(reservationDTO));
+
+        List<ReservationDTO> resultList = reservationFacade.filter(new ReservationParamsDTO());
+
+        assertNotNull(resultList);
+        assertThat(resultList, hasSize(1));
     }
 
 }
