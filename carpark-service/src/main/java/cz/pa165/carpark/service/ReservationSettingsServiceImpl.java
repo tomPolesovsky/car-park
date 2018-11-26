@@ -16,7 +16,6 @@ import java.util.List;
 @Service
 public class ReservationSettingsServiceImpl implements ReservationSettingsService {
 
-    @Inject
     private ReservationSettingsDao reservationSettingsDao;
 
     @Inject

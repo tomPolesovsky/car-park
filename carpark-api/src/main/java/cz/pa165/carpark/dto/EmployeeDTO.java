@@ -3,6 +3,7 @@ package cz.pa165.carpark.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -32,6 +33,7 @@ public class EmployeeDTO {
     /**
      * Username for authentication
      */
+    @NotNull
     private String username;
 
     /**
