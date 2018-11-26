@@ -53,7 +53,7 @@ public interface ReservationService {
      * @param reservationSettings
      * @return true if the request was successfully processed else false
      */
-    boolean processRequest(Reservation reservation, ReservationSettings reservationSettings);
+    void processRequest(Reservation reservation, ReservationSettings reservationSettings);
 
     /**
      * Accepts or declines the reservation request
@@ -62,13 +62,6 @@ public interface ReservationService {
      * @param toBeAccepted
      */
     void acceptOrDecline(Reservation reservation, boolean toBeAccepted);
-
-    /**
-     * Occurs when car is returned
-     *
-     * @param reservation
-     */
-    void returned(Reservation reservation);
 
     /**
      * Update the specified reservation

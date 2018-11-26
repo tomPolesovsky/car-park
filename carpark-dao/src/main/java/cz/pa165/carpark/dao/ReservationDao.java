@@ -4,6 +4,7 @@ import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -28,5 +29,16 @@ public interface ReservationDao extends Dao<Reservation>  {
      * @return list of reservations
      */
     List<Reservation> findByVehicle(Vehicle vehicle);
+
+    /**
+     * Return true if vehicle is available in specific interval
+     *
+     * @param vehicle vehicle entity
+     * @param from date time from
+     * @param to date time to
+     * @return true or false
+     */
+    boolean isVehicleAvailable(Vehicle vehicle, LocalDateTime from, LocalDateTime to);
+
 
 }

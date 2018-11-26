@@ -16,7 +16,7 @@ public class MailingServiceImpl implements MailingService {
      * The method does not actually send an email - there is no server so we fake it by printing it out
      */
     @Override
-    public void SendConfirmation(Reservation reservation) {
+    public void sendConfirmation(Reservation reservation) {
         System.out.println("Your reservation of a car with a registration number " +
                 reservation.getVehicle().getRegistrationNumber() + " from date " +
                 reservation.getFrom() + " to date " + reservation.getTo() + " was successful.");
@@ -27,7 +27,7 @@ public class MailingServiceImpl implements MailingService {
      * The method does not actually send an email - there is no server so we fake it by printing it out
      */
     @Override
-    public void SendDeclination(Reservation reservation) {
+    public void sendDeclination(Reservation reservation) {
         System.out.println("Your reservation of a car with a registration number " +
                 reservation.getVehicle().getRegistrationNumber() + " from date " +
                 reservation.getFrom() + " to date " + reservation.getTo() + " was declined.");
@@ -38,8 +38,9 @@ public class MailingServiceImpl implements MailingService {
      * The method does not actually send an email - there is no server so we fake it by printing it out
      */
     @Override
-    public void SendRequestForApproval(Reservation reservation) {
+    public void sendRequestForApproval(Reservation reservation) {
         System.out.println("You were requested to approve a reservation for " +
                 reservation.getEmployee().getFirstName() + " " + reservation.getEmployee().getLastName() + ".");
     }
+
 }

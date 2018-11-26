@@ -19,15 +19,11 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyCollection;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * The tests for reservation settings facade.
@@ -173,4 +169,5 @@ public class ReservationSettingsFacadeTest extends AbstractJUnitTest {
         reservationSettingsFacade.delete(reservationSettings1DTO.getId());
         verify(reservationSettingsService, times(1)).delete(reservationSettings1.getId());
     }
+
 }

@@ -5,6 +5,7 @@ import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -44,6 +45,17 @@ public class ReservationDaoImpl extends DaoImpl<Reservation> implements Reservat
         return em.createQuery("select r from Reservation r where r.vehicle = :vehicle", Reservation.class)
                  .setParameter("vehicle", vehicle)
                  .getResultList();
+    }
+
+    @Override
+    public boolean isVehicleAvailable(Vehicle vehicle, LocalDateTime from, LocalDateTime to) {
+        List<Reservation> result = em.createQuery("select r from Reservation r where r.vehicle = :vehicle and (:dateFrom <= r.to and :dateTo >= r.from)", Reservation.class)
+                .setParameter("vehicle", vehicle)
+                .setParameter("dateFrom", from)
+                .setParameter("dateTo", to)
+                .getResultList();
+
+        return result.size() <= 0;
     }
 
 }

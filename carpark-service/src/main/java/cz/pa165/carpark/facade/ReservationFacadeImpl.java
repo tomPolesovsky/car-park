@@ -102,22 +102,23 @@ public class ReservationFacadeImpl implements ReservationFacade {
      * @param reservation dto
      */
     @Override
-    public void processRequest(ReservationDTO reservation) {
+    public ReservationDTO processRequest(ReservationDTO reservation) {
         Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
-        ReservationSettings reservationSettings =
-                reservationSettingsService.findByEmployee(reservationEntity.getEmployee());
-        boolean resultOk = reservationService.processRequest(reservationEntity, reservationSettings);
-        if (reservationSettings.getAutoApproval()) {
-            if (resultOk){
-                mailingService.SendConfirmation(reservationEntity);
-            }
-            else {
-                mailingService.SendDeclination(reservationEntity);
-            }
+        ReservationSettings settings = reservationSettingsService.findByEmployee(reservationEntity.getEmployee());
+
+        reservationService.processRequest(reservationEntity, settings);
+        if (!settings.getAllowed()){
+            mailingService.sendDeclination(reservationEntity);
+            return null;
         }
-        else {
-            mailingService.SendRequestForApproval(reservationEntity);
+
+        if (settings.getAutoApproval()) {
+            mailingService.sendConfirmation(reservationEntity);
+        }else{
+            mailingService.sendRequestForApproval(reservationEntity);
         }
+
+        return objectMapper.mapTo(reservationEntity, ReservationDTO.class);
     }
 
     /**
@@ -131,22 +132,10 @@ public class ReservationFacadeImpl implements ReservationFacade {
         Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
         reservationService.acceptOrDecline(reservationEntity, toBeAccepted);
         if (toBeAccepted) {
-            mailingService.SendConfirmation(reservationEntity);
+            mailingService.sendConfirmation(reservationEntity);
+        }else{
+            mailingService.sendDeclination(reservationEntity);
         }
-        else {
-            mailingService.SendDeclination(reservationEntity);
-        }
-    }
-
-    /**
-     * Occurs when car is returned
-     *
-     * @param reservation dto
-     */
-    @Override
-    public void returned(ReservationDTO reservation) {
-        Reservation reservationEntity = objectMapper.mapTo(reservation, Reservation.class);
-        reservationService.returned(reservationEntity);
     }
 
     /**
@@ -180,6 +169,8 @@ public class ReservationFacadeImpl implements ReservationFacade {
     @Override
     public List<ReservationDTO> filter(ReservationParamsDTO reservationParams) {
         ReservationFilterParams reservationFilterParams = objectMapper.mapTo(reservationParams, ReservationFilterParams.class);
-        return reservationService.filter(reservationFilterParams);
-    };
+        List<Reservation> result = reservationService.filter(reservationFilterParams);
+        return objectMapper.mapTo(result, ReservationDTO.class);
+    }
+
 }
