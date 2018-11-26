@@ -2,7 +2,6 @@ package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.dao.ReservationDao;
 import cz.pa165.carpark.dao.VehicleDao;
-import cz.pa165.carpark.dto.ReservationParamsDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.ReservationSettings;
@@ -12,16 +11,19 @@ import cz.pa165.carpark.exception.UnavailableCarException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * The reservation service's implementation.
  *
  * @author Jana Applova, 422352@mail.muni.cz
+ * @author Ondrej Svoren, 487558@mail.muni.cz
+ * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -83,34 +85,24 @@ public class ReservationServiceImpl implements ReservationService {
      * Processes reservation request
      *
      * @param reservation
-     * @param reservationSettings
+     * @param settings
      * @return true if the request was successfully processed else false
      */
     @Override
-    public boolean processRequest(Reservation reservation, ReservationSettings reservationSettings) {
-        List<Vehicle> allCars = vehicleDao.findAll();
-        Vehicle chosenCar = reservation.getVehicle();
-        if (allCars == null || !allCars.contains(chosenCar)){
-            throw new UnavailableCarException("Our company does not rent this car.");
+    public void processRequest(Reservation reservation, ReservationSettings settings) {
+        if (!reservationDao.isVehicleAvailable(reservation.getVehicle(), reservation.getFrom(), reservation.getTo())) {
+            throw new UnavailableCarException("This car does not exists or it isn't available in the selected time period.");
         }
-        List<Reservation> reservations = reservationDao.findByVehicle(chosenCar);
-        if (reservations.stream().anyMatch(r -> r.getTo().compareTo(reservation.getFrom()) > 0 &&
-                r.getFrom().compareTo(reservation.getTo()) < 0)) {
-            throw new UnavailableCarException("This car is not available in the selected time period.");
-        }
-        if (reservationSettings.getAutoApproval()){
-            if (reservationSettings.getAllowed()){
-                reservation.setStatus(ReservationStatus.APPROVED);
-            }
-            else {
-                reservation.setStatus(ReservationStatus.CANCELED);
-            }
-        }
-        else {
+
+        if (settings.getAutoApproval() && settings.getAllowed()) {
+            reservation.setStatus(ReservationStatus.APPROVED);
+        }else if (!settings.getAutoApproval() && settings.getAllowed()){
             reservation.setStatus(ReservationStatus.NEW);
+        }else{
+            reservation.setStatus(ReservationStatus.CANCELED);
         }
+
         reservationDao.save(reservation);
-        return true;
     }
 
     /**
@@ -121,24 +113,13 @@ public class ReservationServiceImpl implements ReservationService {
      */
     @Override
     public void acceptOrDecline(Reservation reservation, boolean toBeAccepted) {
-        if (toBeAccepted){
+        if (!toBeAccepted){
+            reservation.setStatus(ReservationStatus.CANCELED);
+        }else{
             reservation.setStatus(ReservationStatus.APPROVED);
         }
-        else {
-            reservation.setStatus(ReservationStatus.CANCELED);
-        }
-        update(reservation);
-    }
 
-    /**
-     * Occurs when car is returned
-     *
-     * @param reservation
-     */
-    @Override
-    public void returned(Reservation reservation) {
-        reservation.setStatus(ReservationStatus.RETURNED);
-        update(reservation);
+        reservationDao.update(reservation);
     }
 
     /**
@@ -162,32 +143,85 @@ public class ReservationServiceImpl implements ReservationService {
     /**
      * Filter all the reservations according to the input params
      *
-     * @param reservationFilterParams
+     * @param params
      * @return list of reservations
      */
     @Override
-    public List<Reservation> filter(ReservationFilterParams reservationFilterParams) {
-        List<Reservation> reservations = findAll();
-        List<Reservation> reservationResultList = new ArrayList<Reservation>();
-        for (Reservation reservation : reservations) {
-            if (reservation.getEmployee().getFirstName().equals(reservationFilterParams.getQuery()) ||
-                reservation.getEmployee().getLastName().equals(reservationFilterParams.getQuery()) ||
-                reservation.getEmployee().getUsername().equals(reservationFilterParams.getQuery()) ||
-                reservation.getVehicle().getBrand().equals(reservationFilterParams.getQuery()) ||
-                reservation.getVehicle().getRegistrationNumber().equals(reservationFilterParams.getQuery()) ||
-                reservation.getVehicle().getType().equals(reservationFilterParams.getQuery()) &&
-                        (reservation.getFrom().isEqual(reservationFilterParams.getFrom()) &&
-                                reservation.getTo().isEqual(reservation.getTo()))) {
-                reservationResultList.add(reservation);
+    public List<Reservation> filter(ReservationFilterParams params) {
+        List<Reservation> reservationList = this.findAll();
+        Set<Reservation> queryResultSet = new HashSet<>();
+        String query = params.getQuery();
+
+        for (Reservation reservation : reservationList) {
+            Employee employee = reservation.getEmployee();
+            if (this.contains(employee.getFirstName(), query)
+                    || this.contains(employee.getLastName(), (query))
+                    || this.contains(employee.getUsername(), query)
+                    || this.contains(employee.getEmail(), query)
+                    || this.contains(employee.getPosition(), query)) {
+                queryResultSet.add(reservation);
+            }
+
+            Vehicle vehicle = reservation.getVehicle();
+            if (this.contains(vehicle.getRegistrationNumber(), query)
+                    || this.contains(vehicle.getBrand(), query)
+                    || this.contains(vehicle.getColor(), query)
+                    || this.contains(vehicle.getType(), query)) {
+                queryResultSet.add(reservation);
             }
         }
 
-        Long numberOfPages = reservationResultList.size() / reservationFilterParams.getPageSize();
-        if (reservationFilterParams.getPage() <= numberOfPages) {
-            Long firstIndex = (reservationFilterParams.getPage() - 1) * reservationFilterParams.getPageSize();
-            reservationResultList.subList(Math.toIntExact(firstIndex), reservationResultList.size()).clear();
+        List<Reservation> filteredList = this.filterInterval(queryResultSet, params.getFrom(), params.getTo());
+        return this.paginate(filteredList, params.getPage(), params.getPageSize());
+    }
+
+    /**
+     *
+     * @param reservations list of reservations
+     * @param from date time from
+     * @param to date time to
+     * @return filtered list
+     */
+    private List<Reservation> filterInterval(Set<Reservation> reservations, LocalDateTime from, LocalDateTime to) {
+        if (from == null || to == null) {
+            return new ArrayList<>(reservations);
         }
 
-        return reservationResultList;
-    };
+        return reservations.stream().filter(
+            item -> (item.getFrom().isAfter(from) && item.getTo().isBefore(to))
+        ).collect(Collectors.toList());
+    }
+
+    /**
+     * Return true if field string contains query string - case insensitive
+     *
+     * @param field field string
+     * @param query query string
+     * @return true or false
+     */
+    private boolean contains(String field, String query) {
+        return field != null && query != null && field.toLowerCase().contains(query.toLowerCase());
+    }
+
+    /**
+     * Creates sublist of reservations for pagination
+     *
+     * @param reservations list of reservations
+     * @param page
+     * @param pageSize
+     * @return paginated list
+     */
+    private List<Reservation> paginate(List<Reservation> reservations, Integer page, Integer pageSize) {
+        if (page == null || pageSize == null || page <= 0 || pageSize <= 0) {
+            return reservations;
+        }
+
+        int from = (page - 1) * pageSize;
+        if (reservations.size() < from) {
+            return new ArrayList<>();
+        }
+
+        return reservations.subList(from, Math.min(from + pageSize, reservations.size()));
+    }
+
 }

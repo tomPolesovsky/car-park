@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ReservationFilterParams {
+
     /**
      * The page
      */
-    private Long page;
+    private Integer page = 1;
 
     /**
      * The size of the page
      */
-    private Long pageSize;
+    private Integer pageSize = 10;
 
     /**
      *  The query string
@@ -37,4 +38,5 @@ public class ReservationFilterParams {
      * Filter reservations to this date
      */
     private LocalDateTime to;
+
 }

@@ -11,9 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -224,6 +222,30 @@ public class ReservationDaoTest extends AbstractJUnitTest {
 
         Reservation reservationResult = em.find(Reservation.class, reservation.getId());
         assertNull(reservationResult);
+    }
+
+    @Test
+    public void isVehicleAvailable() {
+        LocalDateTime defaultValue = LocalDateTime.of(2018, Month.JANUARY, 1, 8, 0);
+
+        Employee employee = new Employee();
+        employee.setUsername("Username");
+        em.persist(employee);
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setRegistrationNumber("ABC123");
+        em.persist(vehicle);
+
+        Reservation reservation = new Reservation();
+        reservation.setFrom(defaultValue);
+        reservation.setTo(defaultValue.plusMonths(1));
+        reservation.setVehicle(vehicle);
+        reservation.setEmployee(employee);
+        em.persist(reservation);
+
+        assertFalse(reservationDao.isVehicleAvailable(vehicle, defaultValue.plusDays(5), defaultValue.plusDays(10)));
+        assertFalse(reservationDao.isVehicleAvailable(vehicle, defaultValue.plusDays(5), defaultValue.plusMonths(2)));
+        assertTrue(reservationDao.isVehicleAvailable(vehicle, defaultValue.plusMonths(2), defaultValue.plusMonths(3)));
     }
 
 }
