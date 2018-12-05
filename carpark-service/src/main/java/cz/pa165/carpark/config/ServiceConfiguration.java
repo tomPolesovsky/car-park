@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ImportResource;
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
 @Configuration
-@ImportResource({"classpath*:applsication.xml"})
+@ImportResource({"classpath*:application.xml"})
 public class ServiceConfiguration {
 
     @Bean
