@@ -1,14 +1,12 @@
-package cz.pa165.carkpark.facade;
+package cz.pa165.carpark.facade;
 
-import cz.pa165.carkpark.util.AbstractJUnitTest;
+import cz.pa165.carpark.util.AbstractJUnitTest;
 import cz.pa165.carpark.dto.EmployeeDTO;
 import cz.pa165.carpark.dto.ReservationDTO;
-import cz.pa165.carpark.dto.ReservationSettingsDTO;
 import cz.pa165.carpark.dto.VehicleDTO;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
-import cz.pa165.carpark.facade.EmployeeFacadeImpl;
 import cz.pa165.carpark.service.EmployeeService;
 import cz.pa165.carpark.util.ObjectMapper;
 import org.junit.Before;

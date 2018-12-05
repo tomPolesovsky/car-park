@@ -1,10 +1,9 @@
-package cz.pa165.carkpark.service;
+package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.dao.VehicleDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
 import cz.pa165.carpark.entity.Vehicle;
-import cz.pa165.carpark.service.VehicleServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

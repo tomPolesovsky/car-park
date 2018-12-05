@@ -1,11 +1,9 @@
-package cz.pa165.carkpark.service;
+package cz.pa165.carpark.service;
 
-import cz.pa165.carkpark.util.AbstractJUnitTest;
+import cz.pa165.carpark.util.AbstractJUnitTest;
 import cz.pa165.carpark.dao.ReservationSettingsDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.ReservationSettings;
-import cz.pa165.carpark.service.ReservationSettingsService;
-import cz.pa165.carpark.service.ReservationSettingsServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

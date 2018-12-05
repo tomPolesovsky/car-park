@@ -1,9 +1,7 @@
-package cz.pa165.carkpark.util;
+package cz.pa165.carpark.util;
 
 import cz.pa165.carpark.config.ServiceConfiguration;
-import cz.pa165.carpark.util.ObjectMapper;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 

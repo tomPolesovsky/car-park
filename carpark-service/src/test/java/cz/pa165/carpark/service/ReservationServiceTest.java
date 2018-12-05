@@ -1,6 +1,6 @@
-package cz.pa165.carkpark.service;
+package cz.pa165.carpark.service;
 
-import cz.pa165.carkpark.util.AbstractJUnitTest;
+import cz.pa165.carpark.util.AbstractJUnitTest;
 import cz.pa165.carpark.dao.ReservationDao;
 import cz.pa165.carpark.entity.Employee;
 import cz.pa165.carpark.entity.Reservation;
@@ -8,8 +8,6 @@ import cz.pa165.carpark.entity.ReservationSettings;
 import cz.pa165.carpark.entity.Vehicle;
 import cz.pa165.carpark.enums.ReservationStatus;
 import cz.pa165.carpark.exception.UnavailableCarException;
-import cz.pa165.carpark.service.ReservationFilterParams;
-import cz.pa165.carpark.service.ReservationServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
