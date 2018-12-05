@@ -1,0 +1,39 @@
+<div class="background">
+  <h1 class="title">CarPark</h1>
+  <div class="container login-form">
+    <form class="form-signin" [formGroup]="loginForm">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <div class="input-container"
+           [ngClass]="{'wrong-input': loginForm.get('userName').invalid && loginForm.get('userName').touched}">
+        <div class="input-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+          <input type="email"
+                 formControlName="userName"
+                 id="inputEmail"
+                 class="form-control"
+                 placeholder="Email address" required autofocus>
+        </div>
+        <div class="warning-container">
+          <span class="warning-text">{{warningText}}</span>
+        </div>
+      </div>
+
+      <div class="input-container"
+           [ngClass]="{'wrong-input': loginForm.get('password').invalid && loginForm.get('password').touched}">
+        <div class="input-group">
+          <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+          <input type="password"
+                 formControlName="password"
+                 id="inputPassword"
+                 class="form-control"
+                 placeholder="Password" required>
+        </div>
+        <div class="warning-container">
+          <span class="warning-text">{{warningText}}</span>
+        </div>
+      </div>
+      <button class="btn btn-lg btn-danger btn-block" type="submit" (click)="onSubmit()">Sign in</button>
+    </form>
+  </div>
+</div>
+
