@@ -11,11 +11,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.inject.Inject;
+
 @RestController
 @RequestMapping(ApiConfiguration.API_LOGIN)
 public class LoginController {
 
     private AdminFacade adminFacade;
+
+    @Inject
+    public LoginController(AdminFacade adminFacade) {
+        this.adminFacade = adminFacade;
+    }
 
     @RequestMapping(method = RequestMethod.POST)
     public UserDTO login(@RequestParam("username") String username,
