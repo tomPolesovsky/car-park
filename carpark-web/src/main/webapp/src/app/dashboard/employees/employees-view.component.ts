@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {EmployeesService} from "../../../api/services/employees.service";
+import {Employee} from "../../../api/models/employee.model";
 
 @Component({
   selector: 'app-employees',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesViewComponent implements OnInit {
 
-  constructor() { }
+  employees: Employee[] = [];
 
-  ngOnInit() {
+  constructor(private readonly router: Router,
+              private readonly employeesService: EmployeesService) {
+  }
+
+  ngOnInit(): void {
+    this.employeesService.getEmployees()
+      .subscribe(data => {
+        console.log(data);
+        this.employees = data;
+      });
   }
 
 }
