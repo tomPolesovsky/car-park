@@ -1,5 +1,6 @@
 package cz.pa165.carpark.entity;
 
+import cz.pa165.carpark.enums.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
@@ -38,11 +39,9 @@ public class Employee {
     private String lastName;
 
     /**
-     * Username for authentication
+     * Position in company
      */
-    @NotNull
-    @Column(nullable = false, unique = true)
-    private String username;
+    private String position;
 
     /**
      * Person's email
@@ -50,15 +49,22 @@ public class Employee {
     private String email;
 
     /**
+     * Username for authentication
+     */
+    @NotNull
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    /**
      * Password for authentication
      */
-    @Transient
     private String password;
 
     /**
-     * Position in company
+     * Role in system
      */
-    private String position;
+    @Enumerated(EnumType.STRING)
+    private UserRole role = UserRole.USER;
 
     /**
      * @see Object#equals(Object)
