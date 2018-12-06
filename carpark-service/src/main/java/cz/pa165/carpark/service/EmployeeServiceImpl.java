@@ -2,6 +2,7 @@ package cz.pa165.carpark.service;
 
 import cz.pa165.carpark.dao.EmployeeDao;
 import cz.pa165.carpark.entity.Employee;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -12,9 +13,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeDao employeeDao;
 
+    private PasswordEncoder passwordEncoder;
+
     @Inject
-    public EmployeeServiceImpl (EmployeeDao employeeDao) {
+    public EmployeeServiceImpl(EmployeeDao employeeDao, PasswordEncoder passwordEncoder) {
         this.employeeDao = employeeDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,6 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void save(Employee employee) {
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employeeDao.save(employee);
     }
 
