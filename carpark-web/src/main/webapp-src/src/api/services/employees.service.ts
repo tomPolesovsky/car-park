@@ -15,7 +15,8 @@ export class EmployeesService {
   private employeesUrl = '/employees';
 
   getEmployees() {
-    return this.http.get<Employee[]>(this.employeesUrl);
+    // return this.http.get<Employee[]>(this.employeesUrl);
+    return this.http.get<Employee[]>('//localhost:8080/pa165/rest/employees');
   }
 
   deleteEmployee(employee: Employee) {
