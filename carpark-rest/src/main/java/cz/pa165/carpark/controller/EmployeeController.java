@@ -60,7 +60,7 @@ public class EmployeeController {
         return result;
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         EmployeeDTO employee = employeeFacade.find(id);
         notNull(employee, MissingObjectException::new);

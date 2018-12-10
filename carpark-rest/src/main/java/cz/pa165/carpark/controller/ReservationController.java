@@ -114,6 +114,9 @@ public class ReservationController {
     @RequestMapping(value = "/accept-or-decline", method = RequestMethod.PUT)
     public void acceptOrDecline(@RequestBody ReservationDTO reservation,
                                 @RequestParam("toBeAccepted") boolean toBeAccepted) {
+        ReservationDTO result = reservationFacade.find(reservation.getId());
+        notNull(result, MissingObjectException::new);
+
         reservationFacade.acceptOrDecline(reservation, toBeAccepted);
     }
 
