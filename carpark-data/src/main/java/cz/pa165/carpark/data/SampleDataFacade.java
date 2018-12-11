@@ -1,7 +1,7 @@
 package cz.pa165.carpark.data;
 
 /**
- * The simple data facade's interface.
+ * The sample data facade's interface.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
