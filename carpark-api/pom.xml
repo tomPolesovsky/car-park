@@ -14,8 +14,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
-
         <!-- utils -->
         <dependency>
             <groupId>org.projectlombok</groupId>
