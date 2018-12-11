@@ -198,11 +198,12 @@
     </build>
 
     <modules>
-        <module>carpark-dao</module>
+        <module>carpark-persistence</module>
         <module>carpark-service</module>
         <module>carpark-api</module>
         <module>carpark-rest</module>
         <module>carpark-web</module>
+        <module>carpark-data</module>
     </modules>
 
 </project>
