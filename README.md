@@ -15,15 +15,32 @@ Our application is then available on
 To get all the employees use:
 <code>GET localhost:8080/pa165/rest/employees</code>
 
+To get an employee with specified id use:
+<code>GET localhost:8080/pa165/rest/employees/{id}</code>
+
+To get an employee with specified username use:
+<code>GET localhost:8080/pa165/rest/employees/find-by-username/{username}</code>
+
 #### Vehicles
-To get all the employees use:
+To get all the vehicles use:
 <code>localhost:8080/pa165/rest/vehicles</code>
 
+To get a vehicle with specified id use:
+<code>GET localhost:8080/pa165/rest/vehicles/{id}</code>
+
+To get a vehicle with specified registration number use:
+<code>GET localhost:8080/pa165/rest/vehicles/find-by-registration-number/{registration-number}</code>
+
 #### Reservations
+To get all the reservations use:
+<code>localhost:8080/pa165/rest/reservations</code>
 
 #### ReservationSettings
 To get all the reservation settings use:
 <code>localhost:8080/pa165/rest/reservation-settings</code>
+
+To get a reservation setting with specified id use:
+<code>GET localhost:8080/pa165/rest/reservation-settings/{id}</code>
 
 #### Login
 
