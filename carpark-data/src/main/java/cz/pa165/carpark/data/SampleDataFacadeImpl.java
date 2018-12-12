@@ -129,16 +129,16 @@ public class SampleDataFacadeImpl implements SampleDataFacade {
                 sampleEmployees.get(4), sampleVehicles.get(4), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.JANUARY, 20, 7, 0),
                 LocalDateTime.of(2019, Month.JANUARY, 22, 16, 0),
-                sampleEmployees.get(2), sampleVehicles.get(1), ReservationStatus.NEW);
+                sampleEmployees.get(2), sampleVehicles.get(6), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.JANUARY, 23, 8, 0),
                 LocalDateTime.of(2019, Month.JANUARY, 25, 19, 0),
-                sampleEmployees.get(2), sampleVehicles.get(1), ReservationStatus.NEW);
+                sampleEmployees.get(2), sampleVehicles.get(3), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.JANUARY, 28, 10, 0),
                 LocalDateTime.of(2019, Month.JANUARY, 28, 14, 0),
                 sampleEmployees.get(2), sampleVehicles.get(2), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.FEBRUARY, 16, 12, 0),
                 LocalDateTime.of(2019, Month.FEBRUARY, 16, 18, 0),
-                sampleEmployees.get(2), sampleVehicles.get(2), ReservationStatus.NEW);
+                sampleEmployees.get(2), sampleVehicles.get(5), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.FEBRUARY, 18, 7, 45),
                 LocalDateTime.of(2019, Month.FEBRUARY, 20, 19, 45),
                 sampleEmployees.get(2), sampleVehicles.get(3), ReservationStatus.NEW);
@@ -150,13 +150,13 @@ public class SampleDataFacadeImpl implements SampleDataFacade {
                 sampleEmployees.get(3), sampleVehicles.get(1), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.JANUARY, 27, 11, 0),
                 LocalDateTime.of(2019, Month.JANUARY, 27, 15, 0),
-                sampleEmployees.get(3), sampleVehicles.get(2), ReservationStatus.NEW);
+                sampleEmployees.get(3), sampleVehicles.get(6), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.FEBRUARY, 16, 10, 15),
                 LocalDateTime.of(2019, Month.FEBRUARY, 16, 20, 0),
                 sampleEmployees.get(3), sampleVehicles.get(2), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.FEBRUARY, 18, 10, 45),
                 LocalDateTime.of(2019, Month.FEBRUARY, 20, 19, 45),
-                sampleEmployees.get(3), sampleVehicles.get(3), ReservationStatus.NEW);
+                sampleEmployees.get(3), sampleVehicles.get(5), ReservationStatus.NEW);
         createReservation(LocalDateTime.of(2019, Month.FEBRUARY, 26, 10, 0),
                 LocalDateTime.of(2019, Month.FEBRUARY, 28, 19, 0),
                 sampleEmployees.get(3), sampleVehicles.get(3), ReservationStatus.NEW);
