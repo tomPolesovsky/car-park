@@ -12,34 +12,96 @@ Our application is then available on
 
 ### REST API:
 #### Employees
-To get all the employees use:
+To get all the employees use:  
 <code>GET localhost:8080/pa165/rest/employees</code>
 
-To get an employee with specified id use:
+To get an employee with specified id use:  
 <code>GET localhost:8080/pa165/rest/employees/{id}</code>
 
-To get an employee with specified username use:
+To get an employee with specified username use:  
 <code>GET localhost:8080/pa165/rest/employees/find-by-username/{username}</code>
 
+To add an employee use:  
+<code>POST localhost:8080/pa165/rest/employees</code>
+and request body:  
+```
+{  
+    "firstName": "Jmeno",  
+    "lastName": "Prijmeni",  
+    "username": "jmeno",  
+    "email": "jmeno@test.cz",  
+    "password": "test",  
+    "position": "tester"     
+}
+```
+
+To update an employee use:  
+<code>PUT localhost:8080/pa165/rest/employees</code>
+and request body:  
+```
+{
+    "id": 1,
+    "firstName": "Jmeno",
+    "lastName": "Prijmeni",
+    "username": "mojejmeno",
+    "email": "jmeno@test.cz",
+    "password": "test",    
+    "position": "tester"
+}
+```
+
+To delete an employee with specified id use:  
+<code>DELETE localhost:8080/pa165/rest/employees/{id}</code>
+
 #### Vehicles
-To get all the vehicles use:
+To get all the vehicles use:  
 <code>localhost:8080/pa165/rest/vehicles</code>
 
-To get a vehicle with specified id use:
+To get a vehicle with specified id use:  
 <code>GET localhost:8080/pa165/rest/vehicles/{id}</code>
 
-To get a vehicle with specified registration number use:
+To get a vehicle with specified registration number use:  
 <code>GET localhost:8080/pa165/rest/vehicles/find-by-registration-number/{registration-number}</code>
 
+To add a vehicle use:  
+<code>POST localhost:8080/pa165/rest/vehicles</code>
+and request body:  
+```
+{
+    "brand": "Citroën",
+    "registrationNumber": "888 8888",
+    "type": "hatchback",
+    "color": "white",
+    "mileage": 111111
+}
+```
+
+To update a vehicle use:  
+<code>PUT localhost:8080/pa165/rest/vehicles</code>
+and request body:  
+```
+{
+    "id": 1,
+    "brand": "Citroën",
+    "registrationNumber": "999 9999",
+    "type": "hatchback",
+    "color": "white",
+    "mileage": 111111
+}
+```
+
+To delete a vehicle with specified id use:  
+<code>DELETE localhost:8080/pa165/rest/vehicles/{id}</code>
+
 #### Reservations
-To get all the reservations use:
+To get all the reservations use:  
 <code>localhost:8080/pa165/rest/reservations</code>
 
 #### ReservationSettings
-To get all the reservation settings use:
+To get all the reservation settings use:  
 <code>localhost:8080/pa165/rest/reservation-settings</code>
 
-To get a reservation setting with specified id use:
+To get a reservation setting with specified id use:  
 <code>GET localhost:8080/pa165/rest/reservation-settings/{id}</code>
 
 #### Login
