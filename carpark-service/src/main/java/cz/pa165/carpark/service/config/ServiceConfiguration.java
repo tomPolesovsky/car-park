@@ -1,8 +1,9 @@
 package cz.pa165.carpark.service.config;
 
+import com.github.dozermapper.core.DozerBeanMapper;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import com.github.dozermapper.core.Mapper;
 import cz.pa165.carpark.persistence.config.PersistenceConfiguration;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,7 @@ public class ServiceConfiguration {
 
     @Bean
     public Mapper dozer(){
-        DozerBeanMapper dozer = new DozerBeanMapper();
-        return dozer;
+        return DozerBeanMapperBuilder.buildDefault();
     }
 
     @Bean

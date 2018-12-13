@@ -48,7 +48,7 @@ public class VehicleController {
      * @param registrationNumber
      * @return vehicle dto
      */
-    @RequestMapping(value = "/{registration-number}", method = RequestMethod.GET)
+    @RequestMapping(value = "/find-by-registration-number/{registration-number}", method = RequestMethod.GET)
     public VehicleDTO findByRegistrationNumber(@PathVariable("registration-number") String registrationNumber) {
         VehicleDTO result = vehicleFacade.findByRegistrationNumber(registrationNumber);
         notNull(result, MissingObjectException::new);
