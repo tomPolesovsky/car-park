@@ -97,6 +97,41 @@ To delete a vehicle with specified id use:
 To get all the reservations use:  
 <code>localhost:8080/pa165/rest/reservations</code>
 
+To get a reservation with specified id use:  
+<code>GET localhost:8080/pa165/rest/reservations/{id}</code>
+
+To get reservations for specified employee use:  
+<code>GET localhost:8080/pa165/rest/reservations/find-by-employee</code>
+and request body:  
+```
+{
+    "id": 1,
+    "firstName": "Jmeno",
+    "lastName": "Prijmeni",
+    "username": "mojejmeno",
+    "email": "jmeno@test.cz",
+    "password": "test",    
+    "position": "tester"
+}
+```
+
+To get reservations for specified vehicle use:  
+<code>GET localhost:8080/pa165/rest/reservations/find-by-vehicle</code>
+and request body:  
+```
+{
+    "id": 1,
+    "brand": "Citroën",
+    "registrationNumber": "999 9999",
+    "type": "hatchback",
+    "color": "white",
+    "mileage": 111111
+}
+```
+
+To delete a reservation with specified id use:  
+<code>DELETE localhost:8080/pa165/rest/reservations/{id}</code>
+
 #### ReservationSettings
 To get all the reservation settings use:  
 <code>localhost:8080/pa165/rest/reservation-settings</code>
@@ -104,7 +139,66 @@ To get all the reservation settings use:
 To get a reservation setting with specified id use:  
 <code>GET localhost:8080/pa165/rest/reservation-settings/{id}</code>
 
+To get a reservation setting for specified employee use:  
+<code>GET localhost:8080/pa165/rest/reservation-settings/find-by-employee</code>
+and request body:  
+```
+{
+    "id": 1,
+    "firstName": "Jmeno",
+    "lastName": "Prijmeni",
+    "username": "mojejmeno",
+    "email": "jmeno@test.cz",
+    "password": "test",    
+    "position": "tester"
+}
+```
+
+To add a reservation setting use:  
+<code>POST localhost:8080/pa165/rest/reservation-settings</code>
+and request body:  
+```
+{
+    "employee": {
+        "id": 1,
+        "firstName": "Jmeno",
+        "lastName": "Prijmeni",
+        "username": "mojejmeno",
+        "email": "jmeno@test.cz",
+        "password": "test",    
+        "position": "tester"
+    },
+    "allowed": true,
+    "autoApproval": false
+}
+```
+
+To update a reservation setting use:  
+<code>PUT localhost:8080/pa165/rest/reservation-settings</code>
+and request body:  
+```
+{
+    "id": 1,
+    "employee": {
+        "id": 1,
+        "firstName": "Jmeno",
+        "lastName": "Prijmeni",
+        "username": "mojejmeno",
+        "email": "jmeno@test.cz",
+        "password": "test",    
+        "position": "tester"
+    },
+    "allowed": true,
+    "autoApproval": true
+}
+```
+
+To delete a reservation setting with specified id use:  
+<code>DELETE localhost:8080/pa165/rest/reservation-settings/{id}</code>
+
 #### Login
+To log in use:  
+<code>POST localhost:8080/pa165/rest/login?username={username}&password={password}</code>
 
 ### Collaborators:
 Polešovský, T.;
