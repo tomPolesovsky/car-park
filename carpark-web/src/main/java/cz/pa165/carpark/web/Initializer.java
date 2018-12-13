@@ -1,7 +1,10 @@
 package cz.pa165.carpark.web;
 
+import cz.pa165.carpark.rest.security.DefaultRestFilter;
 import cz.pa165.carpark.web.config.WebConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -18,6 +21,11 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/rest/*"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new DefaultRestFilter()};
     }
 
 }
