@@ -1,6 +1,6 @@
 package cz.pa165.carpark.service.util;
 
-import org.dozer.Mapper;
+import com.github.dozermapper.core.Mapper;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

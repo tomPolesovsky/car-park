@@ -31,7 +31,7 @@ public class EmployeeController {
         return employee;
     }
 
-    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/find-by-username/{username}", method = RequestMethod.GET)
     public EmployeeDTO findByUsername(@PathVariable("username") String username) {
         EmployeeDTO employee = employeeFacade.findByUsername(username);
         notNull(employee, MissingObjectException::new);
