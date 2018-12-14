@@ -18,14 +18,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "cp_reservation_settings")
-public class ReservationSettings {
-
-    /**
-     * The identifier
-     */
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+public class ReservationSettings extends BaseEntity {
 
     /**
      * Reservation settings for this employee

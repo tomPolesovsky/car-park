@@ -1,6 +1,7 @@
 package cz.pa165.carpark.web;
 
 import cz.pa165.carpark.rest.security.DefaultRestFilter;
+import cz.pa165.carpark.rest.security.jwt.JwtTokenFilter;
 import cz.pa165.carpark.web.config.WebConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -25,7 +26,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[]{new DefaultRestFilter()};
+        return new Filter[]{new DefaultRestFilter(), new JwtTokenFilter()};
     }
 
 }

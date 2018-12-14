@@ -8,6 +8,7 @@ import cz.pa165.carpark.rest.exception.MissingObjectException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 import static cz.pa165.carpark.rest.util.ApiUtils.notNull;
@@ -45,7 +46,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public EmployeeDTO create(@RequestBody EmployeeDTO employee) {
+    public EmployeeDTO create(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.create(employee);
         notNull(result, FailedOperationException::new);
 
@@ -53,7 +54,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public EmployeeDTO update(@RequestBody EmployeeDTO employee) {
+    public EmployeeDTO update(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.update(employee);
         notNull(result, FailedOperationException::new);
 

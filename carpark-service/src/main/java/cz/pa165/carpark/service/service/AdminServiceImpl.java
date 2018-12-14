@@ -30,11 +30,10 @@ public class AdminServiceImpl implements AdminService {
     public Employee login(String username, String password) {
         Employee employee = employeeDao.findByUsername(username);
         if (employee == null) {
-            throw new AuthenticationException("Employee with username "+username+" was not found.");
+            throw new AuthenticationException("Employee with username " + username + " was not found.");
         }
 
-        String passwordHash = passwordEncoder.encode(password);
-        if (!employee.getPassword().equals(passwordHash)) {
+        if (!passwordEncoder.matches(password, employee.getPassword())) {
             throw new AuthenticationException("Password is not correct.");
         }
 
