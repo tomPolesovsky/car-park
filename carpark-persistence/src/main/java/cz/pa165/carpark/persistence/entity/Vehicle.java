@@ -18,7 +18,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "cp_vehicle")
-public class Vehicle {
+public class Vehicle extends BaseEntity {
 
     /**
      * The Identifier

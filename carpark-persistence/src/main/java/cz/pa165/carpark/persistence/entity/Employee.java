@@ -19,14 +19,7 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "cp_employee")
-public class Employee {
-
-    /**
-     * The identifier
-     */
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+public class Employee extends BaseEntity {
 
     /**
      * First name of person

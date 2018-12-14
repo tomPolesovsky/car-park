@@ -26,14 +26,7 @@ import java.util.Objects;
                "reservation_from", "reservation_to", "employee_id"
        })
 )
-public class Reservation {
-
-    /**
-     * The identifier
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Reservation extends BaseEntity {
 
     /**
      * The date and time from which will the reservation start

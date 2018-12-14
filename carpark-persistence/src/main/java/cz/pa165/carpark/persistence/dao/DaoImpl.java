@@ -1,7 +1,10 @@
 package cz.pa165.carpark.persistence.dao;
 
+import cz.pa165.carpark.persistence.entity.BaseEntity;
+
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
  * @param <T> generic type annotated by {@link Entity}
  * @author Tomáš Polešovský, 487574@mail.muni.cz
  */
-public abstract class DaoImpl<T> implements Dao<T> {
+public abstract class DaoImpl<T extends BaseEntity> implements Dao<T> {
 
     private final Class<T> entityClass;
 
@@ -42,6 +45,9 @@ public abstract class DaoImpl<T> implements Dao<T> {
 
     @Override
     public void update(T entity) {
+        if (this.find(entity.getId()) == null) {
+            throw new EntityNotFoundException("Entity with id "+entity.getId()+" was not found.");
+        }
         em.merge(entity);
     }
 
