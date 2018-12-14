@@ -1,0 +1,21 @@
+$pencil-icon-hover-color: #337ab7;
+$trash-icon-hover-color: #e53935;
+$warning-color: #e53935;
+
+.glyphicon {
+  cursor: pointer;
+}
+
+.glyphicon-trash {
+
+  &:hover {
+    color: $trash-icon-hover-color;
+  }
+}
+
+.glyphicon-pencil {
+
+  &:hover {
+    color: $pencil-icon-hover-color;
+  }
+}

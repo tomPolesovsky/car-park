@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {EmployeesService} from "../../../api/services/employees.service";
-import {Employee} from "../../../api/models/employee.model";
+import {Employee} from "../../shared/models/employee.model";
+import {EmployeesService} from "../../shared/services/employees.service";
+
 
 @Component({
   selector: 'app-employees',
@@ -19,7 +20,6 @@ export class EmployeesViewComponent implements OnInit {
   ngOnInit(): void {
     this.employeesService.getEmployees()
       .subscribe(data => {
-        console.log(data);
         this.employees = data;
       });
   }
