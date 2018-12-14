@@ -9,6 +9,7 @@ import cz.pa165.carpark.rest.exception.MissingObjectException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 import static cz.pa165.carpark.rest.util.ApiUtils.notNull;
@@ -50,7 +51,7 @@ public class ReservationSettingsController {
      * @return reservation settings dto
      */
     @RequestMapping(value = "/find-by-employee", method = RequestMethod.GET)
-    public ReservationSettingsDTO findByEmployee(@RequestBody EmployeeDTO employee) {
+    public ReservationSettingsDTO findByEmployee(@Valid @RequestBody EmployeeDTO employee) {
         ReservationSettingsDTO result = reservationSettingsFacade.findByEmployee(employee);
         notNull(result, MissingObjectException::new);
 
@@ -74,7 +75,7 @@ public class ReservationSettingsController {
      * @return reservationSettings dto
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ReservationSettingsDTO create(@RequestBody ReservationSettingsDTO reservationSettings) {
+    public ReservationSettingsDTO create(@Valid @RequestBody ReservationSettingsDTO reservationSettings) {
         ReservationSettingsDTO result = reservationSettingsFacade.create(reservationSettings);
         notNull(result, FailedOperationException::new);
 
@@ -88,7 +89,7 @@ public class ReservationSettingsController {
      * @return reservationSettings dto
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ReservationSettingsDTO update(@RequestBody ReservationSettingsDTO reservationSettings) {
+    public ReservationSettingsDTO update(@Valid @RequestBody ReservationSettingsDTO reservationSettings) {
         ReservationSettingsDTO result = reservationSettingsFacade.update(reservationSettings);
         notNull(result, FailedOperationException::new);
 

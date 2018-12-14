@@ -13,6 +13,7 @@ import cz.pa165.carpark.rest.exception.MissingObjectException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 import static cz.pa165.carpark.rest.util.ApiUtils.notNull;
@@ -60,7 +61,7 @@ public class ReservationController {
      * @return list of reservation dto
      */
     @RequestMapping(value = "/find-by-employee", method = RequestMethod.GET)
-    public List<ReservationDTO> findByEmployee(@RequestBody EmployeeDTO employee) {
+    public List<ReservationDTO> findByEmployee(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.find(employee.getId());
         notNull(result, MissingObjectException::new);
 
@@ -74,7 +75,7 @@ public class ReservationController {
      * @return list of reservation dto
      */
     @RequestMapping(value = "/find-by-vehicle", method = RequestMethod.GET)
-    public List<ReservationDTO> findByVehicle(@RequestBody VehicleDTO vehicle) {
+    public List<ReservationDTO> findByVehicle(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.find(vehicle.getId());
         notNull(result, MissingObjectException::new);
 
@@ -98,7 +99,7 @@ public class ReservationController {
      * @return reservation dto
      */
     @RequestMapping(value = "/process-request", method = RequestMethod.POST)
-    public ReservationDTO processRequest(@RequestBody ReservationDTO reservation) {
+    public ReservationDTO processRequest(@Valid @RequestBody ReservationDTO reservation) {
         ReservationDTO result = reservationFacade.processRequest(reservation);
         notNull(result, FailedOperationException::new);
 
@@ -112,7 +113,7 @@ public class ReservationController {
      * @param toBeAccepted
      */
     @RequestMapping(value = "/accept-or-decline", method = RequestMethod.PUT)
-    public void acceptOrDecline(@RequestBody ReservationDTO reservation,
+    public void acceptOrDecline(@Valid @RequestBody ReservationDTO reservation,
                                 @RequestParam("toBeAccepted") boolean toBeAccepted) {
         ReservationDTO result = reservationFacade.find(reservation.getId());
         notNull(result, MissingObjectException::new);
@@ -127,7 +128,7 @@ public class ReservationController {
      * @return reservation dto
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ReservationDTO update(@RequestBody ReservationDTO reservation) {
+    public ReservationDTO update(@Valid @RequestBody ReservationDTO reservation) {
         ReservationDTO result = reservationFacade.update(reservation);
         notNull(result, FailedOperationException::new);
 
@@ -154,7 +155,7 @@ public class ReservationController {
      * @return list of reservation dto
      */
     @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public List<ReservationDTO> filter(@RequestBody ReservationParamsDTO reservationParams) {
+    public List<ReservationDTO> filter(@Valid @RequestBody ReservationParamsDTO reservationParams) {
         return reservationFacade.filter(reservationParams);
     }
 

@@ -8,6 +8,7 @@ import cz.pa165.carpark.rest.exception.MissingObjectException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 import static cz.pa165.carpark.rest.util.ApiUtils.notNull;
@@ -73,7 +74,7 @@ public class VehicleController {
      * @return vehicle dto
      */
     @RequestMapping(method = RequestMethod.POST)
-    public VehicleDTO create(@RequestBody VehicleDTO vehicle) {
+    public VehicleDTO create(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.create(vehicle);
         notNull(result, FailedOperationException::new);
 
@@ -87,7 +88,7 @@ public class VehicleController {
      * @return vehicle dto
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public VehicleDTO update(@RequestBody VehicleDTO vehicle) {
+    public VehicleDTO update(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.update(vehicle);
         notNull(result, FailedOperationException::new);
 
