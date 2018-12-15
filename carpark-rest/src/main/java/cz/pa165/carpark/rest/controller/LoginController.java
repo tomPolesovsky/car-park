@@ -32,10 +32,9 @@ public class LoginController {
         try {
             UserDTO userDTO = adminFacade.login(loginDTO.getUsername(), loginDTO.getPassword());
             String token = jwtTokenProvider.createToken(loginDTO.getUsername());
+            userDTO.setToken(token);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", "Bearer " + token);
-            return ResponseEntity.ok().headers(headers).body(userDTO);
+            return ResponseEntity.ok().body(userDTO);
         } catch (Exception e) {
             throw new LoginException();
         }

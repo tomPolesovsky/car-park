@@ -1,7 +1,9 @@
+import {Moment} from "moment";
+
 export interface FilterParams {
   page: number;
   pageSize: number;
   query: string;
-  from: Date;
-  to: Date;
+  from: string | Moment;
+  to: string | Moment;
 }

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {AuthenticationService} from "../shared/services/authentication.service";
+import {Router} from "@angular/router";
+import {Roles} from "../shared/models/roles.enum";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +10,8 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   title = 'Carpark';
+  currentUserRole = JSON.parse(localStorage.getItem('currentUser')).role;
+  userRoles = Roles;
   navigationItems: { name: string, route: string }[] = [
     {
       name: 'Employees',
@@ -20,6 +25,19 @@ export class DashboardComponent {
       name: 'Reservations',
       route: 'reservations',
     },
+    {
+      name: 'Settings',
+      route: 'settings',
+    }
   ];
+
+  constructor(private readonly authenticationService: AuthenticationService,
+              private readonly router: Router) {
+  }
+
+  logout(): void {
+    this.router.navigateByUrl('/login');
+    // this.authenticationService.logout();
+  }
 
 }
