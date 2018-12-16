@@ -1,0 +1,68 @@
+<div class="container">
+  <form [formGroup]="employeeForm">
+    <div class="form-group"
+         [ngClass]="{'wrong-input': employeeForm.get('first_name').invalid && employeeForm.get('first_name').touched}">
+      <input class="form-control"
+             type="text"
+             formControlName="first_name"
+             placeholder="First Name">
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'wrong-input': employeeForm.get('last_name').invalid && employeeForm.get('last_name').touched}">
+      <input class="form-control"
+             type="text"
+             formControlName="last_name"
+             placeholder="Last Name">
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'wrong-input': employeeForm.get('email').invalid && employeeForm.get('email').touched}">
+      <input class="form-control"
+             type="email"
+             formControlName="email"
+             placeholder="Email">
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'wrong-input': employeeForm.get('username').invalid && employeeForm.get('username').touched}">
+      <input class="form-control"
+             type="text"
+             formControlName="username"
+             placeholder="Username">
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'wrong-input': employeeForm.get('password').invalid && employeeForm.get('password').touched}">
+      <input class="form-control"
+             type="password"
+             formControlName="password"
+             placeholder="Password">
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'wrong-input': employeeForm.get('position').invalid && employeeForm.get('position').touched}">
+      <input class="form-control"
+             type="text"
+             formControlName="position"
+             placeholder="Position">
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="editMode ? editEmployee() : createEmployee()">
+      {{ editMode ? 'Save Changes' : 'Create Employee'}}
+    </button>
+  </form>
+</div>
+

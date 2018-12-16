@@ -4,5 +4,5 @@ export interface ReservationSettings {
   id: string;
   employee: Employee;
   allowed: boolean;
-  autoApproval: boolean;
+  auto_approval: boolean;
 }

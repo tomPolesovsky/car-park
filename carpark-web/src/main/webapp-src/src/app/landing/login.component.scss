@@ -38,15 +38,13 @@ $background-color: linear-gradient(90deg, rgba(14,14,14,1) 0%, rgba(45,45,47,1) 
 
 .title {
   color: rgba(255, 255, 255, 0.8);
-  margin-left: 12px;
-  text-align: center;
-  margin-top: 100px;
 }
 
 .background {
   background: $background-color;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .form-signin-heading {
@@ -68,4 +66,16 @@ $background-color: linear-gradient(90deg, rgba(14,14,14,1) 0%, rgba(45,45,47,1) 
   border-radius: 5px;
   padding: 20px 30px 40px 30px;
   margin-top: 30px;
+}
+
+.title-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.carpark-icon {
+  width: 100px;
 }

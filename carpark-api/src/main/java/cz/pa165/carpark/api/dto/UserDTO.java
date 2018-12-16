@@ -30,6 +30,7 @@ public class UserDTO {
      */
     private UserRole role;
 
+    private String token;
     /**
      * @see Object#equals(Object)
      */

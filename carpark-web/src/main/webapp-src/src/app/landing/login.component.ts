@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthenticationService} from "../shared/services/authentication.service";
 import {first} from "rxjs/operators";
 import {User} from "../shared/models/user.model";
+import {touchAllChildren} from "../shared/utils";
 
 @Component({
   selector: 'app-login',
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      touchAllChildren(this.loginForm);
       return;
     }
 
@@ -52,8 +54,10 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          console.log(this.returnUrl);
           this.loggedUser = data;
-          this.router.navigate([this.returnUrl]);
+          // this.router.navigate([this.returnUrl]);
+          this.redirectToDashboard();
         },
         error => {
           this.error = error;
