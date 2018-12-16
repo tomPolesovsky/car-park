@@ -555,7 +555,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav id=\"myNavbar\" class=\"navbar navbar-default navbar-inverse navbar-fixed-top\" role=\"navigation\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" [routerLink]=\"'dashboard/reservations/'\">CarPark</a>\n    </div>\n    <div class=\"collapse nav-collapse\" id=\"navbarCollapse\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"navbar-link\"\n            *ngFor=\"let item of navigationItems\">\n          <a routerLinkActive=\"selected\"\n             [routerLink]=\"item.route\">\n            <span class=\"glyphicon\" [ngClass]=\"{\n            'glyphicon-user' : item.name === 'Employees',\n            'glyphicon-tasks' : item.name === 'Reservations',\n            'glyphicon-road' : item.name === 'Vehicles',\n            'glyphicon-cog' : item.name === 'Settings' && currentUserRole === userRoles.APPROVER\n            }\">\n              {{ item.name === 'Settings' && currentUserRole !== userRoles.APPROVER ? '' : item.name }}\n            </span>\n          </a>\n        </li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"navbar-link\">\n          <a routerLinkActive=\"selected\" (click)=\"logout()\">\n            <span class=\"glyphicon glyphicon-off\">\n              Log-out\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>\n<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h1 class=\"text-center\">{{ title }}</h1>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<nav id=\"myNavbar\" class=\"navbar navbar-default navbar-inverse navbar-fixed-top\" role=\"navigation\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" [routerLink]=\"'/dashboard/reservations'\">CarPark</a>\n    </div>\n    <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"navbar-link\"\n            *ngFor=\"let item of navigationItems\">\n          <a routerLinkActive=\"selected\"\n             [routerLink]=\"item.route\">\n            <span class=\"glyphicon\" [ngClass]=\"{\n            'glyphicon-user' : item.name === 'Employees',\n            'glyphicon-tasks' : item.name === 'Reservations',\n            'glyphicon-road' : item.name === 'Vehicles',\n            'glyphicon-cog' : item.name === 'Settings' && currentUserRole === userRoles.APPROVER\n            }\">\n              {{ item.name === 'Settings' && currentUserRole !== userRoles.APPROVER ? '' : item.name }}\n            </span>\n          </a>\n        </li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"navbar-link\">\n          <a routerLinkActive=\"selected\" (click)=\"logout()\">\n            <span class=\"glyphicon glyphicon-off\">\n              Log-out\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>\n<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h1 class=\"text-center\">{{ title }}</h1>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -704,7 +704,7 @@ module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole =
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n"
 
 /***/ }),
 
@@ -795,7 +795,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"employeeForm\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -915,7 +915,7 @@ var NewEmployeeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <form [formGroup]=\"reservationForm\" (submit)=\"editMode ? editReservation() : createReservation()\">\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('employee').invalid && reservationForm.get('employee').touched}\">\n      <mat-form-field>\n        <mat-select placeholder=\"Choose Employee\" formControlName=\"employee\">\n          <mat-option *ngFor=\"let employee of employees\"\n                      [value]=\"employee.id\">\n                      <!--[value]=\"editMode ? employee.first_name + ' ' + employee.last_name : employee\">-->\n            {{employee.first_name + ' ' + employee.last_name}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('vehicle').invalid && reservationForm.get('vehicle').touched}\">\n      <mat-form-field>\n        <mat-select placeholder=\"Choose Vehicle\" formControlName=\"vehicle\">\n          <mat-option *ngFor=\"let vehicle of vehicles\"\n                      [value]=\"vehicle.id\">\n            {{ vehicle.brand }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('from').invalid && reservationForm.get('from').touched}\">\n      <mat-form-field>\n        <input matInput formControlName=\"from\" [matDatepicker]=\"pickerFrom\" placeholder=\"From\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerFrom\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerFrom>\n        </mat-datepicker>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('to').invalid && reservationForm.get('to').touched}\">\n      <mat-form-field>\n        <input formControlName=\"to\" matInput [matDatepicker]=\"pickerTo\" placeholder=\"To\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerTo\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerTo></mat-datepicker>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div *ngIf=\"editMode\" class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('status').invalid && reservationForm.get('status').touched}\">\n      <mat-form-field>\n        <mat-select placeholder=\"Status\" formControlName=\"status\">\n          <mat-option *ngFor=\"let status of statusOptions\" [value]=\"status\">\n            {{ status }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">\n            <!--(click)=\"editMode ? editReservation() : createReservation()\">-->\n      {{ editMode ? 'Save Changes' : 'Create Reservation' }}\n    </button>\n\n  </form>\n</div>\n\n"
+module.exports = "<div class=\"container\">\n  <form [formGroup]=\"reservationForm\" (submit)=\"editMode ? editReservation() : createReservation()\">\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('employee').invalid && reservationForm.get('employee').touched}\">\n      <mat-form-field>\n        <mat-select placeholder=\"Choose Employee\" formControlName=\"employee\">\n          <mat-option *ngFor=\"let employee of employees\"\n                      [value]=\"employee.id\">\n                      <!--[value]=\"editMode ? employee.first_name + ' ' + employee.last_name : employee\">-->\n            {{employee.first_name + ' ' + employee.last_name}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('vehicle').invalid && reservationForm.get('vehicle').touched}\">\n      <mat-form-field>\n        <mat-select placeholder=\"Choose Vehicle\" formControlName=\"vehicle\">\n          <mat-option *ngFor=\"let vehicle of vehicles\"\n                      [value]=\"vehicle.id\">\n            {{ vehicle.brand }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('from').invalid && reservationForm.get('from').touched}\">\n      <mat-form-field>\n        <input matInput formControlName=\"from\" [matDatepicker]=\"pickerFrom\" placeholder=\"From\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerFrom\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerFrom>\n        </mat-datepicker>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <div class=\"form-group\"\n         [ngClass]=\"{'wrong-input': reservationForm.get('to').invalid && reservationForm.get('to').touched}\">\n      <mat-form-field>\n        <input formControlName=\"to\" matInput [matDatepicker]=\"pickerTo\" placeholder=\"To\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerTo\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerTo></mat-datepicker>\n      </mat-form-field>\n      <div class=\"warning-container\">\n        <span class=\"warning-text\">{{warningText}}</span>\n      </div>\n    </div>\n\n    <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">\n            <!--(click)=\"editMode ? editReservation() : createReservation()\">-->\n      {{ editMode ? 'Save Changes' : 'Create Reservation' }}\n    </button>\n\n  </form>\n</div>\n\n"
 
 /***/ }),
 
@@ -926,7 +926,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"reservationFo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -944,12 +944,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _shared_services_vehicles_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/services/vehicles.service */ "./src/app/shared/services/vehicles.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared/models/reservation-status.enum */ "./src/app/shared/models/reservation-status.enum.ts");
-/* harmony import */ var _shared_services_employees_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../shared/services/employees.service */ "./src/app/shared/services/employees.service.ts");
-/* harmony import */ var _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../shared/services/reservations.service */ "./src/app/shared/services/reservations.service.ts");
-/* harmony import */ var _shared_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../shared/utils */ "./src/app/shared/utils.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _shared_services_employees_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../shared/services/employees.service */ "./src/app/shared/services/employees.service.ts");
+/* harmony import */ var _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../shared/services/reservations.service */ "./src/app/shared/services/reservations.service.ts");
+/* harmony import */ var _shared_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../shared/utils */ "./src/app/shared/utils.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../shared/models/roles.enum */ "./src/app/shared/models/roles.enum.ts");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -976,29 +976,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-var VEHICLES_MOCK = [
-    {
-        registrationNumber: 'ABC123',
-        brand: 'Skoda Octavia',
-        type: 'Combi',
-        color: 'white',
-        mileage: 100000,
-    },
-    {
-        registrationNumber: '123ABC',
-        brand: 'VW Golf',
-        type: 'Hatchback',
-        color: 'black',
-        mileage: 80000,
-    },
-    {
-        registrationNumber: 'A1B2C3',
-        brand: 'Mercedes Vito',
-        type: 'Van',
-        color: 'gray',
-        mileage: 50000,
-    },
-];
 var NewReservationComponent = /** @class */ (function () {
     function NewReservationComponent(fb, router, route, vehiclesService, employeeService, reservationService) {
         var _this = this;
@@ -1012,7 +989,6 @@ var NewReservationComponent = /** @class */ (function () {
         this.employeeId = '';
         this.vehicleId = '';
         this.editMode = false;
-        // vehicles = VEHICLES_MOCK;
         this.vehicles = [];
         this.employees = [];
         this.warningText = 'This is required!';
@@ -1024,7 +1000,7 @@ var NewReservationComponent = /** @class */ (function () {
             vehicle: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             status: 'NEW',
         });
-        this.statusOptions = Object(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["enumToArray"])(_shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_4__["ReservationStatus"]);
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.route.queryParams
             .subscribe(function (params) {
             _this.reservationId = params.edit;
@@ -1047,20 +1023,34 @@ var NewReservationComponent = /** @class */ (function () {
         this.employeeService.getEmployees()
             .subscribe(function (employees) {
             _this.employees = employees;
+            if (_this.employees !== null && _this.employees.length > 0) {
+                if (_this.currentUser.role === _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_8__["Roles"].USER) {
+                    var currentEmployee = _this.employees.find(function (employee) {
+                        return String(employee.id) === String(_this.currentUser.employee_id);
+                    });
+                    _this.employees = [currentEmployee];
+                }
+            }
         });
     };
     NewReservationComponent.prototype.createReservation = function () {
         var _this = this;
         if (this.reservationForm.valid) {
-            this.reservationService.createReservation(__assign({}, this.reservationForm.value, { from: moment__WEBPACK_IMPORTED_MODULE_8__(this.reservationForm.get('from').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["LOCAL_FORMAT"]), to: moment__WEBPACK_IMPORTED_MODULE_8__(this.reservationForm.get('to').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["LOCAL_FORMAT"]), vehicle: this.vehicles.find(function (vehicle) {
+            this.reservationService.createReservation(__assign({}, this.reservationForm.value, { from: moment__WEBPACK_IMPORTED_MODULE_7__(this.reservationForm.get('from').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]), to: moment__WEBPACK_IMPORTED_MODULE_7__(this.reservationForm.get('to').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]), vehicle: this.vehicles.find(function (vehicle) {
                     return String(vehicle.id) === String(_this.reservationForm.get('vehicle').value);
                 }), employee: this.employees.find(function (employee) {
                     return String(employee.id) === String(_this.reservationForm.get('employee').value);
                 }) }))
-                .subscribe(function () { return _this.router.navigateByUrl('/dashboard/reservations'); });
+                .subscribe(function (newReservation) {
+                _this.router.navigate(['/dashboard/reservations'], { queryParams: { id: newReservation.id } });
+            }, function (error) {
+                if (error) {
+                    alert('You already have reservation in this date or the vehicle is not available in this date!');
+                }
+            });
         }
         else {
-            Object(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["touchAllChildren"])(this.reservationForm);
+            Object(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["touchAllChildren"])(this.reservationForm);
         }
     };
     NewReservationComponent.prototype.initReservationForm = function () {
@@ -1074,7 +1064,6 @@ var NewReservationComponent = /** @class */ (function () {
             vehicle: this.reservation.vehicle.id,
             status: this.reservation.status,
         });
-        console.log(this.reservationForm.value);
     };
     NewReservationComponent.prototype.editReservation = function () {
         var _this = this;
@@ -1082,8 +1071,8 @@ var NewReservationComponent = /** @class */ (function () {
             if (JSON.stringify(Object.values(this.reservation)) !== JSON.stringify(Object.values(this.reservationForm.value))) {
                 this.reservationService.updateReservation({
                     id: this.reservationForm.get('id').value,
-                    from: moment__WEBPACK_IMPORTED_MODULE_8__(this.reservationForm.get('from').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["LOCAL_FORMAT"]),
-                    to: moment__WEBPACK_IMPORTED_MODULE_8__(this.reservationForm.get('to').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["LOCAL_FORMAT"]),
+                    from: moment__WEBPACK_IMPORTED_MODULE_7__(this.reservationForm.get('from').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]),
+                    to: moment__WEBPACK_IMPORTED_MODULE_7__(this.reservationForm.get('to').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]),
                     employee: this.employees.find(function (employee) {
                         return String(employee.id) === String(_this.reservationForm.get('employee').value);
                     }),
@@ -1093,7 +1082,6 @@ var NewReservationComponent = /** @class */ (function () {
                     status: this.reservationForm.get('status').value,
                 }).subscribe(function (data) {
                     if (data) {
-                        console.log('put', data);
                         _this.router.navigateByUrl('/dashboard/reservations');
                     }
                 });
@@ -1101,7 +1089,7 @@ var NewReservationComponent = /** @class */ (function () {
             this.router.navigateByUrl('/dashboard/reservations');
         }
         else {
-            Object(_shared_utils__WEBPACK_IMPORTED_MODULE_7__["touchAllChildren"])(this.reservationForm);
+            Object(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["touchAllChildren"])(this.reservationForm);
         }
     };
     NewReservationComponent = __decorate([
@@ -1114,8 +1102,8 @@ var NewReservationComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
             _shared_services_vehicles_service__WEBPACK_IMPORTED_MODULE_2__["VehiclesService"],
-            _shared_services_employees_service__WEBPACK_IMPORTED_MODULE_5__["EmployeesService"],
-            _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_6__["ReservationsService"]])
+            _shared_services_employees_service__WEBPACK_IMPORTED_MODULE_4__["EmployeesService"],
+            _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_5__["ReservationsService"]])
     ], NewReservationComponent);
     return NewReservationComponent;
 }());
@@ -1131,7 +1119,7 @@ var NewReservationComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"upper-row-container\">\n    <button class=\"btn btn-primary pull-left\" (click)=\"createReservation()\">Create Reservation</button>\n\n    <div class=\"date-pickers pull-right\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"pickerFrom\" (dateChange)=\"updateFrom($event)\" placeholder=\"From\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerFrom\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerFrom>\n        </mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"pickerTo\" (dateChange)=\"updateTo($event)\" placeholder=\"To\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerTo\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerTo>\n        </mat-datepicker>\n      </mat-form-field>\n    </div>\n  </div>\n\n  <div class=\"input-group filter-row\">\n    <input type=\"text\" class=\"form-control\" [value]=\"filter.query\" placeholder=\"Search for...\">\n    <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\" (click)=\"filterReservations()\">Filter</button>\n      </span>\n  </div>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Username</th>\n        <th>Vehicle</th>\n        <th>From</th>\n        <th>To</th>\n        <th>Status</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reservation of reservations$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ reservation.employee.first_name }}</td>\n        <td>{{ reservation.employee.last_name }}</td>\n        <td>{{ reservation.employee.username }}</td>\n        <td>{{ reservation.vehicle.brand }}</td>\n        <td>{{ formatDate(reservation.from) }}</td>\n        <td>{{ formatDate(reservation.to) }}</td>\n        <td>{{ reservation.status }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"editReservation(reservation)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"deleteReservation(reservation)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <!--<nav aria-label=\"Page navigation example\">-->\n    <!--<ul class=\"pagination\">-->\n      <!--<li class=\"page-item\"><a class=\"page-link\" (click)=\"previousPage()\">Previous</a></li>-->\n      <!--<li class=\"page-item\" *ngFor=\"let page of pages; let i = index\">-->\n        <!--<a class=\"page-link\">{{ i + 1 }}</a>-->\n      <!--</li>-->\n      <!--<li class=\"page-item\"><a class=\"page-link\" (click)=\"nextPage()\">Next</a></li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <mat-paginator [length]=\"100\"\n                 (page)=\"pageChanged($event)\"\n                 [pageSize]=\"10\"\n                 [pageSizeOptions]=\"[5, 10, 25, 100]\">\n  </mat-paginator>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"upper-row-container\">\n    <button class=\"btn btn-primary pull-left\" (click)=\"createReservation()\">Create Reservation</button>\n\n    <div class=\"date-pickers\">\n      <button class=\"btn btn-primary reset-filter-btn\" (click)=\"resetFilter()\">Reset Filter</button>\n\n      <mat-form-field class=\"picker-from\">\n        <input #fromInput matInput [matDatepicker]=\"pickerFrom\" (dateChange)=\"updateFrom($event)\" placeholder=\"From\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerFrom\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerFrom>\n        </mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field class=\"picker-from\">\n        <input #toInput matInput [matDatepicker]=\"pickerTo\" (dateChange)=\"updateTo($event)\" placeholder=\"To\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerTo\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerTo>\n        </mat-datepicker>\n      </mat-form-field>\n    </div>\n  </div>\n\n  <div class=\"input-group filter-row\">\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"filter.query\" placeholder=\"Search for...\">\n    <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\" (click)=\"filterReservations()\">Filter</button>\n      </span>\n  </div>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Username</th>\n        <th>Vehicle</th>\n        <th>From</th>\n        <th>To</th>\n        <th>Status</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Delete</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Approve</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Cancel</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reservation of reservations$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ reservation.employee.first_name }}</td>\n        <td>{{ reservation.employee.last_name }}</td>\n        <td>{{ reservation.employee.username }}</td>\n        <td>{{ reservation.vehicle.brand }}</td>\n        <td>{{ formatDate(reservation.from) }}</td>\n        <td>{{ formatDate(reservation.to) }}</td>\n        <td>{{ reservation.status }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"acceptOrDeclineReservation(reservation, true)\" class=\"glyphicon glyphicon-ok\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"acceptOrDeclineReservation(reservation, false)\" class=\"glyphicon glyphicon-remove\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"editReservation(reservation)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"deleteReservation(reservation)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <!--<nav aria-label=\"Page navigation example\">-->\n    <!--<ul class=\"pagination\">-->\n      <!--<li class=\"page-item\"><a class=\"page-link\" (click)=\"previousPage()\">Previous</a></li>-->\n      <!--<li class=\"page-item\" *ngFor=\"let page of pages; let i = index\">-->\n        <!--<a class=\"page-link\">{{ i + 1 }}</a>-->\n      <!--</li>-->\n      <!--<li class=\"page-item\"><a class=\"page-link\" (click)=\"nextPage()\">Next</a></li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <mat-paginator [length]=\"100\"\n                 (page)=\"pageChanged($event)\"\n                 [pageSize]=\"10\"\n                 [pageSizeOptions]=\"[5, 10, 25, 100]\">\n  </mat-paginator>\n</div>\n"
 
 /***/ }),
 
@@ -1142,7 +1130,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"upper-row-container\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.filter-row {\n  width: 100%; }\n\n.date-pickers {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: 50%; }\n\n.page-item {\n  cursor: pointer; }\n\n.upper-row-container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between; }\n\n.container {\n  display: flex;\n  flex-direction: column; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.filter-row {\n  width: 100%; }\n\n.date-pickers {\n  display: flex;\n  align-items: center;\n  justify-content: space-between; }\n\n@media screen and (max-width: 600px) {\n    .date-pickers {\n      flex-direction: column; } }\n\n.picker-from {\n  margin-right: 5%; }\n\n.page-item {\n  cursor: pointer; }\n\n.upper-row-container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between; }\n\n@media screen and (max-width: 1200px) {\n    .upper-row-container {\n      flex-direction: column; } }\n\n.container {\n  display: flex;\n  flex-direction: column; }\n\n.reset-filter-btn {\n  margin-right: 5%; }\n\n@media screen and (max-width: 600px) {\n    .reset-filter-btn {\n      margin-top: 5%; } }\n"
 
 /***/ }),
 
@@ -1159,10 +1147,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/services/reservations.service */ "./src/app/shared/services/reservations.service.ts");
-/* harmony import */ var _shared_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/utils */ "./src/app/shared/utils.ts");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/models/roles.enum */ "./src/app/shared/models/roles.enum.ts");
+/* harmony import */ var _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/models/reservation-status.enum */ "./src/app/shared/models/reservation-status.enum.ts");
+/* harmony import */ var _shared_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/utils */ "./src/app/shared/utils.ts");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/models/roles.enum */ "./src/app/shared/models/roles.enum.ts");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -1186,51 +1176,83 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var ReservationsViewComponent = /** @class */ (function () {
-    function ReservationsViewComponent(router, reservationService) {
+    function ReservationsViewComponent(router, route, reservationService) {
         this.router = router;
+        this.route = route;
         this.reservationService = reservationService;
-        // reservations: Reservation[] = [];
+        this.reservations = [];
         this.filter = {
             page: 1,
-            pageSize: _shared_utils__WEBPACK_IMPORTED_MODULE_3__["PAGE_SIZE"],
-            query: null,
+            page_size: _shared_utils__WEBPACK_IMPORTED_MODULE_4__["PAGE_SIZE"],
+            query: '',
             from: null,
-            to: null,
+            to: null
         };
-        // filteredReservation$: Observable<Reservation[]> = this.reservationService.getFilteredReservations(this.filter);
-        this.reservations$ = this.reservationService.getReservations();
-        // reservations$: Observable<Reservation[]> = this.reservationService.getFilteredReservations(this.filter);
-        this.actualPage = 1;
-        this.userRoles = _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_5__["Roles"];
-        this.currentUserRole = JSON.parse(localStorage.getItem('currentUser')).role;
+        this.reservations$ = this.reservationService.getFilteredReservations(this.filter);
+        this.userRoles = _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_7__["Roles"];
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     ReservationsViewComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.reservations$
             .subscribe(function (data) {
-            console.log(data);
-            // this.reservations = data;
+            if (data !== null && data.length > 0) {
+                _this.route.queryParams
+                    .subscribe(function (params) {
+                    if (params.id) {
+                        var approved = data.some(function (reservation) {
+                            return String(reservation.id) === String(params.id) && reservation.status === _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_3__["ReservationStatus"].APPROVED;
+                        });
+                        if (approved) {
+                            alert('Your reservation is approved now!');
+                        }
+                    }
+                });
+            }
         });
     };
-    ReservationsViewComponent.prototype.formatDate = function (date) {
-        return moment__WEBPACK_IMPORTED_MODULE_4__(date).format('DD.MM.YYYY');
+    ReservationsViewComponent.prototype.acceptOrDeclineReservation = function (reservation, toBeAccepted) {
+        var _this = this;
+        if (reservation.status === _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_3__["ReservationStatus"].NEW) {
+            this.reservationService.acceptOrDeclineReservation(reservation, toBeAccepted)
+                .subscribe(function () {
+                _this.reservations.map(function (res) { return (String(res.id === reservation.id)
+                    ? __assign({}, res, { status: toBeAccepted ? _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_3__["ReservationStatus"].APPROVED : _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_3__["ReservationStatus"].CANCELED }) : res); });
+                _this.reservations$ = _this.reservationService.getFilteredReservations(_this.filter);
+            });
+        }
+        else {
+            alert('This reservation has already set the status!');
+        }
     };
-    // get pages(): number[] {
-    //   return new Array(Math.ceil(this.reservations.length / 10)).fill(0);
-    // }
+    ReservationsViewComponent.prototype.resetFilter = function () {
+        this.fromInput.value = '';
+        this.toInput.value = '';
+        this.filter = {
+            page: 1,
+            page_size: _shared_utils__WEBPACK_IMPORTED_MODULE_4__["PAGE_SIZE"],
+            query: '',
+            from: null,
+            to: null
+        };
+        this.reservations$ = this.reservationService.getFilteredReservations(this.filter);
+    };
+    ReservationsViewComponent.prototype.formatDate = function (date) {
+        return moment__WEBPACK_IMPORTED_MODULE_5__(date).format('DD.MM.YYYY');
+    };
     ReservationsViewComponent.prototype.pageChanged = function (event) {
-        this.filter = __assign({}, this.filter, { page: event.pageIndex + 1, pageSize: event.pageSize });
-        console.log(this.filter);
+        this.filter = __assign({}, this.filter, { page: event.pageIndex + 1, page_size: event.pageSize });
         this.filterReservations();
     };
     ReservationsViewComponent.prototype.updateFrom = function (event) {
-        console.log(event.from);
-        this.filter = __assign({}, this.filter, { from: moment__WEBPACK_IMPORTED_MODULE_4__(event.value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_3__["LOCAL_FORMAT"]) });
-        console.log(this.filter);
+        this.filter = __assign({}, this.filter, { from: moment__WEBPACK_IMPORTED_MODULE_5__(event.value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_4__["LOCAL_FORMAT"]) });
         this.filterReservations();
     };
     ReservationsViewComponent.prototype.updateTo = function (event) {
-        this.filter = __assign({}, this.filter, { to: moment__WEBPACK_IMPORTED_MODULE_4__(event.value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_3__["LOCAL_FORMAT"]) });
+        this.filter = __assign({}, this.filter, { to: moment__WEBPACK_IMPORTED_MODULE_5__(event.value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_4__["LOCAL_FORMAT"]) });
         this.filterReservations();
     };
     ReservationsViewComponent.prototype.createReservation = function () {
@@ -1243,13 +1265,24 @@ var ReservationsViewComponent = /** @class */ (function () {
         var _this = this;
         this.reservationService.deleteReservation(reservation)
             .subscribe(function () {
-            _this.reservations$ = _this.reservationService.getReservations();
+            _this.reservations$ = _this.reservationService.getFilteredReservations(_this.filter);
         });
     };
     ReservationsViewComponent.prototype.filterReservations = function () {
-        console.log(this.filter);
         this.reservations$ = this.reservationService.getFilteredReservations(this.filter);
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('fromInput', {
+            read: _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInput"]
+        }),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInput"])
+    ], ReservationsViewComponent.prototype, "fromInput", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('toInput', {
+            read: _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInput"]
+        }),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInput"])
+    ], ReservationsViewComponent.prototype, "toInput", void 0);
     ReservationsViewComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-reservations',
@@ -1257,6 +1290,7 @@ var ReservationsViewComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./reservations-view.component.scss */ "./src/app/dashboard/reservations/reservations-view.component.scss")]
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_2__["ReservationsService"]])
     ], ReservationsViewComponent);
     return ReservationsViewComponent;
@@ -1284,7 +1318,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"settingsForm\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -1528,7 +1562,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"vehicleForm\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -1665,7 +1699,7 @@ module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole =
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n"
 
 /***/ }),
 
@@ -1823,7 +1857,6 @@ var LoginComponent = /** @class */ (function () {
         this.authenticationService.login(this.loginForm.get('userName').value, this.loginForm.get('password').value)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
             .subscribe(function (data) {
-            console.log(_this.returnUrl);
             _this.loggedUser = data;
             // this.router.navigate([this.returnUrl]);
             _this.redirectToDashboard();
@@ -1883,10 +1916,8 @@ var AuthGuard = /** @class */ (function () {
     AuthGuard.prototype.canActivate = function (route, state) {
         if (localStorage.getItem('currentUser')) {
             // logged in so return true
-            console.log('logged in');
             return true;
         }
-        console.log('dont have token');
         // not logged in so redirect to login page with the return url
         this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
@@ -2177,7 +2208,6 @@ var AuthenticationService = /** @class */ (function () {
         return this.http.post("" + _utils__WEBPACK_IMPORTED_MODULE_3__["requestPath"] + this.loginUrl, { username: username, password: password })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (user) {
             // login successful if there's a jwt token in the response
-            console.log(user);
             if (user && user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
@@ -2348,19 +2378,13 @@ var ReservationsService = /** @class */ (function () {
         this.reservationsUrl = '/reservations';
         this.processRequest = '/process-request';
         this.filterUrl = '/filter';
+        this.acceptOrDeclineUrl = '/accept-or-decline';
         this.reservations$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
     ReservationsService.prototype.getReservations = function () {
-        var _this = this;
-        var got = this.http.get("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationsUrl);
-        got.subscribe(function (data) { return _this.reservations$.next(data); });
-        return got;
-        // return this.http.get<Reservation[]>(`${requestPath}${this.reservationsUrl}`);
+        return this.http.get("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationsUrl);
     };
     ReservationsService.prototype.deleteReservation = function (reservation) {
-        // const data = this.http.delete(`${requestPath}${this.reservationsUrl}/${reservation.id}`);
-        //   data.subscribe(data => console.log(data));
-        // return data;
         return this.http.delete("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationsUrl + "/" + reservation.id);
     };
     ReservationsService.prototype.createReservation = function (reservation) {
@@ -2370,8 +2394,14 @@ var ReservationsService = /** @class */ (function () {
         return this.http.put("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationsUrl, reservation);
     };
     ReservationsService.prototype.getFilteredReservations = function (filterParams) {
-        console.log(filterParams);
         return this.http.post("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationsUrl + this.filterUrl, filterParams);
+    };
+    ReservationsService.prototype.acceptOrDeclineReservation = function (reservation, toBeAccepted) {
+        return this.http.put("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationsUrl + this.acceptOrDeclineUrl, reservation, {
+            params: {
+                'toBeAccepted': String(toBeAccepted)
+            }
+        });
     };
     ReservationsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
