@@ -4,36 +4,12 @@ import {VehiclesService} from "../../../shared/services/vehicles.service";
 import {Vehicle} from "../../../shared/models/vehicle.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Reservation} from "../../../shared/models/reservation.model";
-import {ReservationStatus} from "../../../shared/models/reservation-status.enum";
 import {EmployeesService} from "../../../shared/services/employees.service";
 import {Employee} from "../../../shared/models/employee.model";
 import {ReservationsService} from "../../../shared/services/reservations.service";
-import {enumToArray, LOCAL_FORMAT, touchAllChildren} from "../../../shared/utils";
+import {LOCAL_FORMAT, touchAllChildren} from "../../../shared/utils";
 import * as moment from "moment";
-
-const VEHICLES_MOCK = [
-  {
-    registrationNumber: 'ABC123',
-    brand: 'Skoda Octavia',
-    type: 'Combi',
-    color: 'white',
-    mileage: 100000,
-  },
-  {
-    registrationNumber: '123ABC',
-    brand: 'VW Golf',
-    type: 'Hatchback',
-    color: 'black',
-    mileage: 80000,
-  },
-  {
-    registrationNumber: 'A1B2C3',
-    brand: 'Mercedes Vito',
-    type: 'Van',
-    color: 'gray',
-    mileage: 50000,
-  },
-];
+import {Roles} from "../../../shared/models/roles.enum";
 
 @Component({
   selector: 'app-new-reservation',
@@ -47,7 +23,6 @@ export class NewReservationComponent implements OnInit {
   employeeId = '';
   vehicleId = '';
   editMode = false;
-  // vehicles = VEHICLES_MOCK;
   vehicles: Vehicle[] = [];
   employees: Employee[] = [];
   warningText = 'This is required!';
@@ -61,7 +36,7 @@ export class NewReservationComponent implements OnInit {
     status: 'NEW',
   });
 
-  statusOptions = enumToArray(ReservationStatus);
+  currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   constructor(private readonly fb: FormBuilder,
               private readonly router: Router,
@@ -91,6 +66,13 @@ export class NewReservationComponent implements OnInit {
     this.employeeService.getEmployees()
       .subscribe(employees => {
         this.employees = employees;
+        if (this.employees !== null && this.employees.length > 0) {
+          if (this.currentUser.role === Roles.USER) {
+            const currentEmployee = this.employees.find(employee =>
+              String(employee.id) === String(this.currentUser.employee_id));
+            this.employees = [currentEmployee];
+          }
+        }
       });
   }
 
@@ -105,7 +87,14 @@ export class NewReservationComponent implements OnInit {
         employee: this.employees.find(employee =>
           String(employee.id) === String(this.reservationForm.get('employee').value)),
       })
-        .subscribe(() => this.router.navigateByUrl('/dashboard/reservations'));
+        .subscribe((newReservation) => {
+          this.router.navigate(['/dashboard/reservations'], {queryParams: {id: newReservation.id}});
+        },
+          error => {
+          if (error) {
+            alert('You already have reservation in this date or the vehicle is not available in this date!');
+          }
+          });
     } else {
       touchAllChildren(this.reservationForm);
     }
@@ -122,7 +111,6 @@ export class NewReservationComponent implements OnInit {
       vehicle: this.reservation.vehicle.id,
       status: this.reservation.status,
     });
-    console.log(this.reservationForm.value);
   }
 
   editReservation(): void {
@@ -139,7 +127,6 @@ export class NewReservationComponent implements OnInit {
           status: this.reservationForm.get('status').value,
         }).subscribe((data) => {
           if (data) {
-            console.log('put', data);
             this.router.navigateByUrl('/dashboard/reservations');
           }
         });

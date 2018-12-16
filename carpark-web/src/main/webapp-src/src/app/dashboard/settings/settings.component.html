@@ -1,0 +1,32 @@
+<div class="container">
+  <button class="btn btn-primary pull-left" (click)="addSettings()">Add Settings</button>
+  <hr/>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Row</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Allowed</th>
+        <th>Autoapproval</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let setting of settings$ | async; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ setting.employee.first_name }}</td>
+        <td>{{ setting.employee.last_name }}</td>
+        <td *ngIf="setting.allowed"><span class="glyphicon glyphicon-ok"></span></td>
+        <td *ngIf="!setting.allowed"><span class="glyphicon glyphicon-remove"></span></td>
+        <td *ngIf="setting.auto_approval"><span class="glyphicon glyphicon-ok"></span></td>
+        <td *ngIf="!setting.auto_approval"><span class="glyphicon glyphicon-remove"></span></td>
+        <td class="text-center"><span (click)="editSettings(setting)" class="glyphicon glyphicon-pencil"></span></td>
+        <td class="text-center"><span (click)="deleteSettings(setting)" class="glyphicon glyphicon-trash"></span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

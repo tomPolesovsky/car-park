@@ -35,6 +35,7 @@ public class VehicleController {
      * @param id
      * @return vehicle dto
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public VehicleDTO find(@PathVariable("id") Long id) {
         VehicleDTO result = vehicleFacade.find(id);
@@ -49,6 +50,7 @@ public class VehicleController {
      * @param registrationNumber
      * @return vehicle dto
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/find-by-registration-number/{registration-number}", method = RequestMethod.GET)
     public VehicleDTO findByRegistrationNumber(@PathVariable("registration-number") String registrationNumber) {
         VehicleDTO result = vehicleFacade.findByRegistrationNumber(registrationNumber);
@@ -62,6 +64,7 @@ public class VehicleController {
      *
      * @return list of vehicle dto
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public List<VehicleDTO> findAll() {
         return vehicleFacade.findAll();
@@ -73,6 +76,7 @@ public class VehicleController {
      * @param vehicle dto
      * @return vehicle dto
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public VehicleDTO create(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.create(vehicle);
@@ -87,6 +91,7 @@ public class VehicleController {
      * @param vehicle dto
      * @return vehicle dto
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.PUT)
     public VehicleDTO update(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.update(vehicle);
@@ -100,6 +105,7 @@ public class VehicleController {
      *
      * @param id
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         VehicleDTO result = vehicleFacade.find(id);

@@ -56,20 +56,6 @@
       </div>
     </div>
 
-    <div *ngIf="editMode" class="form-group"
-         [ngClass]="{'wrong-input': reservationForm.get('status').invalid && reservationForm.get('status').touched}">
-      <mat-form-field>
-        <mat-select placeholder="Status" formControlName="status">
-          <mat-option *ngFor="let status of statusOptions" [value]="status">
-            {{ status }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="warning-container">
-        <span class="warning-text">{{warningText}}</span>
-      </div>
-    </div>
-
     <button class="btn btn-lg btn-primary btn-block" type="submit">
             <!--(click)="editMode ? editReservation() : createReservation()">-->
       {{ editMode ? 'Save Changes' : 'Create Reservation' }}

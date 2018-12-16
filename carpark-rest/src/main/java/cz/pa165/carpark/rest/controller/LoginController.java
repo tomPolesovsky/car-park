@@ -27,6 +27,7 @@ public class LoginController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UserDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
         try {
