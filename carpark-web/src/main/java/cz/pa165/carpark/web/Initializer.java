@@ -28,5 +28,4 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     protected Filter[] getServletFilters() {
         return new Filter[]{new DefaultRestFilter(), new JwtTokenFilter()};
     }
-
 }

@@ -1,0 +1,33 @@
+<div class="container">
+  <form [formGroup]="settingsForm">
+    <div class="form-group"
+         [ngClass]="{'wrong-input': settingsForm.get('employee').invalid && settingsForm.get('employee').touched}">
+      <mat-form-field>
+        <mat-select placeholder="Choose Employee" formControlName="employee">
+          <mat-option *ngFor="let employee of employees"
+                      [value]="editMode ? employee.first_name + ' ' + employee.last_name : employee">
+            {{employee.first_name + ' ' + employee.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" formControlName="allowed"> Allowed
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" formControlName="auto_approval"> Autoapproval
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="editMode ? editSettings() : addSettings()">
+      {{ editMode ? 'Save Changes' : 'Add Settings'}}
+    </button>
+  </form>
+</div>
+

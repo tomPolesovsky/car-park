@@ -1,0 +1,46 @@
+@import '../../shared/styles/global.scss';
+
+.filter-row {
+  width: 100%;
+}
+
+.date-pickers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.picker-from {
+  margin-right: 5%;
+}
+
+.page-item {
+  cursor: pointer;
+}
+
+.upper-row-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reset-filter-btn {
+  margin-right: 5%;
+
+  @media screen and (max-width: 600px) {
+    margin-top: 5%;
+  }
+}

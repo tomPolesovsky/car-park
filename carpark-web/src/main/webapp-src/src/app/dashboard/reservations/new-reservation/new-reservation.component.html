@@ -1,0 +1,66 @@
+<div class="container">
+  <form [formGroup]="reservationForm" (submit)="editMode ? editReservation() : createReservation()">
+    <div class="form-group"
+         [ngClass]="{'wrong-input': reservationForm.get('employee').invalid && reservationForm.get('employee').touched}">
+      <mat-form-field>
+        <mat-select placeholder="Choose Employee" formControlName="employee">
+          <mat-option *ngFor="let employee of employees"
+                      [value]="employee.id">
+                      <!--[value]="editMode ? employee.first_name + ' ' + employee.last_name : employee">-->
+            {{employee.first_name + ' ' + employee.last_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'wrong-input': reservationForm.get('vehicle').invalid && reservationForm.get('vehicle').touched}">
+      <mat-form-field>
+        <mat-select placeholder="Choose Vehicle" formControlName="vehicle">
+          <mat-option *ngFor="let vehicle of vehicles"
+                      [value]="vehicle.id">
+            {{ vehicle.brand }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'wrong-input': reservationForm.get('from').invalid && reservationForm.get('from').touched}">
+      <mat-form-field>
+        <input matInput formControlName="from" [matDatepicker]="pickerFrom" placeholder="From">
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom>
+        </mat-datepicker>
+      </mat-form-field>
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'wrong-input': reservationForm.get('to').invalid && reservationForm.get('to').touched}">
+      <mat-form-field>
+        <input formControlName="to" matInput [matDatepicker]="pickerTo" placeholder="To">
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo></mat-datepicker>
+      </mat-form-field>
+      <div class="warning-container">
+        <span class="warning-text">{{warningText}}</span>
+      </div>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+            <!--(click)="editMode ? editReservation() : createReservation()">-->
+      {{ editMode ? 'Save Changes' : 'Create Reservation' }}
+    </button>
+
+  </form>
+</div>
+
