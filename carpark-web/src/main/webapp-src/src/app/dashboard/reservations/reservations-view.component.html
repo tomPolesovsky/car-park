@@ -2,16 +2,18 @@
   <div class="upper-row-container">
     <button class="btn btn-primary pull-left" (click)="createReservation()">Create Reservation</button>
 
-    <div class="date-pickers pull-right">
-      <mat-form-field>
-        <input matInput [matDatepicker]="pickerFrom" (dateChange)="updateFrom($event)" placeholder="From">
+    <div class="date-pickers">
+      <button class="btn btn-primary reset-filter-btn" (click)="resetFilter()">Reset Filter</button>
+
+      <mat-form-field class="picker-from">
+        <input #fromInput matInput [matDatepicker]="pickerFrom" (dateChange)="updateFrom($event)" placeholder="From">
         <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
         <mat-datepicker #pickerFrom>
         </mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput [matDatepicker]="pickerTo" (dateChange)="updateTo($event)" placeholder="To">
+      <mat-form-field class="picker-from">
+        <input #toInput matInput [matDatepicker]="pickerTo" (dateChange)="updateTo($event)" placeholder="To">
         <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
         <mat-datepicker #pickerTo>
         </mat-datepicker>
@@ -20,7 +22,7 @@
   </div>
 
   <div class="input-group filter-row">
-    <input type="text" class="form-control" [value]="filter.query" placeholder="Search for...">
+    <input type="text" class="form-control" [(ngModel)]="filter.query" placeholder="Search for...">
     <span class="input-group-btn">
         <button class="btn btn-default" type="button" (click)="filterReservations()">Filter</button>
       </span>
@@ -37,8 +39,10 @@
         <th>From</th>
         <th>To</th>
         <th>Status</th>
-        <th *ngIf="currentUserRole === userRoles.APPROVER">Edit</th>
-        <th *ngIf="currentUserRole === userRoles.APPROVER">Delete</th>
+        <th *ngIf="currentUser.role === userRoles.APPROVER">Edit</th>
+        <th *ngIf="currentUser.role === userRoles.APPROVER">Delete</th>
+        <th *ngIf="currentUser.role === userRoles.APPROVER">Approve</th>
+        <th *ngIf="currentUser.role === userRoles.APPROVER">Cancel</th>
       </tr>
       </thead>
       <tbody>
@@ -51,10 +55,16 @@
         <td>{{ formatDate(reservation.from) }}</td>
         <td>{{ formatDate(reservation.to) }}</td>
         <td>{{ reservation.status }}</td>
-        <td class="text-center" *ngIf="currentUserRole === userRoles.APPROVER">
+        <td class="text-center" *ngIf="currentUser.role === userRoles.APPROVER">
+          <span (click)="acceptOrDeclineReservation(reservation, true)" class="glyphicon glyphicon-ok"></span>
+        </td>
+        <td class="text-center" *ngIf="currentUser.role === userRoles.APPROVER">
+          <span (click)="acceptOrDeclineReservation(reservation, false)" class="glyphicon glyphicon-remove"></span>
+        </td>
+        <td class="text-center" *ngIf="currentUser.role === userRoles.APPROVER">
           <span (click)="editReservation(reservation)" class="glyphicon glyphicon-pencil"></span>
         </td>
-        <td class="text-center" *ngIf="currentUserRole === userRoles.APPROVER">
+        <td class="text-center" *ngIf="currentUser.role === userRoles.APPROVER">
           <span (click)="deleteReservation(reservation)" class="glyphicon glyphicon-trash"></span>
         </td>
       </tr>
