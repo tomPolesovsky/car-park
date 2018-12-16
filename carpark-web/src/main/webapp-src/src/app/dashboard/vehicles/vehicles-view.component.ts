@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Vehicle} from "../../shared/models/vehicle.model";
+import {VehiclesService} from "../../shared/services/vehicles.service";
+import {Router} from "@angular/router";
+import {Observable} from "rxjs";
+import {Roles} from "../../shared/models/roles.enum";
 
 @Component({
   selector: 'app-vehicles',
@@ -7,9 +12,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehiclesViewComponent implements OnInit {
 
-  constructor() { }
+  vehicles$: Observable<Vehicle[]> = this.vehicleService.getVehicles();
+  userRoles = Roles;
+  currentUserRole = JSON.parse(localStorage.getItem('currentUser')).role;
 
-  ngOnInit() {
+    constructor(private readonly vehicleService: VehiclesService,
+              private readonly router: Router) {
   }
 
+  ngOnInit(): void {
+    this.vehicles$
+      .subscribe(() => {});
+  }
+
+  addVehicle(): void {
+    this.router.navigateByUrl('/dashboard/new-vehicle');
+  }
+
+  editVehicle(vehicle: Vehicle): void {
+    this.router.navigate(['/dashboard/new-vehicle'], {queryParams: {edit: vehicle.id}});
+  }
+
+  deleteVehicle(vehicle: Vehicle): void {
+    this.vehicleService.deleteVehicle(vehicle)
+      .subscribe(() => {
+        this.vehicles$ = this.vehicleService.getVehicles();
+      });
+  }
 }

@@ -26,4 +26,8 @@ export class VehiclesService {
   updateVehicle(vehicle: Vehicle) {
     return this.http.put<Vehicle>(`${requestPath}${this.vehiclesUrl}`, vehicle);
   }
+
+  findVehicleById(id: string) {
+    return this.http.get<Vehicle>(`${requestPath}${this.vehiclesUrl}/${id}`);
+  }
 }

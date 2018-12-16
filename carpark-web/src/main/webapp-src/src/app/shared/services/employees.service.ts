@@ -24,6 +24,7 @@ export class EmployeesService {
   }
 
   updateEmployee(employee: Employee) {
+    console.log('update', JSON.stringify(employee));
     return this.http.put<Employee>(`${requestPath}${this.employeesUrl}`, employee);
   }
 }

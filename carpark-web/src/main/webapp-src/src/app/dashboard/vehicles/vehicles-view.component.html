@@ -1,3 +1,36 @@
-<p>
-  vehicles works!
-</p>
+<div class="container">
+  <button *ngIf="currentUserRole === userRoles.APPROVER" class="btn btn-primary pull-left" (click)="addVehicle()">Add Vehicle</button>
+  <hr/>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Row</th>
+        <th>Brand</th>
+        <th>Registration Number</th>
+        <th>Mileage [km]</th>
+        <th>Type</th>
+        <th>Color</th>
+        <th *ngIf="currentUserRole === userRoles.APPROVER">Edit</th>
+        <th *ngIf="currentUserRole === userRoles.APPROVER">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vehicle of vehicles$ | async; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ vehicle.brand }}</td>
+        <td>{{ vehicle.registration_number }}</td>
+        <td>{{ vehicle.mileage | separateThousands }}</td>
+        <td>{{ vehicle.type }}</td>
+        <td>{{ vehicle.color }}</td>
+        <td class="text-center" *ngIf="currentUserRole === userRoles.APPROVER">
+          <span (click)="editVehicle(vehicle)" class="glyphicon glyphicon-pencil"></span>
+        </td>
+        <td class="text-center" *ngIf="currentUserRole === userRoles.APPROVER">
+          <span (click)="deleteVehicle(vehicle)" class="glyphicon glyphicon-trash"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

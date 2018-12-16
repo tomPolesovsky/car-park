@@ -24,3 +24,5 @@ export function enumToArray(enumObject): string[] {
 
   return options;
 }
+
+export const LOCAL_FORMAT = 'YYYY-MM-DD[T]HH:mm:ss';
