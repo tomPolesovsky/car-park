@@ -36,7 +36,6 @@ public class ReservationSettingsController {
      * @param id
      * @return reservation settings dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ReservationSettingsDTO find(@PathVariable("id") Long id) {
         ReservationSettingsDTO result = reservationSettingsFacade.find(id);
@@ -51,7 +50,6 @@ public class ReservationSettingsController {
      * @param employee dto
      * @return reservation settings dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/find-by-employee", method = RequestMethod.GET)
     public ReservationSettingsDTO findByEmployee(@Valid @RequestBody EmployeeDTO employee) {
         ReservationSettingsDTO result = reservationSettingsFacade.findByEmployee(employee);
@@ -65,7 +63,6 @@ public class ReservationSettingsController {
      *
      * @return list of reservation settings dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public List<ReservationSettingsDTO> findAll() {
         return reservationSettingsFacade.findAll();
@@ -77,7 +74,6 @@ public class ReservationSettingsController {
      * @param reservationSettings dto
      * @return reservationSettings dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public ReservationSettingsDTO create(@Valid @RequestBody ReservationSettingsDTO reservationSettings) {
         ReservationSettingsDTO result = reservationSettingsFacade.create(reservationSettings);
@@ -92,7 +88,6 @@ public class ReservationSettingsController {
      * @param reservationSettings dto
      * @return reservationSettings dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.PUT)
     public ReservationSettingsDTO update(@Valid @RequestBody ReservationSettingsDTO reservationSettings) {
         ReservationSettingsDTO result = reservationSettingsFacade.update(reservationSettings);
@@ -106,7 +101,6 @@ public class ReservationSettingsController {
      *
      * @param id
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         ReservationSettingsDTO result = reservationSettingsFacade.find(id);

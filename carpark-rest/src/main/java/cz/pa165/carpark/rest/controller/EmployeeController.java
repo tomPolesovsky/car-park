@@ -24,7 +24,6 @@ public class EmployeeController {
         this.employeeFacade = employeeFacade;
     }
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public EmployeeDTO find(@PathVariable("id") Long id) {
         EmployeeDTO employee = employeeFacade.find(id);
@@ -33,7 +32,6 @@ public class EmployeeController {
         return employee;
     }
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/find-by-username/{username}", method = RequestMethod.GET)
     public EmployeeDTO findByUsername(@PathVariable("username") String username) {
         EmployeeDTO employee = employeeFacade.findByUsername(username);
@@ -42,13 +40,11 @@ public class EmployeeController {
         return employee;
     }
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public List<EmployeeDTO> findAll() {
         return employeeFacade.findAll();
     }
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public EmployeeDTO create(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.create(employee);
@@ -57,7 +53,6 @@ public class EmployeeController {
         return result;
     }
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.PUT)
     public EmployeeDTO update(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.update(employee);
@@ -66,7 +61,6 @@ public class EmployeeController {
         return result;
     }
 
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         EmployeeDTO employee = employeeFacade.find(id);

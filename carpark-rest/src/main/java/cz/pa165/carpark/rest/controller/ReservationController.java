@@ -46,7 +46,6 @@ public class ReservationController {
      * @param id
      * @return vehicle dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ReservationDTO find(@PathVariable("id") Long id) {
         ReservationDTO reservation = reservationFacade.find(id);
@@ -61,7 +60,6 @@ public class ReservationController {
      * @param employee dto
      * @return list of reservation dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/find-by-employee", method = RequestMethod.GET)
     public List<ReservationDTO> findByEmployee(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.find(employee.getId());
@@ -76,7 +74,6 @@ public class ReservationController {
      * @param vehicle dto
      * @return list of reservation dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/find-by-vehicle", method = RequestMethod.GET)
     public List<ReservationDTO> findByVehicle(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.find(vehicle.getId());
@@ -90,7 +87,6 @@ public class ReservationController {
      *
      * @return list of reservation dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public List<ReservationDTO> findAll() {
         return reservationFacade.findAll();
@@ -102,7 +98,6 @@ public class ReservationController {
      * @param reservation dto
      * @return reservation dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/process-request", method = RequestMethod.POST)
     public ReservationDTO processRequest(@Valid @RequestBody ReservationDTO reservation) {
         ReservationDTO result = reservationFacade.processRequest(reservation);
@@ -117,7 +112,6 @@ public class ReservationController {
      * @param reservation dto
      * @param toBeAccepted
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/accept-or-decline", method = RequestMethod.PUT)
     public void acceptOrDecline(@Valid @RequestBody ReservationDTO reservation,
                                 @RequestParam("toBeAccepted") boolean toBeAccepted) {
@@ -133,7 +127,6 @@ public class ReservationController {
      * @param reservation dto
      * @return reservation dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.PUT)
     public ReservationDTO update(@Valid @RequestBody ReservationDTO reservation) {
         ReservationDTO result = reservationFacade.update(reservation);
@@ -147,7 +140,6 @@ public class ReservationController {
      *
      * @param id
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") Long id) {
         ReservationDTO reservation = reservationFacade.find(id);
@@ -162,7 +154,6 @@ public class ReservationController {
      * @param reservationParams dto
      * @return list of reservation dto
      */
-    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public List<ReservationDTO> filter(@Valid @RequestBody ReservationParamsDTO reservationParams) {
         return reservationFacade.filter(reservationParams);
