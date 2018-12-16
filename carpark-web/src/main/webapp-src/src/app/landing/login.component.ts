@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthenticationService} from "../shared/services/authentication.service";
+import {first} from "rxjs/operators";
+import {User} from "../shared/models/user.model";
+import {touchAllChildren} from "../shared/utils";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   warningText = 'This field is required!';
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = '';
+  loggedUser: User;
+
 
   loginForm = this.fb.group({
     userName: ['', Validators.required],
@@ -17,22 +27,46 @@ export class LoginComponent {
   });
 
   constructor(private readonly fb: FormBuilder,
-              private readonly router: Router) {
+              private readonly route: ActivatedRoute,
+              private readonly router: Router,
+              private readonly authenticationService: AuthenticationService) {
+  }
+
+  ngOnInit(): void {
+    // reset login status
+    this.authenticationService.logout();
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-      if (this.loginForm.get('userName').value === 'admin' && this.loginForm.get('password').value === 'admin') {
-        this.redirectToDashboard();
-      }
-    } else {
-      this.loginForm.controls['userName'].markAsTouched();
-      this.loginForm.controls['password'].markAsTouched();
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      touchAllChildren(this.loginForm);
+      return;
     }
+
+    this.loading = true;
+    this.authenticationService.login(this.loginForm.get('userName').value, this.loginForm.get('password').value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          console.log(this.returnUrl);
+          this.loggedUser = data;
+          // this.router.navigate([this.returnUrl]);
+          this.redirectToDashboard();
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        });
   }
 
   redirectToDashboard(): void {
     this.router.navigateByUrl('/dashboard/reservations');
   }
-
 }
+

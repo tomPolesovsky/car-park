@@ -154,7 +154,7 @@ public class ReservationController {
      * @param reservationParams dto
      * @return list of reservation dto
      */
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
     public List<ReservationDTO> filter(@Valid @RequestBody ReservationParamsDTO reservationParams) {
         return reservationFacade.filter(reservationParams);
     }

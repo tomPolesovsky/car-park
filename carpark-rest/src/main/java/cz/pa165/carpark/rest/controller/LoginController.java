@@ -1,5 +1,6 @@
 package cz.pa165.carpark.rest.controller;
 
+import cz.pa165.carpark.api.dto.LoginDTO;
 import cz.pa165.carpark.api.dto.UserDTO;
 import cz.pa165.carpark.api.facade.AdminFacade;
 import cz.pa165.carpark.rest.config.ApiConfiguration;
@@ -7,12 +8,10 @@ import cz.pa165.carpark.rest.exception.LoginException;
 import cz.pa165.carpark.rest.security.jwt.JwtTokenProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(ApiConfiguration.API_LOGIN)
@@ -29,16 +28,13 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<UserDTO> login(@RequestParam("username") String username,
-                                         @RequestParam("password") String password
-    ) {
+    public ResponseEntity<UserDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
         try {
-            UserDTO userDTO = adminFacade.login(username, password);
-            String token = jwtTokenProvider.createToken(username);
+            UserDTO userDTO = adminFacade.login(loginDTO.getUsername(), loginDTO.getPassword());
+            String token = jwtTokenProvider.createToken(loginDTO.getUsername());
+            userDTO.setToken(token);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", "Bearer " + token);
-            return ResponseEntity.ok().headers(headers).body(userDTO);
+            return ResponseEntity.ok().body(userDTO);
         } catch (Exception e) {
             throw new LoginException();
         }
