@@ -1,36 +1,78 @@
-<div class="table-responsive">
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th>Row</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Biography</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>1</td>
-      <td>John</td>
-      <td>Carter</td>
-      <td>johncarter@mail.com</td>
-      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui.</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Peter</td>
-      <td>Parker</td>
-      <td>peterparker@mail.com</td>
-      <td>Vestibulum consectetur scelerisque lacus, ac fermentum lorem convallis sed. Nam odio tortor, dictum quis malesuada at, pellentesque.</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>John</td>
-      <td>Rambo</td>
-      <td>johnrambo@mail.com</td>
-      <td>Integer pulvinar leo id risus pellentesque vestibulum. Sed diam libero, sodales eget sapien vel, porttitor bibendum enim.</td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container">
+  <div class="upper-row-container">
+    <button class="btn btn-primary pull-left" (click)="createReservation()">Create Reservation</button>
+
+    <div class="date-pickers pull-right">
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerFrom" (dateChange)="updateFrom($event)" placeholder="From">
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom>
+        </mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerTo" (dateChange)="updateTo($event)" placeholder="To">
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo>
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="input-group filter-row">
+    <input type="text" class="form-control" [value]="filter.query" placeholder="Search for...">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="filterReservations()">Filter</button>
+      </span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Row</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Vehicle</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Status</th>
+        <th *ngIf="currentUserRole === userRoles.APPROVER">Edit</th>
+        <th *ngIf="currentUserRole === userRoles.APPROVER">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reservation of reservations$ | async; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ reservation.employee.first_name }}</td>
+        <td>{{ reservation.employee.last_name }}</td>
+        <td>{{ reservation.employee.username }}</td>
+        <td>{{ reservation.vehicle.brand }}</td>
+        <td>{{ formatDate(reservation.from) }}</td>
+        <td>{{ formatDate(reservation.to) }}</td>
+        <td>{{ reservation.status }}</td>
+        <td class="text-center" *ngIf="currentUserRole === userRoles.APPROVER">
+          <span (click)="editReservation(reservation)" class="glyphicon glyphicon-pencil"></span>
+        </td>
+        <td class="text-center" *ngIf="currentUserRole === userRoles.APPROVER">
+          <span (click)="deleteReservation(reservation)" class="glyphicon glyphicon-trash"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--<nav aria-label="Page navigation example">-->
+    <!--<ul class="pagination">-->
+      <!--<li class="page-item"><a class="page-link" (click)="previousPage()">Previous</a></li>-->
+      <!--<li class="page-item" *ngFor="let page of pages; let i = index">-->
+        <!--<a class="page-link">{{ i + 1 }}</a>-->
+      <!--</li>-->
+      <!--<li class="page-item"><a class="page-link" (click)="nextPage()">Next</a></li>-->
+    <!--</ul>-->
+  <!--</nav>-->
+  <mat-paginator [length]="100"
+                 (page)="pageChanged($event)"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
 </div>

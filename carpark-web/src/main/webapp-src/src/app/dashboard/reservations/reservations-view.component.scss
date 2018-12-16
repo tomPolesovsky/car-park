@@ -1,0 +1,27 @@
+@import '../../shared/styles/global.scss';
+
+.filter-row {
+  width: 100%;
+}
+
+.date-pickers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.page-item {
+  cursor: pointer;
+}
+
+.upper-row-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}

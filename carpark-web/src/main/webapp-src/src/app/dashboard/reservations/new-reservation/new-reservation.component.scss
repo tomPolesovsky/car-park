@@ -1,0 +1,28 @@
+@import '../../../shared/styles/global.scss';
+
+.form-group {
+  padding-bottom: 5px;
+
+  &.wrong-input {
+
+    ::placeholder {
+      color: $warning-color;
+    }
+
+    .warning-text {
+      display: block;
+    }
+  }
+}
+
+.warning-container {
+  margin-top: 5px;
+  display: flex;
+  height: 5px;
+}
+
+.warning-text {
+  font-size: 12px;
+  color: $warning-color;
+  display: none;
+}
