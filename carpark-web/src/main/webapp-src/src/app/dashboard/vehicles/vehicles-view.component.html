@@ -1,6 +1,5 @@
 <div class="container">
-  <button *ngIf="currentUserRole === userRoles.APPROVER" class="btn btn-primary pull-left" (click)="addVehicle()">Add Vehicle</button>
-  <hr/>
+  <button *ngIf="currentUserRole === userRoles.APPROVER" class="add-btn btn btn-primary pull-left" (click)="addVehicle()">Add Vehicle</button>
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>

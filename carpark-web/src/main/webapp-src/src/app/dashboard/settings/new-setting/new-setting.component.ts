@@ -61,7 +61,11 @@ export class NewSettingComponent implements OnInit {
   addSettings(): void {
     if (this.settingsForm.valid) {
       this.settingsService.createReservationSettings(this.settingsForm.value)
-        .subscribe(() => this.router.navigateByUrl('/dashboard/settings'));
+        .subscribe(() => {
+          this.router.navigateByUrl('/dashboard/settings');
+        },
+          error => alert('Reservation settings for this employee already exist!')
+        );
     } else {
       touchAllChildren(this.settingsForm);
     }

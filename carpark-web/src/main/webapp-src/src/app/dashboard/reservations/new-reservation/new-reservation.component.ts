@@ -91,9 +91,7 @@ export class NewReservationComponent implements OnInit {
           this.router.navigate(['/dashboard/reservations'], {queryParams: {id: newReservation.id}});
         },
           error => {
-          if (error) {
-            alert('You already have reservation in this date or the vehicle is not available in this date!');
-          }
+            alert('You already have reservation in this date or the vehicle is already reserved in this date!');
           });
     } else {
       touchAllChildren(this.reservationForm);
