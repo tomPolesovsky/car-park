@@ -10,6 +10,7 @@ import {ReservationsService} from "../../../shared/services/reservations.service
 import {LOCAL_FORMAT, touchAllChildren} from "../../../shared/utils";
 import * as moment from "moment";
 import {Roles} from "../../../shared/models/roles.enum";
+import {ReservationSettingsService} from "../../../shared/services/reservation-settings.service";
 
 @Component({
   selector: 'app-new-reservation',
@@ -43,6 +44,7 @@ export class NewReservationComponent implements OnInit {
               private readonly route: ActivatedRoute,
               private readonly vehiclesService: VehiclesService,
               private readonly employeeService: EmployeesService,
+              private readonly reservationSettingService: ReservationSettingsService,
               private readonly reservationService: ReservationsService) {
     this.route.queryParams
       .subscribe(params => {
@@ -78,21 +80,33 @@ export class NewReservationComponent implements OnInit {
 
   createReservation(): void {
     if (this.reservationForm.valid) {
-      this.reservationService.createReservation({
-        ...this.reservationForm.value,
-        from: moment(this.reservationForm.get('from').value).format(LOCAL_FORMAT),
-        to: moment(this.reservationForm.get('to').value).format(LOCAL_FORMAT),
-        vehicle: this.vehicles.find(vehicle =>
-          String(vehicle.id) === String(this.reservationForm.get('vehicle').value)),
-        employee: this.employees.find(employee =>
-          String(employee.id) === String(this.reservationForm.get('employee').value)),
-      })
-        .subscribe((newReservation) => {
-          this.router.navigate(['/dashboard/reservations'], {queryParams: {id: newReservation.id}});
+      const employee =  this.employees.find(employee =>
+        String(employee.id) === String(this.reservationForm.get('employee').value));
+      this.reservationSettingService.getReservationSettingsByEmployee(employee)
+        .subscribe((reservationSettings) => {
+          if (reservationSettings.allowed) {
+            this.reservationService.createReservation({
+              ...this.reservationForm.value,
+              from: moment(this.reservationForm.get('from').value).format(LOCAL_FORMAT),
+              to: moment(this.reservationForm.get('to').value).format(LOCAL_FORMAT),
+              vehicle: this.vehicles.find(vehicle =>
+                String(vehicle.id) === String(this.reservationForm.get('vehicle').value)),
+              employee: employee,
+            })
+              .subscribe((newReservation) => {
+                  this.router.navigate(['/dashboard/reservations'], {queryParams: {id: newReservation.id}});
+                },
+                error => {
+                  alert('You already have reservation in this date or the vehicle is already reserved in this date!');
+                });
+          } else {
+            alert('This emloyee don\'t have permission to create new reservation!');
+          }
+
         },
-          error => {
-            alert('You already have reservation in this date or the vehicle is already reserved in this date!');
-          });
+          error => alert('There is no reservation settings for this employee!')
+        );
+
     } else {
       touchAllChildren(this.reservationForm);
     }

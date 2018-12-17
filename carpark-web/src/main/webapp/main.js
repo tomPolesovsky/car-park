@@ -958,6 +958,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../shared/models/roles.enum */ "./src/app/shared/models/roles.enum.ts");
+/* harmony import */ var _shared_services_reservation_settings_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../shared/services/reservation-settings.service */ "./src/app/shared/services/reservation-settings.service.ts");
 var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -984,14 +985,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var NewReservationComponent = /** @class */ (function () {
-    function NewReservationComponent(fb, router, route, vehiclesService, employeeService, reservationService) {
+    function NewReservationComponent(fb, router, route, vehiclesService, employeeService, reservationSettingService, reservationService) {
         var _this = this;
         this.fb = fb;
         this.router = router;
         this.route = route;
         this.vehiclesService = vehiclesService;
         this.employeeService = employeeService;
+        this.reservationSettingService = reservationSettingService;
         this.reservationService = reservationService;
         this.reservationId = '';
         this.employeeId = '';
@@ -1044,16 +1047,25 @@ var NewReservationComponent = /** @class */ (function () {
     NewReservationComponent.prototype.createReservation = function () {
         var _this = this;
         if (this.reservationForm.valid) {
-            this.reservationService.createReservation(__assign({}, this.reservationForm.value, { from: moment__WEBPACK_IMPORTED_MODULE_7__(this.reservationForm.get('from').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]), to: moment__WEBPACK_IMPORTED_MODULE_7__(this.reservationForm.get('to').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]), vehicle: this.vehicles.find(function (vehicle) {
-                    return String(vehicle.id) === String(_this.reservationForm.get('vehicle').value);
-                }), employee: this.employees.find(function (employee) {
-                    return String(employee.id) === String(_this.reservationForm.get('employee').value);
-                }) }))
-                .subscribe(function (newReservation) {
-                _this.router.navigate(['/dashboard/reservations'], { queryParams: { id: newReservation.id } });
-            }, function (error) {
-                alert('You already have reservation in this date or the vehicle is already reserved in this date!');
+            var employee_1 = this.employees.find(function (employee) {
+                return String(employee.id) === String(_this.reservationForm.get('employee').value);
             });
+            this.reservationSettingService.getReservationSettingsByEmployee(employee_1)
+                .subscribe(function (reservationSettings) {
+                if (reservationSettings.allowed) {
+                    _this.reservationService.createReservation(__assign({}, _this.reservationForm.value, { from: moment__WEBPACK_IMPORTED_MODULE_7__(_this.reservationForm.get('from').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]), to: moment__WEBPACK_IMPORTED_MODULE_7__(_this.reservationForm.get('to').value).format(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["LOCAL_FORMAT"]), vehicle: _this.vehicles.find(function (vehicle) {
+                            return String(vehicle.id) === String(_this.reservationForm.get('vehicle').value);
+                        }), employee: employee_1 }))
+                        .subscribe(function (newReservation) {
+                        _this.router.navigate(['/dashboard/reservations'], { queryParams: { id: newReservation.id } });
+                    }, function (error) {
+                        alert('You already have reservation in this date or the vehicle is already reserved in this date!');
+                    });
+                }
+                else {
+                    alert('This emloyee don\'t have permission to create new reservation!');
+                }
+            }, function (error) { return alert('There is no reservation settings for this employee!'); });
         }
         else {
             Object(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["touchAllChildren"])(this.reservationForm);
@@ -1109,6 +1121,7 @@ var NewReservationComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
             _shared_services_vehicles_service__WEBPACK_IMPORTED_MODULE_2__["VehiclesService"],
             _shared_services_employees_service__WEBPACK_IMPORTED_MODULE_4__["EmployeesService"],
+            _shared_services_reservation_settings_service__WEBPACK_IMPORTED_MODULE_9__["ReservationSettingsService"],
             _shared_services_reservations_service__WEBPACK_IMPORTED_MODULE_5__["ReservationsService"]])
     ], NewReservationComponent);
     return NewReservationComponent;
@@ -2337,6 +2350,7 @@ var ReservationSettingsService = /** @class */ (function () {
     function ReservationSettingsService(http) {
         this.http = http;
         this.reservationSettingsUrl = '/reservation-settings';
+        this.findbyEmployeeUrl = '/find-by-employee';
     }
     ReservationSettingsService.prototype.getReservationSettings = function () {
         return this.http.get("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationSettingsUrl);
@@ -2349,6 +2363,9 @@ var ReservationSettingsService = /** @class */ (function () {
     };
     ReservationSettingsService.prototype.updateReservationSettings = function (reservationSettings) {
         return this.http.put("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationSettingsUrl, reservationSettings);
+    };
+    ReservationSettingsService.prototype.getReservationSettingsByEmployee = function (employee) {
+        return this.http.post("" + _utils__WEBPACK_IMPORTED_MODULE_2__["requestPath"] + this.reservationSettingsUrl + this.findbyEmployeeUrl, employee);
     };
     ReservationSettingsService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
