@@ -12,5 +12,6 @@ public class LoginDTO {
     @NotNull
     private String username;
 
+    @NotNull
     private String password;
 }
