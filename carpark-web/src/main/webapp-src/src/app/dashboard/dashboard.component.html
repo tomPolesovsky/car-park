@@ -13,15 +13,15 @@
       <ul class="nav navbar-nav">
         <li class="navbar-link"
             *ngFor="let item of navigationItems">
-          <a routerLinkActive="selected"
+          <a *ngIf="item.name !== 'Settings' || currentUserRole === userRoles.APPROVER" routerLinkActive="selected"
              [routerLink]="item.route">
             <span class="glyphicon" [ngClass]="{
             'glyphicon-user' : item.name === 'Employees',
             'glyphicon-tasks' : item.name === 'Reservations',
             'glyphicon-road' : item.name === 'Vehicles',
-            'glyphicon-cog' : item.name === 'Settings' && currentUserRole === userRoles.APPROVER
+            'glyphicon-cog' : item.name === 'Settings'
             }">
-              {{ item.name === 'Settings' && currentUserRole !== userRoles.APPROVER ? '' : item.name }}
+              {{ item.name }}
             </span>
           </a>
         </li>

@@ -37,6 +37,9 @@ export class VehiclesViewComponent implements OnInit {
     this.vehicleService.deleteVehicle(vehicle)
       .subscribe(() => {
         this.vehicles$ = this.vehicleService.getVehicles();
-      });
+      },
+        error =>
+          alert('You don\'t have permission to remove this vehicle!')
+      );
   }
 }

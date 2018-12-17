@@ -468,12 +468,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard_employees_new_employee_new_employee_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./dashboard/employees/new-employee/new-employee.component */ "./src/app/dashboard/employees/new-employee/new-employee.component.ts");
 /* harmony import */ var _dashboard_vehicles_new_vehicle_new_vehicle_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./dashboard/vehicles/new-vehicle/new-vehicle.component */ "./src/app/dashboard/vehicles/new-vehicle/new-vehicle.component.ts");
 /* harmony import */ var _dashboard_settings_new_setting_new_setting_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./dashboard/settings/new-setting/new-setting.component */ "./src/app/dashboard/settings/new-setting/new-setting.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -525,6 +527,7 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ReactiveFormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_12__["HttpClientModule"],
                 _shared_modules_material_module__WEBPACK_IMPORTED_MODULE_19__["MaterialModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_25__["BrowserAnimationsModule"],
             ],
             exports: [
                 _shared_pipes_separate_thousands_pipe__WEBPACK_IMPORTED_MODULE_20__["SeparateThousandsPipe"],
@@ -555,7 +558,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav id=\"myNavbar\" class=\"navbar navbar-default navbar-inverse navbar-fixed-top\" role=\"navigation\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" [routerLink]=\"'/dashboard/reservations'\">CarPark</a>\n    </div>\n    <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"navbar-link\"\n            *ngFor=\"let item of navigationItems\">\n          <a routerLinkActive=\"selected\"\n             [routerLink]=\"item.route\">\n            <span class=\"glyphicon\" [ngClass]=\"{\n            'glyphicon-user' : item.name === 'Employees',\n            'glyphicon-tasks' : item.name === 'Reservations',\n            'glyphicon-road' : item.name === 'Vehicles',\n            'glyphicon-cog' : item.name === 'Settings' && currentUserRole === userRoles.APPROVER\n            }\">\n              {{ item.name === 'Settings' && currentUserRole !== userRoles.APPROVER ? '' : item.name }}\n            </span>\n          </a>\n        </li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"navbar-link\">\n          <a routerLinkActive=\"selected\" (click)=\"logout()\">\n            <span class=\"glyphicon glyphicon-off\">\n              Log-out\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>\n<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h1 class=\"text-center\">{{ title }}</h1>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<nav id=\"myNavbar\" class=\"navbar navbar-default navbar-inverse navbar-fixed-top\" role=\"navigation\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" [routerLink]=\"'/dashboard/reservations'\">CarPark</a>\n    </div>\n    <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"navbar-link\"\n            *ngFor=\"let item of navigationItems\">\n          <a *ngIf=\"item.name !== 'Settings' || currentUserRole === userRoles.APPROVER\" routerLinkActive=\"selected\"\n             [routerLink]=\"item.route\">\n            <span class=\"glyphicon\" [ngClass]=\"{\n            'glyphicon-user' : item.name === 'Employees',\n            'glyphicon-tasks' : item.name === 'Reservations',\n            'glyphicon-road' : item.name === 'Vehicles',\n            'glyphicon-cog' : item.name === 'Settings'\n            }\">\n              {{ item.name }}\n            </span>\n          </a>\n        </li>\n      </ul>\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"navbar-link\">\n          <a routerLinkActive=\"selected\" (click)=\"logout()\">\n            <span class=\"glyphicon glyphicon-off\">\n              Log-out\n            </span>\n          </a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>\n<div class=\"container\">\n  <div class=\"jumbotron\">\n    <h1 class=\"text-center\">{{ title }}</h1>\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -693,7 +696,7 @@ var dashboardRoutes = [{
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole === userRoles.APPROVER\" class=\"btn btn-primary pull-left\" (click)=\"addEmployee()\">Add Employee</button>\n  <hr/>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Username</th>\n        <th>Position</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let employee of employees$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ employee.first_name }}</td>\n        <td>{{ employee.last_name }}</td>\n        <td>{{ employee.username }}</td>\n        <td>{{ employee.position }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"editEmployee(employee)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"deleteEmployee(employee)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole === userRoles.APPROVER\" class=\"add-btn btn btn-primary pull-left\" (click)=\"addEmployee()\">Add Employee</button>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Username</th>\n        <th>Email</th>\n        <th>Position</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let employee of employees$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ employee.first_name }}</td>\n        <td>{{ employee.last_name }}</td>\n        <td>{{ employee.username }}</td>\n        <td>{{ employee.email }}</td>\n        <td>{{ employee.position }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"editEmployee(employee)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"deleteEmployee(employee)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -704,7 +707,7 @@ module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole =
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n"
 
 /***/ }),
 
@@ -739,7 +742,6 @@ var EmployeesViewComponent = /** @class */ (function () {
     function EmployeesViewComponent(router, employeesService) {
         this.router = router;
         this.employeesService = employeesService;
-        // employees = EMPLOYEES_MOCK;
         this.employees$ = this.employeesService.getEmployees();
         this.userRoles = _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_3__["Roles"];
         this.currentUserRole = JSON.parse(localStorage.getItem('currentUser')).role;
@@ -759,6 +761,8 @@ var EmployeesViewComponent = /** @class */ (function () {
         this.employeesService.deleteEmployee(employee)
             .subscribe(function () {
             _this.employees$ = _this.employeesService.getEmployees();
+        }, function (error) {
+            alert('You don\'t have permission to remove this employee!');
         });
     };
     EmployeesViewComponent = __decorate([
@@ -795,7 +799,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"employeeForm\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -884,7 +888,11 @@ var NewEmployeeComponent = /** @class */ (function () {
         var _this = this;
         if (this.employeeForm.valid) {
             this.employeeService.createEmployee(this.employeeForm.value)
-                .subscribe(function () { return _this.router.navigateByUrl('/dashboard/employees'); });
+                .subscribe(function () {
+                _this.router.navigateByUrl('/dashboard/employees');
+            }, function (error) {
+                alert('Employee with this username already exists!');
+            });
         }
         else {
             Object(_shared_utils__WEBPACK_IMPORTED_MODULE_4__["touchAllChildren"])(this.employeeForm);
@@ -926,7 +934,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"reservationFo
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -1044,9 +1052,7 @@ var NewReservationComponent = /** @class */ (function () {
                 .subscribe(function (newReservation) {
                 _this.router.navigate(['/dashboard/reservations'], { queryParams: { id: newReservation.id } });
             }, function (error) {
-                if (error) {
-                    alert('You already have reservation in this date or the vehicle is not available in this date!');
-                }
+                alert('You already have reservation in this date or the vehicle is already reserved in this date!');
             });
         }
         else {
@@ -1119,7 +1125,7 @@ var NewReservationComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"upper-row-container\">\n    <button class=\"btn btn-primary pull-left\" (click)=\"createReservation()\">Create Reservation</button>\n\n    <div class=\"date-pickers\">\n      <button class=\"btn btn-primary reset-filter-btn\" (click)=\"resetFilter()\">Reset Filter</button>\n\n      <mat-form-field class=\"picker-from\">\n        <input #fromInput matInput [matDatepicker]=\"pickerFrom\" (dateChange)=\"updateFrom($event)\" placeholder=\"From\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerFrom\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerFrom>\n        </mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field class=\"picker-from\">\n        <input #toInput matInput [matDatepicker]=\"pickerTo\" (dateChange)=\"updateTo($event)\" placeholder=\"To\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerTo\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerTo>\n        </mat-datepicker>\n      </mat-form-field>\n    </div>\n  </div>\n\n  <div class=\"input-group filter-row\">\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"filter.query\" placeholder=\"Search for...\">\n    <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\" (click)=\"filterReservations()\">Filter</button>\n      </span>\n  </div>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Username</th>\n        <th>Vehicle</th>\n        <th>From</th>\n        <th>To</th>\n        <th>Status</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Delete</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Approve</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Cancel</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reservation of reservations$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ reservation.employee.first_name }}</td>\n        <td>{{ reservation.employee.last_name }}</td>\n        <td>{{ reservation.employee.username }}</td>\n        <td>{{ reservation.vehicle.brand }}</td>\n        <td>{{ formatDate(reservation.from) }}</td>\n        <td>{{ formatDate(reservation.to) }}</td>\n        <td>{{ reservation.status }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"acceptOrDeclineReservation(reservation, true)\" class=\"glyphicon glyphicon-ok\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"acceptOrDeclineReservation(reservation, false)\" class=\"glyphicon glyphicon-remove\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"editReservation(reservation)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"deleteReservation(reservation)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <!--<nav aria-label=\"Page navigation example\">-->\n    <!--<ul class=\"pagination\">-->\n      <!--<li class=\"page-item\"><a class=\"page-link\" (click)=\"previousPage()\">Previous</a></li>-->\n      <!--<li class=\"page-item\" *ngFor=\"let page of pages; let i = index\">-->\n        <!--<a class=\"page-link\">{{ i + 1 }}</a>-->\n      <!--</li>-->\n      <!--<li class=\"page-item\"><a class=\"page-link\" (click)=\"nextPage()\">Next</a></li>-->\n    <!--</ul>-->\n  <!--</nav>-->\n  <mat-paginator [length]=\"100\"\n                 (page)=\"pageChanged($event)\"\n                 [pageSize]=\"10\"\n                 [pageSizeOptions]=\"[5, 10, 25, 100]\">\n  </mat-paginator>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"upper-row-container\">\n    <button class=\"btn btn-primary pull-left\" (click)=\"createReservation()\">Create Reservation</button>\n\n    <div class=\"date-pickers\">\n      <button class=\"btn btn-primary reset-filter-btn\" (click)=\"resetFilter()\">Reset Filter</button>\n\n      <mat-form-field class=\"picker-from\">\n        <input #fromInput matInput [matDatepicker]=\"pickerFrom\" (dateChange)=\"updateFrom($event)\" placeholder=\"From\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerFrom\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerFrom>\n        </mat-datepicker>\n      </mat-form-field>\n\n      <mat-form-field class=\"picker-from\">\n        <input #toInput matInput [matDatepicker]=\"pickerTo\" (dateChange)=\"updateTo($event)\" placeholder=\"To\">\n        <mat-datepicker-toggle matSuffix [for]=\"pickerTo\"></mat-datepicker-toggle>\n        <mat-datepicker #pickerTo>\n        </mat-datepicker>\n      </mat-form-field>\n    </div>\n  </div>\n\n  <div class=\"input-group filter-row\">\n    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"filter.query\" placeholder=\"Search for...\">\n    <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\" (click)=\"filterReservations()\">Filter</button>\n      </span>\n  </div>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Username</th>\n        <th>Vehicle</th>\n        <th>From</th>\n        <th>To</th>\n        <th>Status</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Delete</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Approve</th>\n        <th *ngIf=\"currentUser.role === userRoles.APPROVER\">Cancel</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let reservation of reservations$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ reservation.employee.first_name }}</td>\n        <td>{{ reservation.employee.last_name }}</td>\n        <td>{{ reservation.employee.username }}</td>\n        <td>{{ reservation.vehicle.brand }}</td>\n        <td>{{ formatDate(reservation.from) }}</td>\n        <td>{{ formatDate(reservation.to) }}</td>\n        <td>{{ reservation.status }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"editReservation(reservation)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"deleteReservation(reservation)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n          <span (click)=\"acceptOrDeclineReservation(reservation, true)\"\n                class=\"glyphicon glyphicon-ok\"\n                [ngClass]=\"{'unavailable': reservation.status !== reservationStatus.NEW}\">\n          </span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUser.role === userRoles.APPROVER\">\n        <span (click)=\"acceptOrDeclineReservation(reservation, false)\"\n              class=\"glyphicon glyphicon-remove\"\n              [ngClass]=\"{'unavailable': reservation.status !== reservationStatus.NEW}\">\n        </span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n  <mat-paginator [length]=\"100\"\n                 (page)=\"pageChanged($event)\"\n                 [pageIndex]=\"filter.page - 1\"\n                 [pageSize]=\"10\"\n                 [pageSizeOptions]=\"[5, 10, 25, 100]\">\n  </mat-paginator>\n</div>\n"
 
 /***/ }),
 
@@ -1130,7 +1136,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"upper-row-container\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.filter-row {\n  width: 100%; }\n\n.date-pickers {\n  display: flex;\n  align-items: center;\n  justify-content: space-between; }\n\n@media screen and (max-width: 600px) {\n    .date-pickers {\n      flex-direction: column; } }\n\n.picker-from {\n  margin-right: 5%; }\n\n.page-item {\n  cursor: pointer; }\n\n.upper-row-container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between; }\n\n@media screen and (max-width: 1200px) {\n    .upper-row-container {\n      flex-direction: column; } }\n\n.container {\n  display: flex;\n  flex-direction: column; }\n\n.reset-filter-btn {\n  margin-right: 5%; }\n\n@media screen and (max-width: 600px) {\n    .reset-filter-btn {\n      margin-top: 5%; } }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n\n.filter-row {\n  width: 100%; }\n\n.date-pickers {\n  display: flex;\n  align-items: center;\n  width: 56%; }\n\n@media screen and (max-width: 600px) {\n    .date-pickers {\n      flex-direction: column; } }\n\n.picker-from {\n  margin-right: 5%; }\n\n.page-item {\n  cursor: pointer; }\n\n.upper-row-container {\n  display: flex;\n  align-items: center;\n  justify-content: space-between; }\n\n@media screen and (max-width: 1200px) {\n    .upper-row-container {\n      flex-direction: column; } }\n\n.container {\n  display: flex;\n  flex-direction: column; }\n\n.reset-filter-btn {\n  margin-right: 5%; }\n\n@media screen and (max-width: 600px) {\n    .reset-filter-btn {\n      margin-top: 5%; } }\n"
 
 /***/ }),
 
@@ -1191,6 +1197,8 @@ var ReservationsViewComponent = /** @class */ (function () {
             from: null,
             to: null
         };
+        this.queryString = '';
+        this.reservationStatus = _shared_models_reservation_status_enum__WEBPACK_IMPORTED_MODULE_3__["ReservationStatus"];
         this.reservations$ = this.reservationService.getFilteredReservations(this.filter);
         this.userRoles = _shared_models_roles_enum__WEBPACK_IMPORTED_MODULE_7__["Roles"];
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -1269,6 +1277,10 @@ var ReservationsViewComponent = /** @class */ (function () {
         });
     };
     ReservationsViewComponent.prototype.filterReservations = function () {
+        if (this.filter.query !== this.queryString) {
+            this.filter = __assign({}, this.filter, { page: this.filter.query ? 1 : this.filter.page });
+        }
+        this.queryString = this.filter.query;
         this.reservations$ = this.reservationService.getFilteredReservations(this.filter);
     };
     __decorate([
@@ -1318,7 +1330,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"settingsForm\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -1407,7 +1419,9 @@ var NewSettingComponent = /** @class */ (function () {
         var _this = this;
         if (this.settingsForm.valid) {
             this.settingsService.createReservationSettings(this.settingsForm.value)
-                .subscribe(function () { return _this.router.navigateByUrl('/dashboard/settings'); });
+                .subscribe(function () {
+                _this.router.navigateByUrl('/dashboard/settings');
+            }, function (error) { return alert('Reservation settings for this employee already exist!'); });
         }
         else {
             Object(_shared_utils__WEBPACK_IMPORTED_MODULE_6__["touchAllChildren"])(this.settingsForm);
@@ -1465,7 +1479,7 @@ var NewSettingComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <button class=\"btn btn-primary pull-left\" (click)=\"addSettings()\">Add Settings</button>\n  <hr/>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Allowed</th>\n        <th>Autoapproval</th>\n        <th>Edit</th>\n        <th>Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let setting of settings$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ setting.employee.first_name }}</td>\n        <td>{{ setting.employee.last_name }}</td>\n        <td *ngIf=\"setting.allowed\"><span class=\"glyphicon glyphicon-ok\"></span></td>\n        <td *ngIf=\"!setting.allowed\"><span class=\"glyphicon glyphicon-remove\"></span></td>\n        <td *ngIf=\"setting.auto_approval\"><span class=\"glyphicon glyphicon-ok\"></span></td>\n        <td *ngIf=\"!setting.auto_approval\"><span class=\"glyphicon glyphicon-remove\"></span></td>\n        <td class=\"text-center\"><span (click)=\"editSettings(setting)\" class=\"glyphicon glyphicon-pencil\"></span></td>\n        <td class=\"text-center\"><span (click)=\"deleteSettings(setting)\" class=\"glyphicon glyphicon-trash\"></span></td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <button class=\"add-btn btn btn-primary pull-left\" (click)=\"addSettings()\">Add Settings</button>\n\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>First Name</th>\n        <th>Last Name</th>\n        <th>Allowed</th>\n        <th>Autoapproval</th>\n        <th>Edit</th>\n        <th>Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let setting of settings$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ setting.employee.first_name }}</td>\n        <td>{{ setting.employee.last_name }}</td>\n        <td *ngIf=\"setting.allowed\"><span class=\"glyphicon glyphicon-ok\"></span></td>\n        <td *ngIf=\"!setting.allowed\"><span class=\"glyphicon glyphicon-remove\"></span></td>\n        <td *ngIf=\"setting.auto_approval\"><span class=\"glyphicon glyphicon-ok\"></span></td>\n        <td *ngIf=\"!setting.auto_approval\"><span class=\"glyphicon glyphicon-remove\"></span></td>\n        <td class=\"text-center\"><span (click)=\"editSettings(setting)\" class=\"glyphicon glyphicon-pencil\"></span></td>\n        <td class=\"text-center\"><span (click)=\"deleteSettings(setting)\" class=\"glyphicon glyphicon-trash\"></span></td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1476,7 +1490,7 @@ module.exports = "<div class=\"container\">\n  <button class=\"btn btn-primary p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n"
 
 /***/ }),
 
@@ -1562,7 +1576,7 @@ module.exports = "<div class=\"container\">\n  <form [formGroup]=\"vehicleForm\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n\n.form-group {\n  padding-bottom: 5px; }\n\n.form-group.wrong-input .form-control {\n    border-color: #e53935;\n    color: #e53935; }\n\n.form-group.wrong-input ::-webkit-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::-ms-input-placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input ::placeholder {\n    color: #e53935; }\n\n.form-group.wrong-input .warning-text {\n    display: block; }\n\n.warning-container {\n  margin-top: 5px;\n  display: flex;\n  height: 5px; }\n\n.warning-text {\n  font-size: 12px;\n  color: #e53935;\n  display: none; }\n"
 
 /***/ }),
 
@@ -1688,7 +1702,7 @@ var NewVehicleComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole === userRoles.APPROVER\" class=\"btn btn-primary pull-left\" (click)=\"addVehicle()\">Add Vehicle</button>\n  <hr/>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>Brand</th>\n        <th>Registration Number</th>\n        <th>Mileage [km]</th>\n        <th>Type</th>\n        <th>Color</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let vehicle of vehicles$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ vehicle.brand }}</td>\n        <td>{{ vehicle.registration_number }}</td>\n        <td>{{ vehicle.mileage | separateThousands }}</td>\n        <td>{{ vehicle.type }}</td>\n        <td>{{ vehicle.color }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"editVehicle(vehicle)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"deleteVehicle(vehicle)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole === userRoles.APPROVER\" class=\"add-btn btn btn-primary pull-left\" (click)=\"addVehicle()\">Add Vehicle</button>\n  <div class=\"table-responsive\">\n    <table class=\"table table-bordered\">\n      <thead>\n      <tr>\n        <th>Row</th>\n        <th>Brand</th>\n        <th>Registration Number</th>\n        <th>Mileage [km]</th>\n        <th>Type</th>\n        <th>Color</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Edit</th>\n        <th *ngIf=\"currentUserRole === userRoles.APPROVER\">Delete</th>\n      </tr>\n      </thead>\n      <tbody>\n      <tr *ngFor=\"let vehicle of vehicles$ | async; let i = index\">\n        <td>{{ i + 1 }}</td>\n        <td>{{ vehicle.brand }}</td>\n        <td>{{ vehicle.registration_number }}</td>\n        <td>{{ vehicle.mileage | separateThousands }}</td>\n        <td>{{ vehicle.type }}</td>\n        <td>{{ vehicle.color }}</td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"editVehicle(vehicle)\" class=\"glyphicon glyphicon-pencil\"></span>\n        </td>\n        <td class=\"text-center\" *ngIf=\"currentUserRole === userRoles.APPROVER\">\n          <span (click)=\"deleteVehicle(vehicle)\" class=\"glyphicon glyphicon-trash\"></span>\n        </td>\n      </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1699,7 +1713,7 @@ module.exports = "<div class=\"container\">\n  <button *ngIf=\"currentUserRole =
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-remove {\n  color: #e53935; }\n"
+module.exports = ".glyphicon {\n  cursor: pointer; }\n\n.glyphicon-trash:hover {\n  color: #e53935; }\n\n.glyphicon-pencil:hover {\n  color: #337ab7; }\n\n.glyphicon-ok {\n  color: #008000; }\n\n.glyphicon-ok.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.glyphicon-remove {\n  color: #e53935; }\n\n.glyphicon-remove.unavailable {\n    color: rgba(0, 0, 0, 0.7);\n    cursor: default; }\n\n.container {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden; }\n\n.add-btn {\n  -ms-grid-row-align: start;\n      align-self: start;\n  width: initial;\n  margin: 10px 0; }\n\n@media screen and (max-width: 600px) {\n    .add-btn {\n      -ms-grid-row-align: center;\n          align-self: center; } }\n"
 
 /***/ }),
 
@@ -1753,6 +1767,8 @@ var VehiclesViewComponent = /** @class */ (function () {
         this.vehicleService.deleteVehicle(vehicle)
             .subscribe(function () {
             _this.vehicles$ = _this.vehicleService.getVehicles();
+        }, function (error) {
+            return alert('You don\'t have permission to remove this vehicle!');
         });
     };
     VehiclesViewComponent = __decorate([
@@ -2545,18 +2561,21 @@ var environment = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm5/platform-browser-dynamic.js");
-/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
+/* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm5/platform-browser-dynamic.js");
+/* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
 
 
 
 
-if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].production) {
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
+
+if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].production) {
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();
 }
-Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
+Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"])
     .catch(function (err) { return console.log(err); });
 
 
@@ -2569,7 +2588,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ondrejsvoren/IdeaProjects/car-park2/carpark-web/src/main/webapp-src/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/ondrejsvoren/IdeaProjects/car-park/carpark-web/src/main/webapp-src/src/main.ts */"./src/main.ts");
 
 
 /***/ })

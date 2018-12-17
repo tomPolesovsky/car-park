@@ -70,7 +70,12 @@ export class NewEmployeeComponent implements OnInit {
   createEmployee(): void {
     if (this.employeeForm.valid) {
       this.employeeService.createEmployee(this.employeeForm.value)
-        .subscribe(() => this.router.navigateByUrl('/dashboard/employees'));
+        .subscribe(() => {
+          this.router.navigateByUrl('/dashboard/employees')
+        },
+          error => {
+            alert('Employee with this username already exists!');
+          });
     } else {
       touchAllChildren(this.employeeForm);
     }

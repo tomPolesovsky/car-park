@@ -2,6 +2,7 @@ $pencil-icon-hover-color: #337ab7;
 $trash-icon-hover-color: #e53935;
 $warning-color: #e53935;
 $tick-icon-color: #008000;
+$unavailable-color: rgba(0,0,0,0.7);
 
 .glyphicon {
   cursor: pointer;
@@ -23,8 +24,34 @@ $tick-icon-color: #008000;
 
 .glyphicon-ok {
   color: $tick-icon-color;
+
+  &.unavailable {
+    color: $unavailable-color;
+    cursor: default;
+  }
 }
 
 .glyphicon-remove {
   color: $warning-color;
+
+  &.unavailable {
+    color: $unavailable-color;
+    cursor: default;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.add-btn {
+  align-self: start;
+  width: initial;
+  margin: 10px 0;
+
+  @media screen and (max-width: 600px) {
+    align-self: center;
+  }
 }
