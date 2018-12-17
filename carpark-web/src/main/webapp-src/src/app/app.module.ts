@@ -24,6 +24,7 @@ import {ReservationSettingsService} from "./shared/services/reservation-settings
 import { NewEmployeeComponent } from './dashboard/employees/new-employee/new-employee.component';
 import { NewVehicleComponent } from './dashboard/vehicles/new-vehicle/new-vehicle.component';
 import { NewSettingComponent } from './dashboard/settings/new-setting/new-setting.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NewSettingComponent } from './dashboard/settings/new-setting/new-settin
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     SeparateThousandsPipe,

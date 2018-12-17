@@ -7,7 +7,7 @@
 .date-pickers {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 56%;
 
   @media screen and (max-width: 600px) {
     flex-direction: column;

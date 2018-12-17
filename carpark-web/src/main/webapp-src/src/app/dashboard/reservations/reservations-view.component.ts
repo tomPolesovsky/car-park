@@ -36,6 +36,10 @@ export class ReservationsViewComponent implements OnInit {
     to: null
   };
 
+  queryString = '';
+
+  reservationStatus = ReservationStatus;
+
   reservations$: Observable<Reservation[]> = this.reservationService.getFilteredReservations(this.filter);
   userRoles = Roles;
   currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -141,6 +145,13 @@ export class ReservationsViewComponent implements OnInit {
   }
 
   filterReservations(): void {
+    if (this.filter.query !== this.queryString) {
+      this.filter = {
+        ...this.filter,
+        page: this.filter.query ? 1 : this.filter.page
+      };
+    }
+    this.queryString = this.filter.query;
     this.reservations$ = this.reservationService.getFilteredReservations(this.filter);
   }
 }

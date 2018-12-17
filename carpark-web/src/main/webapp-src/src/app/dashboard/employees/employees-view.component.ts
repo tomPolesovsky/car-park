@@ -12,7 +12,6 @@ import {Roles} from "../../shared/models/roles.enum";
 })
 export class EmployeesViewComponent implements OnInit {
 
-  // employees = EMPLOYEES_MOCK;
   employees$: Observable<Employee[]> = this.employeesService.getEmployees();
   userRoles = Roles;
 
@@ -39,7 +38,9 @@ export class EmployeesViewComponent implements OnInit {
     this.employeesService.deleteEmployee(employee)
       .subscribe(() => {
         this.employees$ = this.employeesService.getEmployees();
-      });
+      },
+        error => {
+          alert('You don\'t have permission to remove this employee!');
+        });
   }
-
 }
