@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+/**
+ * Login REST API
+ */
 @RestController
 @RequestMapping(ApiConfiguration.API_LOGIN)
 public class LoginController {
@@ -27,6 +30,12 @@ public class LoginController {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    /**
+     * Log in via this method.
+     *
+     * @param loginDTO
+     * @return UserDTO
+     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UserDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
         try {

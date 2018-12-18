@@ -50,7 +50,7 @@ public class ReservationSettingsController {
      * @param employee dto
      * @return reservation settings dto
      */
-    @RequestMapping(value = "/find-by-employee", method = RequestMethod.GET)
+    @RequestMapping(value = "/find-by-employee", method = RequestMethod.POST)
     public ReservationSettingsDTO findByEmployee(@Valid @RequestBody EmployeeDTO employee) {
         ReservationSettingsDTO result = reservationSettingsFacade.findByEmployee(employee);
         notNull(result, MissingObjectException::new);

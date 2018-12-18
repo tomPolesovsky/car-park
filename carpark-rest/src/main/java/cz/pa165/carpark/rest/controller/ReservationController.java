@@ -60,7 +60,7 @@ public class ReservationController {
      * @param employee dto
      * @return list of reservation dto
      */
-    @RequestMapping(value = "/find-by-employee", method = RequestMethod.GET)
+    @RequestMapping(value = "/find-by-employee", method = RequestMethod.POST)
     public List<ReservationDTO> findByEmployee(@Valid @RequestBody EmployeeDTO employee) {
         EmployeeDTO result = employeeFacade.find(employee.getId());
         notNull(result, MissingObjectException::new);
@@ -74,7 +74,7 @@ public class ReservationController {
      * @param vehicle dto
      * @return list of reservation dto
      */
-    @RequestMapping(value = "/find-by-vehicle", method = RequestMethod.GET)
+    @RequestMapping(value = "/find-by-vehicle", method = RequestMethod.POST)
     public List<ReservationDTO> findByVehicle(@Valid @RequestBody VehicleDTO vehicle) {
         VehicleDTO result = vehicleFacade.find(vehicle.getId());
         notNull(result, MissingObjectException::new);
