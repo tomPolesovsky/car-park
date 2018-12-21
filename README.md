@@ -26,7 +26,7 @@ and request body:
 
 In the response body you will get a token. You need to use this Bearer Token to authorize when making any other rest api calls.
 
-There are different roles in the system - you can be an approver or an average employee. If you log in with admin/admin you will get access to the approver's view. To view CarPark as a regular employee you can use e.g. jana/jana (or you create your own account or you can also see the sample data module for other logins). Every person in the company has their own account.
+There are different roles in the system - you can be an approver or an average employee. If you log in with **admin/admin** you will get access to the approver's view. To view CarPark as a regular employee you can use e.g. **jana/jana** (or you create your own account or you can also see the sample data module for other logins). Every person in the company has their own account.
 
 Approver can manage the whole application and its main job is to approve/decline not automatically handled reservation requests. Regular users can create their own reservations and list all the employees, vehicles and reservations. 
 
