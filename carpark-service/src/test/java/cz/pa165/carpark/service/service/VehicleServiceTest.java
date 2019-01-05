@@ -100,7 +100,11 @@ public class VehicleServiceTest {
         assertThat(resultList, hasSize(1));
     }
 
-    // todo: new vehicle
+    @Test
+    public void save() {
+        vehicleService.save(vehicle);
+        verify(vehicleDao, times(1)).save(any(Vehicle.class));
+    }
 
     @Test
     public void update() {
