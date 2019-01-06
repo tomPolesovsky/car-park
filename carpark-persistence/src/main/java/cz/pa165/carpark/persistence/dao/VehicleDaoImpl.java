@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 /**
  * Specific implementation of {@link VehicleDao} interface
  *
- * @param <T> generic type annotated by {@link Entity}
  * @author Ondrej Svoreň
  */
 @Repository
@@ -18,6 +17,12 @@ public class VehicleDaoImpl extends DaoImpl<Vehicle> implements VehicleDao {
         super(Vehicle.class);
     }
 
+    /**
+     * Find specific vehicle by its registration number
+     *
+     * @param registrationNumber registration number of vehicle
+     * @return entity object
+     */
     @Override
     public Vehicle findByRegistrationNumber(String registrationNumber) {
         return em.createQuery("from Vehicle where registrationNumber = :registrationNumber", Vehicle.class)

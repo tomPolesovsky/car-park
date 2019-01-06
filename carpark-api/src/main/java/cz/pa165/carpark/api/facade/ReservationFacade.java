@@ -25,7 +25,7 @@ public interface ReservationFacade {
     /**
      * Find all the reservations for the specified employee
      *
-     * @param employee
+     * @param employee dto
      * @return list of reservations
      */
     List<ReservationDTO> findByEmployee(EmployeeDTO employee);
@@ -33,7 +33,7 @@ public interface ReservationFacade {
     /**
      * Find all the reservations for the specified vehicle
      *
-     * @param vehicle
+     * @param vehicle dto
      * @return list of reservations
      */
     List<ReservationDTO> findByVehicle(VehicleDTO vehicle);
@@ -49,6 +49,7 @@ public interface ReservationFacade {
      * Processes the reservation request
      *
      * @param reservation dto
+     * @return reservation dto
      */
     ReservationDTO processRequest(ReservationDTO reservation);
 
@@ -64,6 +65,7 @@ public interface ReservationFacade {
      * Update the specified reservation
      *
      * @param reservation dto
+     * @return reservation dto
      */
     ReservationDTO update(ReservationDTO reservation);
 

@@ -101,6 +101,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
      * Processes the reservation request
      *
      * @param reservation dto
+     * @return reservation dto
      */
     @Override
     public ReservationDTO processRequest(ReservationDTO reservation) {
@@ -143,6 +144,7 @@ public class ReservationFacadeImpl implements ReservationFacade {
      * Update the specified reservation
      *
      * @param reservation dto
+     * @return reservation dto
      */
     @Override
     public ReservationDTO update(ReservationDTO reservation) {

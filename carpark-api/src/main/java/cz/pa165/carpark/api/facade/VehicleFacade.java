@@ -37,6 +37,7 @@ public interface VehicleFacade {
      * Create new vehicle
      *
      * @param vehicle dto
+     * @return vehicle dto
      */
     VehicleDTO create(VehicleDTO vehicle);
 
@@ -44,6 +45,7 @@ public interface VehicleFacade {
      * Update the specified vehicle
      *
      * @param vehicle dto
+     * @return vehicle dto
      */
     VehicleDTO update(VehicleDTO vehicle);
 

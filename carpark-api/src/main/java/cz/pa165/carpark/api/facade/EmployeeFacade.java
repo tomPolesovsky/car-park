@@ -38,6 +38,7 @@ public interface EmployeeFacade {
      * Create new employee
      *
      * @param employee dto
+     * @return employee dto
      */
     EmployeeDTO create(EmployeeDTO employee);
 
@@ -45,6 +46,7 @@ public interface EmployeeFacade {
      * Update the specified employee
      *
      * @param employee dto
+     * @return employee dto
      */
     EmployeeDTO update(EmployeeDTO employee);
 

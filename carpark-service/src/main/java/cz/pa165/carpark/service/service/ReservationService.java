@@ -51,7 +51,6 @@ public interface ReservationService {
      *
      * @param reservation
      * @param reservationSettings
-     * @return true if the request was successfully processed else false
      * @throws UnavailableCarException when car is not available
      */
     void processRequest(Reservation reservation, ReservationSettings reservationSettings);

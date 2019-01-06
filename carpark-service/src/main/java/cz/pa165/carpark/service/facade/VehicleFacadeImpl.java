@@ -69,6 +69,7 @@ public class VehicleFacadeImpl implements VehicleFacade {
      * Create new vehicle
      *
      * @param vehicle dto
+     * @return vehicle dto
      */
     @Override
     public VehicleDTO create(VehicleDTO vehicle) {
@@ -81,6 +82,7 @@ public class VehicleFacadeImpl implements VehicleFacade {
      * Update the specified vehicle
      *
      * @param vehicle dto
+     * @return vehicle dto
      */
     @Override
     public VehicleDTO update(VehicleDTO vehicle) {

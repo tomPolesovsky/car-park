@@ -38,6 +38,7 @@ public interface ReservationSettingsFacade {
      * Create new reservation settings
      *
      * @param reservationSettings dto
+     * @return reservation settings dto
      */
     ReservationSettingsDTO create(ReservationSettingsDTO reservationSettings);
 
@@ -45,6 +46,7 @@ public interface ReservationSettingsFacade {
      * Update the specified reservation settings
      *
      * @param reservationSettings dto
+     * @return reservation settings dto
      */
     ReservationSettingsDTO update(ReservationSettingsDTO reservationSettings);
 

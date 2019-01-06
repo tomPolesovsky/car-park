@@ -36,7 +36,7 @@ public class ReservationSettingsFacadeImpl implements ReservationSettingsFacade 
      * Find the reservation settings with the specified id
      *
      * @param id unambiguous identification of entity
-     * @return reservation dto
+     * @return reservation settings dto
      */
     @Override
     public ReservationSettingsDTO find(Long id) {
@@ -73,6 +73,7 @@ public class ReservationSettingsFacadeImpl implements ReservationSettingsFacade 
      * Create new reservation
      *
      * @param reservationSettings dto
+     * @return reservation settings dto
      */
     @Override
     public ReservationSettingsDTO create(ReservationSettingsDTO reservationSettings) {
@@ -85,6 +86,7 @@ public class ReservationSettingsFacadeImpl implements ReservationSettingsFacade 
      * Update the specified reservation
      *
      * @param reservationSettings dto
+     * @return reservation settings dto
      */
     @Override
     public ReservationSettingsDTO update(ReservationSettingsDTO reservationSettings) {

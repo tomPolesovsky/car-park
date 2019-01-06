@@ -26,6 +26,14 @@ public class AdminServiceImpl implements AdminService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Login to the system with username & password
+     *
+     * @param username username
+     * @param username password
+     * @return employee
+     * @throws AuthenticationException
+     */
     @Override
     public Employee login(String username, String password) {
         Employee employee = employeeDao.findByUsername(username);

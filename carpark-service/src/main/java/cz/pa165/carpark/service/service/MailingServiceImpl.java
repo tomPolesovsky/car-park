@@ -14,6 +14,7 @@ public class MailingServiceImpl implements MailingService {
     /**
      * Sends confirmation to the employee that the car was successfully reserved
      * The method does not actually send an email - there is no server so we fake it by printing it out
+     * @param reservation
      */
     @Override
     public void sendConfirmation(Reservation reservation) {
@@ -25,6 +26,7 @@ public class MailingServiceImpl implements MailingService {
     /**
      * Sends declination to the employee - the reservation of the car was not approved
      * The method does not actually send an email - there is no server so we fake it by printing it out
+     * @param reservation
      */
     @Override
     public void sendDeclination(Reservation reservation) {
@@ -36,6 +38,7 @@ public class MailingServiceImpl implements MailingService {
     /**
      * Sends request for approval to the approver
      * The method does not actually send an email - there is no server so we fake it by printing it out
+     * @param reservation
      */
     @Override
     public void sendRequestForApproval(Reservation reservation) {
