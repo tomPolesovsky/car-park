@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 /**
  * The admin facade's implementation.
+ * Possibility to login to the system with username & password via this facade.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
@@ -26,6 +27,13 @@ public class AdminFacadeImpl implements AdminFacade {
         this.adminService = adminService;
     }
 
+    /**
+     * Login to the system with username & password
+     *
+     * @param username username
+     * @param username password
+     * @return UserDTO or null
+     */
     @Override
     public UserDTO login(String username, String password) {
         Employee employee = adminService.login(username, password);

@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * The vehicle service's interface.
+ * Possibility to save, update, delete, find, find by registration number, find all (vehicle/s) via this service.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */

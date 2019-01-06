@@ -4,7 +4,8 @@ import cz.pa165.carpark.persistence.entity.Employee;
 import cz.pa165.carpark.service.exception.AuthenticationException;
 
 /**
- * The admin facade's implementation.
+ * The admin service's interface.
+ * Possibility to login to the system with username & password via this interface.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */

@@ -47,6 +47,14 @@ public class ReservationDaoImpl extends DaoImpl<Reservation> implements Reservat
                  .getResultList();
     }
 
+    /**
+     * Return true if vehicle is available in specific interval
+     *
+     * @param vehicle vehicle entity
+     * @param from date time from
+     * @param to date time to
+     * @return true or false
+     */
     @Override
     public boolean isVehicleAvailable(Vehicle vehicle, LocalDateTime from, LocalDateTime to) {
         List<Reservation> result = em.createQuery("select r from Reservation r where r.vehicle = :vehicle and (:dateFrom <= r.to and :dateTo >= r.from)", Reservation.class)

@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * The employee service's interface.
+ * Possibility to save, update, delete, find, find by username, find all (employee/s) via this service.
  *
  * @author Ondrej Svoren, 487558@mail.muni.cz
  */

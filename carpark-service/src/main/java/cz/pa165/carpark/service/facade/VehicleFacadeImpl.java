@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * The reservation facade's implementation.
+ * Possibility to create, update, delete, find, find by registration number, find all (vehicle/s) via this facade.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
@@ -69,6 +70,7 @@ public class VehicleFacadeImpl implements VehicleFacade {
      * Create new vehicle
      *
      * @param vehicle dto
+     * @return vehicle dto
      */
     @Override
     public VehicleDTO create(VehicleDTO vehicle) {
@@ -81,6 +83,7 @@ public class VehicleFacadeImpl implements VehicleFacade {
      * Update the specified vehicle
      *
      * @param vehicle dto
+     * @return vehicle dto
      */
     @Override
     public VehicleDTO update(VehicleDTO vehicle) {

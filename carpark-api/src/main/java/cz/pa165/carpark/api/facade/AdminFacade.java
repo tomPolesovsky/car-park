@@ -4,6 +4,7 @@ import cz.pa165.carpark.api.dto.UserDTO;
 
 /**
  * The admin facade's implementation.
+ * Possibility to login to the system with username & password via this facade.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */

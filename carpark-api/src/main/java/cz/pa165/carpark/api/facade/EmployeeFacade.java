@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * The employee facade's interface.
+ * Possibility to create, update, delete, find, find by username, find all (employee/s) via this facade.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
@@ -38,6 +39,7 @@ public interface EmployeeFacade {
      * Create new employee
      *
      * @param employee dto
+     * @return employee dto
      */
     EmployeeDTO create(EmployeeDTO employee);
 
@@ -45,6 +47,7 @@ public interface EmployeeFacade {
      * Update the specified employee
      *
      * @param employee dto
+     * @return employee dto
      */
     EmployeeDTO update(EmployeeDTO employee);
 

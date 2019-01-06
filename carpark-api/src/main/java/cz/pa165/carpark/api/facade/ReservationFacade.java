@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * The reservation facade's interface.
+ * Possibility to process reservation request, approve or decline reservation request, update, delete, filter,
+ * find, find by employee, find by vehicle, find all via this facade.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */
@@ -25,7 +27,7 @@ public interface ReservationFacade {
     /**
      * Find all the reservations for the specified employee
      *
-     * @param employee
+     * @param employee dto
      * @return list of reservations
      */
     List<ReservationDTO> findByEmployee(EmployeeDTO employee);
@@ -33,7 +35,7 @@ public interface ReservationFacade {
     /**
      * Find all the reservations for the specified vehicle
      *
-     * @param vehicle
+     * @param vehicle dto
      * @return list of reservations
      */
     List<ReservationDTO> findByVehicle(VehicleDTO vehicle);
@@ -49,6 +51,7 @@ public interface ReservationFacade {
      * Processes the reservation request
      *
      * @param reservation dto
+     * @return reservation dto
      */
     ReservationDTO processRequest(ReservationDTO reservation);
 
@@ -64,6 +67,7 @@ public interface ReservationFacade {
      * Update the specified reservation
      *
      * @param reservation dto
+     * @return reservation dto
      */
     ReservationDTO update(ReservationDTO reservation);
 

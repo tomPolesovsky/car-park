@@ -6,7 +6,8 @@ import cz.pa165.carpark.api.dto.ReservationSettingsDTO;
 import java.util.List;
 
 /**
- * The reservation facade's implementation.
+ * The reservation settings facade's implementation.
+ * Possibility to create, update, delete, find, find by employee, find all (reservation settings) via this facade.
  *
  * @author Ondrej Svoren, 487558@mail.muni.cz
  */
@@ -38,6 +39,7 @@ public interface ReservationSettingsFacade {
      * Create new reservation settings
      *
      * @param reservationSettings dto
+     * @return reservation settings dto
      */
     ReservationSettingsDTO create(ReservationSettingsDTO reservationSettings);
 
@@ -45,6 +47,7 @@ public interface ReservationSettingsFacade {
      * Update the specified reservation settings
      *
      * @param reservationSettings dto
+     * @return reservation settings dto
      */
     ReservationSettingsDTO update(ReservationSettingsDTO reservationSettings);
 
