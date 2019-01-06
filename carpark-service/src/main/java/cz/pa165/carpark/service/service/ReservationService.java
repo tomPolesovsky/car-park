@@ -10,6 +10,8 @@ import java.util.List;
 
 /**
  * The reservation service's interface.
+ * Possibility to process reservation request, approve or decline reservation request, update, delete, filter,
+ * find, find by employee, find by vehicle, find all via this service.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */

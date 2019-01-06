@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * The reservation facade's implementation.
+ * Possibility to create, update, delete, find, find by employee, find all (reservation settings) via this facade.
  *
  * @author Ondrej Svoren, 487558@mail.muni.cz
  */

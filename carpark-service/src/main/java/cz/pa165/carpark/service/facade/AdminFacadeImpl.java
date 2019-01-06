@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 /**
  * The admin facade's implementation.
+ * Possibility to login to the system with username & password via this facade.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */

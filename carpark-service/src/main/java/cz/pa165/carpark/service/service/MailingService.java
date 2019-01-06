@@ -4,6 +4,7 @@ import cz.pa165.carpark.persistence.entity.Reservation;
 
 /**
  * The mailing service's interface.
+ * Send request for approval/confirmation/declination via this service.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */

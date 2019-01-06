@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * The reservation facade's interface.
+ * Possibility to process reservation request, approve or decline reservation request, update, delete, filter,
+ * find, find by employee, find by vehicle, find all via this facade.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */

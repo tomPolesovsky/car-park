@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * The reservation settings service's interface.
+ * Possibility to save, update, delete, find, find by employee, find all (reservation settings) via this service.
  *
  * @author Jana Applova, 422352@mail.muni.cz
  */

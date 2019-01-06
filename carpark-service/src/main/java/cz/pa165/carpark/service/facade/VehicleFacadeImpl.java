@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * The reservation facade's implementation.
+ * Possibility to create, update, delete, find, find by registration number, find all (vehicle/s) via this facade.
  *
  * @author Tomáš Polešovský, polesovsky.tomas@gmail.com
  */
